@@ -1,7 +1,7 @@
-import Arrival from './screens/Arrival';
+import SelectDriver from './screens/SelectDriver';
 
 const App = (): JSX.Element => {
-  return <Arrival />;
+  return <SelectDriver />;
 };
 
 export default App;
