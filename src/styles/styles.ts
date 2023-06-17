@@ -28,37 +28,6 @@ const container: ViewStyle = {
   padding: 8,
 };
 
-const header: ViewStyle = {
-  ...debug,
-  marginHorizontal: "auto",
-  width: "100%",
-  flexDirection: "row",
-  flexWrap: "nowrap",
-  justifyContent: "space-between",
-  alignItems: "center",
-  alignContent: "stretch",
-  marginBottom: 8,
-};
-const headerSidesView: ViewStyle = {
-  ...debug,
-  flex: 1,
-  justifyContent: "center",
-  alignItems: "center",
-};
-const headerSidesText: TextStyle = {
-  ...debug,
-  ...text,
-  fontSize: 16,
-  textAlign: "center",
-  color: COLORS.greenPrimary,
-};
-const headerCenter: ViewStyle = {
-  ...debug,
-  flexGrow: 1,
-  justifyContent: "center",
-  alignItems: "center",
-};
-
 const spaceBetweenRows12: ViewStyle = {
   ...debug,
   display: "flex",
@@ -70,10 +39,6 @@ const STYLES = StyleSheet.create({
   titleText: { ...titleText },
   simpleText: { ...simpleText },
   container: { ...container },
-  header: { ...header },
-  headerSidesView: { ...headerSidesView },
-  headerSidesText: { ...headerSidesText },
-  headerCenter: { ...headerCenter },
   spaceBetweenRows12: { ...spaceBetweenRows12 },
 });
 
