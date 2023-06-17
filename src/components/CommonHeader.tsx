@@ -1,5 +1,5 @@
 import STYLES from "../styles/styles";
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { View, Text } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import CommonButton from "./CommonButton";

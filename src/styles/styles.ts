@@ -59,6 +59,13 @@ const headerCenter: ViewStyle = {
   alignItems: "center",
 };
 
+const spaceBetweenRows12: ViewStyle = {
+  ...debug,
+  display: "flex",
+  flexDirection: "column",
+  rowGap: 12,
+};
+
 const STYLES = StyleSheet.create({
   titleText: { ...titleText },
   simpleText: { ...simpleText },
@@ -67,6 +74,7 @@ const STYLES = StyleSheet.create({
   headerSidesView: { ...headerSidesView },
   headerSidesText: { ...headerSidesText },
   headerCenter: { ...headerCenter },
+  spaceBetweenRows12: { ...spaceBetweenRows12 },
 });
 
 export default STYLES;
