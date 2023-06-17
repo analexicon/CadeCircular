@@ -4,25 +4,39 @@ import { View, Text } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import CommonButton from "./CommonButton";
 
-interface CommonHeaderProps extends PropsWithChildren {
+interface CommonHeaderProps {
   navigation: NativeStackNavigationProp<any, any>;
-  leftText?: string;
+  leftText?: string | null;
+  centerText: string;
   rightText?: string;
+  rightButtonRoute?: string;
 }
 
 const CommonHeader = (props: CommonHeaderProps): JSX.Element => {
-  const leftChild = props.leftText ? (
-    <CommonButton handlePress={() => console.log("Left")}>
-      <Text style={STYLES.headerSidesText}>{props.leftText}</Text>
-    </CommonButton>
-  ) : (
-    <CommonButton handlePress={() => props.navigation.goBack()}>
-      <Text style={STYLES.headerSidesText}>Voltar</Text>
-    </CommonButton>
-  );
+  let leftChild;
+  if (props.leftText === null) {
+    leftChild = <></>;
+  } else if (typeof props.leftText === "string") {
+    leftChild = (
+      <CommonButton handlePress={() => props.navigation.goBack()}>
+        <Text style={STYLES.headerSidesText}>{props.leftText}</Text>
+      </CommonButton>
+    );
+  } else {
+    leftChild = (
+      <CommonButton handlePress={() => props.navigation.goBack()}>
+        <Text style={STYLES.headerSidesText}>Voltar</Text>
+      </CommonButton>
+    );
+  }
 
   const rightChild = props.rightText ? (
-    <CommonButton handlePress={() => console.log("Right")}>
+    <CommonButton
+      handlePress={() => {
+        props.rightButtonRoute &&
+          props.navigation.navigate(props.rightButtonRoute);
+      }}
+    >
       <Text style={STYLES.headerSidesText}>{props.rightText}</Text>
     </CommonButton>
   ) : (
@@ -33,7 +47,7 @@ const CommonHeader = (props: CommonHeaderProps): JSX.Element => {
     <View style={STYLES.header}>
       <View style={STYLES.headerSidesView}>{leftChild}</View>
       <View style={STYLES.headerCenter}>
-        {React.Children.only(props.children)}
+        <Text style={STYLES.titleText}>{props.centerText}</Text>
       </View>
       <View style={STYLES.headerSidesView}>{rightChild}</View>
     </View>

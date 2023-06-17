@@ -17,9 +17,7 @@ const SelectDriver = (props: SelectDriverProps): JSX.Element => {
 
   return (
     <SafeAreaView style={STYLES.container}>
-      <CommonHeader navigation={props.navigation}>
-        <Text style={STYLES.titleText}>Motoristas</Text>
-      </CommonHeader>
+      <CommonHeader navigation={props.navigation} centerText="Motoristas" />
       <View>
         <FlatList
           data={[
