@@ -1,5 +1,5 @@
-import COLORS from './colors';
-import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import COLORS from "./colors";
+import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 
 const debug: ViewStyle = {
   // borderColor: COLORS.redPrimary,
@@ -8,8 +8,8 @@ const debug: ViewStyle = {
 
 const text: TextStyle = {
   color: COLORS.black,
-  fontFamily: 'Inter',
-  textAlignVertical: 'center',
+  fontFamily: "Inter",
+  textAlignVertical: "center",
 };
 const titleText = {
   ...text,
@@ -23,44 +23,50 @@ const simpleText = {
 const container: ViewStyle = {
   ...debug,
   backgroundColor: COLORS.white,
-  display: 'flex',
-  height: '100%',
+  display: "flex",
+  height: "100%",
   padding: 8,
 };
 
 const header: ViewStyle = {
   ...debug,
-  marginHorizontal: 'auto',
-  width: '100%',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
+  marginHorizontal: "auto",
+  width: "100%",
+  flexDirection: "row",
+  flexWrap: "nowrap",
+  justifyContent: "space-between",
+  alignItems: "center",
+  alignContent: "stretch",
+  marginBottom: 8,
 };
 const headerSidesView: ViewStyle = {
   ...debug,
   flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
+  justifyContent: "center",
+  alignItems: "center",
 };
 const headerSidesText: TextStyle = {
+  ...debug,
   ...text,
-  fontSize: 20,
+  fontSize: 16,
+  textAlign: "center",
   color: COLORS.greenPrimary,
 };
 const headerCenter: ViewStyle = {
   ...debug,
   flexGrow: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 const STYLES = StyleSheet.create({
-  titleText: {...titleText},
-  simpleText: {...simpleText},
-  container: {...container},
-  header: {...header},
-  headerSidesView: {...headerSidesView},
-  headerSidesText: {...headerSidesText},
-  headerCenter: {...headerCenter},
+  titleText: { ...titleText },
+  simpleText: { ...simpleText },
+  container: { ...container },
+  header: { ...header },
+  headerSidesView: { ...headerSidesView },
+  headerSidesText: { ...headerSidesText },
+  headerCenter: { ...headerCenter },
 });
 
 export default STYLES;
