@@ -2,8 +2,7 @@ import STYLES from "../styles/styles";
 import { View, Text } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CommonButton from "../components/CommonButton";
-import CommonHeader from "../components/CommonHeader";
+import CommonHeader from "../components/Header";
 
 interface ArrivalProps {
   navigation: NativeStackNavigationProp<any, any>;

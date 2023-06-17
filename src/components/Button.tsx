@@ -18,13 +18,12 @@ const CommonButton = (props: CommonButtonProps): JSX.Element => {
     </TouchableHighlight>
   );
 };
+export default CommonButton;
 
-interface CommonButtonDriverProps {
+interface DriverButtonProps {
   driver: Driver;
 }
-export const CommonButtonDriver = (
-  props: CommonButtonDriverProps
-): JSX.Element => {
+export const DriverButton = (props: DriverButtonProps): JSX.Element => {
   return (
     <CommonButton
       handlePress={() => {
@@ -35,5 +34,3 @@ export const CommonButtonDriver = (
     </CommonButton>
   );
 };
-
-export default CommonButton;

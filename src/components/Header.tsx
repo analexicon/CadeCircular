@@ -2,7 +2,7 @@ import STYLES from "../styles/styles";
 import React from "react";
 import { View, Text } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import CommonButton from "./CommonButton";
+import CommonButton from "./Button";
 
 interface CommonHeaderProps {
   navigation: NativeStackNavigationProp<any, any>;

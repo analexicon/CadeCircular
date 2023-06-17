@@ -25,6 +25,7 @@ const CommonInput = (props: CommonInputProps): JSX.Element => {
     />
   );
 };
+export default CommonInput;
 
 export const PasswordInput = (props: CommonInputProps): JSX.Element => {
   return (
@@ -49,5 +50,3 @@ const LOCAL_STYLE = StyleSheet.create({
     paddingHorizontal: 8,
   },
 });
-
-export default CommonInput;

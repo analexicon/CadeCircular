@@ -3,9 +3,9 @@ import { useState } from "react";
 import { Text, View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CommonHeader from "../components/CommonHeader";
-import CommonButton from "../components/CommonButton";
-import CommonInput, { PasswordInput } from "../components/CommonInput";
+import CommonHeader from "../components/Header";
+import CommonButton from "../components/Button";
+import CommonInput, { PasswordInput } from "../components/Input";
 
 interface LoginProps {
   navigation: NativeStackNavigationProp<any, any>;
@@ -17,6 +17,8 @@ const Login = (props: LoginProps): JSX.Element => {
 
   function authenticate() {
     props.navigation.navigate("SelectDriver");
+    setPassword("");
+    setUsername("");
   }
 
   return (

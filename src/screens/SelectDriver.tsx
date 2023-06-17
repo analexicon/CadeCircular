@@ -3,8 +3,8 @@ import { Driver } from "../types";
 import { FlatList, Text, View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { CommonButtonDriver } from "../components/CommonButton";
-import CommonHeader from "../components/CommonHeader";
+import { DriverButton } from "../components/Button";
+import CommonHeader from "../components/Header";
 
 interface SelectDriverProps {
   navigation: NativeStackNavigationProp<any, any>;
@@ -33,9 +33,7 @@ const SelectDriver = (props: SelectDriverProps): JSX.Element => {
             { key: "Julie" },
           ]}
           renderItem={({ item }) => (
-            <CommonButtonDriver
-              driver={new Driver("0", item.key, "", "", "")}
-            />
+            <DriverButton driver={new Driver("0", item.key, "", "", "")} />
           )}
         />
       </View>
