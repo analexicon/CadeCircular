@@ -17,7 +17,7 @@ const titleText = {
 };
 const simpleText = {
   ...text,
-  fontSize: 16,
+  fontSize: 20,
 };
 
 const container: ViewStyle = {
