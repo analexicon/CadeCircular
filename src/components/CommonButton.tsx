@@ -2,35 +2,36 @@ import COLORS from '../styles/colors';
 import STYLES from '../styles/styles';
 import {Driver} from '../types';
 import {PropsWithChildren} from 'react';
-import {TouchableHighlight, View, Text} from 'react-native';
+import {TouchableHighlight, View, Text, ViewStyle} from 'react-native';
 
-interface SimpleButtonProps extends PropsWithChildren {
+interface CommonButtonProps extends PropsWithChildren {
   handlePress: Function;
+  style?: ViewStyle;
 }
-const SimpleButton = (props: SimpleButtonProps): JSX.Element => {
+const CommonButton = (props: CommonButtonProps): JSX.Element => {
   return (
     <TouchableHighlight
       underlayColor={COLORS.gray1}
       onPress={() => props.handlePress}>
-      <View>{props.children}</View>
+      <View style={props.style}>{props.children}</View>
     </TouchableHighlight>
   );
 };
 
-interface SimpleButtonDriverProps {
+interface CommonButtonDriverProps {
   driver: Driver;
 }
-export const SimpleButtonDriver = (
-  props: SimpleButtonDriverProps,
+export const CommonButtonDriver = (
+  props: CommonButtonDriverProps,
 ): JSX.Element => {
   return (
-    <SimpleButton
+    <CommonButton
       handlePress={() => {
         console.log('Apertou!');
       }}>
       <Text style={STYLES.simpleText}>{props.driver.name}</Text>
-    </SimpleButton>
+    </CommonButton>
   );
 };
 
-export default SimpleButton;
+export default CommonButton;

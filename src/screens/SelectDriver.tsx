@@ -1,8 +1,10 @@
+import COLORS from '../styles/colors';
 import STYLES from '../styles/styles';
 import {Driver} from '../types';
 import React from 'react';
 import {FlatList, Text, View} from 'react-native';
-import {SimpleButtonDriver} from '../components/SimpleButton';
+import {CommonButtonDriver} from '../components/CommonButton';
+import CommonHeader from '../components/CommonHeader';
 
 const SelectDriver = (): JSX.Element => {
   function handlePress() {
@@ -11,7 +13,9 @@ const SelectDriver = (): JSX.Element => {
 
   return (
     <View style={STYLES.container}>
-      <Text style={STYLES.titleText}>Motoristas</Text>
+      <CommonHeader leftText={'Voltar'}>
+        <Text style={STYLES.titleText}>Motoristas</Text>
+      </CommonHeader>
 
       <View>
         <FlatList
@@ -28,7 +32,7 @@ const SelectDriver = (): JSX.Element => {
             {key: 'Julie'},
           ]}
           renderItem={({item}) => (
-            <SimpleButtonDriver
+            <CommonButtonDriver
               driver={new Driver('0', item.key, '', '', '')}
             />
           )}
