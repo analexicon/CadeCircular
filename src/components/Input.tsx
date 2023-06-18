@@ -19,7 +19,7 @@ const CommonInput = (props: CommonInputProps): JSX.Element => {
     <TextInput
       value={props.value}
       onChangeText={(value) => props.setValue(value)}
-      style={(STYLES.simpleText, LOCAL_STYLE.textInput)}
+      style={[STYLES.simpleText, LOCAL_STYLE.textInput]}
       placeholder={props.placeholder}
       autoComplete={props.autocomplete}
     />
@@ -32,7 +32,7 @@ export const PasswordInput = (props: CommonInputProps): JSX.Element => {
     <TextInput
       value={props.value}
       onChangeText={(value) => props.setValue(value)}
-      style={(STYLES.simpleText, LOCAL_STYLE.textInput)}
+      style={[STYLES.simpleText, LOCAL_STYLE.textInput]}
       placeholder={props.placeholder ?? "Senha"}
       autoComplete={props.autocomplete ?? "password"}
       secureTextEntry={true}
@@ -46,7 +46,7 @@ const LOCAL_STYLE = StyleSheet.create({
     borderColor: COLORS.gray2,
     borderRadius: 8,
     borderWidth: 1,
-    height: 40,
+    height: 64,
     paddingHorizontal: 8,
   },
 });

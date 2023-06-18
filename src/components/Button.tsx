@@ -2,11 +2,20 @@ import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import { Driver } from "../types";
 import { PropsWithChildren } from "react";
-import { TouchableHighlight, View, Text, ViewStyle } from "react-native";
+import {
+  StyleSheet,
+  TouchableHighlight,
+  View,
+  Text,
+  ViewStyle,
+} from "react-native";
 
-interface CommonButtonProps extends PropsWithChildren {
+interface ButtonProps {
   handlePress: Function;
-  style?: ViewStyle;
+}
+
+interface CommonButtonProps extends PropsWithChildren, ButtonProps {
+  style?: ViewStyle[];
 }
 const CommonButton = (props: CommonButtonProps): JSX.Element => {
   return (
@@ -34,3 +43,45 @@ export const DriverButton = (props: DriverButtonProps): JSX.Element => {
     </CommonButton>
   );
 };
+
+interface StyledButtonProps extends ButtonProps {
+  color?: "green" | "red" | "gray" | "yellow";
+  text: string;
+}
+export const StyledButton = (props: StyledButtonProps): JSX.Element => {
+  let color = COLORS.greenPrimary;
+  switch (props.color) {
+    case "red":
+      color = COLORS.redPrimary;
+      break;
+    case "gray":
+      color = COLORS.gray1;
+      break;
+    case "yellow":
+      color = COLORS.yellowPrimary;
+      break;
+  }
+
+  return (
+    <CommonButton
+      handlePress={props.handlePress}
+      style={[LOCAL_STYLES.styledButton, { backgroundColor: color }]}
+    >
+      <Text style={[STYLES.simpleText, { color: COLORS.white }]}>
+        {props.text}
+      </Text>
+    </CommonButton>
+  );
+};
+
+const LOCAL_STYLES = StyleSheet.create({
+  styledButton: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    paddingHorizontal: 32,
+    paddingVertical: 16,
+    gap: 12,
+    borderRadius: 100,
+  },
+});

@@ -1,10 +1,10 @@
 import STYLES from "../styles/styles";
 import { useState } from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CommonHeader from "../components/Header";
-import CommonButton from "../components/Button";
+import { StyledButton } from "../components/Button";
 import CommonInput, { PasswordInput } from "../components/Input";
 
 interface LoginProps {
@@ -24,7 +24,7 @@ const Login = (props: LoginProps): JSX.Element => {
   return (
     <SafeAreaView style={STYLES.container}>
       <CommonHeader navigation={props.navigation} centerText="Login" />
-      <View style={STYLES.container}>
+      <View style={[STYLES.container, STYLES.spaceBetweenRows24]}>
         <View style={STYLES.spaceBetweenRows12}>
           <CommonInput
             placeholder="Nome de usuário"
@@ -34,12 +34,9 @@ const Login = (props: LoginProps): JSX.Element => {
           />
           <PasswordInput value={password} setValue={setPassword} />
         </View>
-        <CommonButton handlePress={authenticate}>
-          <Text style={STYLES.titleText}>Entrar</Text>
-        </CommonButton>
+        <StyledButton text="Entrar" handlePress={authenticate} />
       </View>
     </SafeAreaView>
   );
 };
-
 export default Login;

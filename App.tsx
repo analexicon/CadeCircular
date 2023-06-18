@@ -24,6 +24,7 @@ const App = (): JSX.Element => {
           initialRouteName="Arrival"
           screenOptions={{
             headerShown: false,
+            animation: "slide_from_right",
           }}
         >
           <Stack.Screen name="Arrival" component={Arrival} />
