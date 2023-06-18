@@ -1,6 +1,6 @@
 import STYLES from "../styles/styles";
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CommonHeader from "../components/Header";
@@ -16,13 +16,13 @@ const Login = (props: LoginProps): JSX.Element => {
   const [password, setPassword] = useState("");
 
   function authenticate() {
-    props.navigation.navigate("SelectDriver");
+    props.navigation.navigate("Profile");
     setPassword("");
     setUsername("");
   }
 
   return (
-    <SafeAreaView style={STYLES.container}>
+    <SafeAreaView style={STYLES.rows}>
       <CommonHeader navigation={props.navigation} centerText="Login" />
       <View style={[STYLES.container, STYLES.spaceBetweenRows24]}>
         <View style={STYLES.spaceBetweenRows12}>

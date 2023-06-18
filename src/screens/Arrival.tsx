@@ -10,7 +10,7 @@ interface ArrivalProps {
 
 const Arrival = (props: ArrivalProps): JSX.Element => {
   return (
-    <SafeAreaView style={STYLES.container}>
+    <SafeAreaView style={STYLES.rows}>
       <CommonHeader
         navigation={props.navigation}
         leftText={null}

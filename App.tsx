@@ -2,16 +2,22 @@ import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_600SemiBold,
+} from "@expo-google-fonts/inter";
 import Arrival from "./src/screens/Arrival";
 import SelectDriver from "./src/screens/SelectDriver";
 import Login from "./src/screens/Login";
+import Profile from "./src/screens/Profile";
 
 const Stack = createNativeStackNavigator();
 
 const App = (): JSX.Element => {
   let [fontsLoaded] = useFonts({
-    Inter: Inter_400Regular,
+    InterRegular: Inter_400Regular,
+    InterSemiBold: Inter_600SemiBold,
   });
   if (!fontsLoaded) {
     return <View></View>;
@@ -30,6 +36,7 @@ const App = (): JSX.Element => {
           <Stack.Screen name="Arrival" component={Arrival} />
           <Stack.Screen name="SelectDriver" component={SelectDriver} />
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Profile" component={Profile} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
