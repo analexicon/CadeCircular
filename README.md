@@ -29,7 +29,7 @@ This is a monorepo with both frontend with React-Native and backend API service 
     yarn install
     ```
 4. **Set environment variables**
-Inside `CadeCircular-API` folder, create a `.env` at the same level and same content as `.env.example`
+   Inside `CadeCircular-API` folder, create a `.env` at the same level and same content as `.env.example`
 
 ## 🔍 About the project
 
