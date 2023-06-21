@@ -4,8 +4,8 @@ import { Driver } from "../types";
 import { FlatList, StatusBar, View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { DriverButton } from "../components/Button";
 import CommonHeader from "../components/Header";
+import { DriverButton } from "../components/Buttons/DriverButton";
 
 interface SelectDriverProps {
   navigation: NativeStackNavigationProp<any, any>;

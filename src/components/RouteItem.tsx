@@ -4,7 +4,7 @@ import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Checkbox from "expo-checkbox";
-import CommonButton from "./Button";
+import CommonButton from "./Buttons/CommonButton";
 
 interface RouteItemProps {
   navigation: NativeStackNavigationProp<any, any>;

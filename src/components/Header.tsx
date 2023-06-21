@@ -3,7 +3,7 @@ import STYLES from "../styles/styles";
 import React from "react";
 import { StyleSheet, View, Text, TextStyle, ViewStyle } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import CommonButton from "./Button";
+import LinkButton from "./Buttons/LinkButton";
 
 interface CommonHeaderProps {
   navigation: NativeStackNavigationProp<any, any>;
@@ -18,12 +18,10 @@ const CommonHeader = (props: CommonHeaderProps): JSX.Element => {
   const titleTextStyle: TextStyle[] = props.filledBackground
     ? [STYLES.largeTitleText, { color: COLORS.white }]
     : [STYLES.largeTitleText];
-  const simpleTextStyle: TextStyle[] = props.filledBackground
-    ? [STYLES.linkText, { color: COLORS.white }]
-    : [STYLES.linkText];
   const headerStyle: ViewStyle[] = props.filledBackground
     ? [LOCAL_STYLES.header, { backgroundColor: COLORS.greenPrimary }]
     : [LOCAL_STYLES.header];
+  const linkColor = props.filledBackground ? "white" : "green";
 
   // If leftText is null, don't render the left button
   let leftChild;
@@ -33,33 +31,36 @@ const CommonHeader = (props: CommonHeaderProps): JSX.Element => {
   // If leftText is a string, render the left button with the given text
   else if (typeof props.leftText === "string") {
     leftChild = (
-      <CommonButton handlePress={() => props.navigation.goBack()}>
-        <Text style={simpleTextStyle}>{props.leftText}</Text>
-      </CommonButton>
+      <LinkButton
+        text={props.leftText}
+        navigation={props.navigation}
+        color={linkColor}
+      />
     );
   }
   // If leftText is undefined, render the default left button
   else {
     leftChild = (
-      <CommonButton handlePress={() => props.navigation.goBack()}>
-        <Text style={simpleTextStyle}>Voltar</Text>
-      </CommonButton>
+      <LinkButton
+        text="Voltar"
+        navigation={props.navigation}
+        color={linkColor}
+      />
     );
   }
 
-  // If rightText is undefined, don't render the right button, otherwise render the right button with the given text and route
-  const rightChild = props.rightText ? (
-    <CommonButton
-      handlePress={() => {
-        props.rightButtonRoute &&
-          props.navigation.navigate(props.rightButtonRoute);
-      }}
-    >
-      <Text style={simpleTextStyle}>{props.rightText}</Text>
-    </CommonButton>
-  ) : (
-    <></>
-  );
+  // If rightText or rightButtonRoute are undefined, don't render the right button, otherwise render the right button with the given text and route
+  const rightChild =
+    props.rightText && props.rightButtonRoute ? (
+      <LinkButton
+        text={props.rightText}
+        route={props.rightButtonRoute}
+        navigation={props.navigation}
+        color={linkColor}
+      />
+    ) : (
+      <></>
+    );
 
   return (
     <View style={headerStyle}>
