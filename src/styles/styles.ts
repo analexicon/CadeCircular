@@ -16,10 +16,21 @@ const simpleText: TextStyle = {
   fontFamily: "InterRegular",
   fontSize: 20,
 };
+const mediumText: TextStyle = {
+  ...text,
+  fontFamily: "InterMedium",
+  fontSize: 20,
+};
 const semiBoldText: TextStyle = {
   ...text,
   fontFamily: "InterSemiBold",
   fontSize: 20,
+};
+const linkText: TextStyle = {
+  ...text,
+  fontSize: 16,
+  textAlign: "center",
+  color: COLORS.greenPrimary,
 };
 const titleText: TextStyle = {
   ...text,
@@ -36,35 +47,45 @@ const mediumTitleText: TextStyle = {
   fontSize: 24,
 };
 
-const rows: ViewStyle = {
+const base: ViewStyle = {
   // ...debug,
   backgroundColor: COLORS.white,
   display: "flex",
+};
+const row: ViewStyle = {
+  ...base,
+  flexDirection: "row",
+};
+const column: ViewStyle = {
+  ...base,
   flexDirection: "column",
 };
 const spaceBetweenRows12: ViewStyle = {
-  ...rows,
+  ...column,
   rowGap: 12,
 };
 const spaceBetweenRows24: ViewStyle = {
-  ...rows,
+  ...column,
   rowGap: 24,
 };
 
 const container: ViewStyle = {
-  ...rows,
+  ...column,
   height: "100%",
   padding: 8,
   alignContent: "center",
 };
 
 const STYLES = StyleSheet.create({
-  largeTitleText: { ...largeTitleText },
-  semiBoldText: { ...semiBoldText },
-  mediumTitleText: { ...mediumTitleText },
   simpleText: { ...simpleText },
+  mediumText: { ...mediumText },
+  semiBoldText: { ...semiBoldText },
+  linkText: { ...linkText },
+  mediumTitleText: { ...mediumTitleText },
+  largeTitleText: { ...largeTitleText },
   container: { ...container },
-  rows: { ...rows },
+  row: { ...row },
+  column: { ...column },
   spaceBetweenRows12: { ...spaceBetweenRows12 },
   spaceBetweenRows24: { ...spaceBetweenRows24 },
 });

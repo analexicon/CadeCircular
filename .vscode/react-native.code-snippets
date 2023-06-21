@@ -16,7 +16,6 @@
 		  "interface PageProps {",
 		  "  navigation: NativeStackNavigationProp<any, any>;",
 		  "}",
-		  "",
 		  "const Page = (props: PageProps): JSX.Element => {",
 		  "  return (",
 		  "    <SafeAreaView style={STYLES.container}>",
@@ -24,7 +23,6 @@
 		  "    </SafeAreaView>",
 		  "  );",
 		  "};",
-		  "",
 		  "export default Page;",
 		  ""
 		],
@@ -37,11 +35,9 @@
 		  "import { View } from \"react-native\";",
 		  "",
 		  "interface ComponentProps {}",
-		  "",
 		  "const Component = (props: ComponentProps): JSX.Element => {",
 		  "  return <View></View>;",
 		  "};",
-		  "",
 		  "export default Component;"
 		],
 		"description": ""

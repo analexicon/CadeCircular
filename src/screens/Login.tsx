@@ -23,7 +23,7 @@ const Login = (props: LoginProps): JSX.Element => {
   }
 
   return (
-    <SafeAreaView style={STYLES.rows}>
+    <SafeAreaView style={STYLES.column}>
       <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader navigation={props.navigation} centerText="Login" />
       <View style={[STYLES.container, STYLES.spaceBetweenRows24]}>

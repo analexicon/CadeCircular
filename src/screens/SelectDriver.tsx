@@ -17,7 +17,7 @@ const SelectDriver = (props: SelectDriverProps): JSX.Element => {
   }
 
   return (
-    <SafeAreaView style={STYLES.rows}>
+    <SafeAreaView style={STYLES.column}>
       <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader navigation={props.navigation} centerText="Motoristas" />
       <View>

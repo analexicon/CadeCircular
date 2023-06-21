@@ -1,27 +1,38 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
-import { PropsWithChildren, useMemo, useRef } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { default as BaseBottomSheet } from "@gorhom/bottom-sheet";
+import { useMemo, useRef } from "react";
+import { Text, StyleSheet } from "react-native";
+import {
+  default as BaseBottomSheet,
+  BottomSheetFlatList,
+} from "@gorhom/bottom-sheet";
+import { SharedValue } from "react-native-reanimated";
 
-interface BottomSheetProps extends PropsWithChildren {
+interface BottomSheetProps {
   title: string;
+  snapPoints?: (string | number)[] | SharedValue<(string | number)[]>;
+  data: string[];
+  renderItem: ({ item }: { item: string }) => JSX.Element;
 }
 
 const BottomSheet = (props: BottomSheetProps): JSX.Element => {
   const snapPoints = useMemo(() => ["25%", "50%"], []);
   const bottomSheetRef = useRef<BaseBottomSheet>(null);
+
   return (
     <BaseBottomSheet
       index={1}
-      snapPoints={snapPoints}
+      snapPoints={props.snapPoints ?? snapPoints}
       ref={bottomSheetRef}
       style={LOCAL_STYLES.bottomSheet}
     >
-      <View style={STYLES.container}>
-        <Text style={STYLES.mediumTitleText}>{props.title}</Text>
-        <View>{props.children}</View>
-      </View>
+      <Text style={STYLES.mediumTitleText}>{props.title}</Text>
+      <BottomSheetFlatList
+        data={props.data}
+        renderItem={props.renderItem}
+        style={[STYLES.container, LOCAL_STYLES.flatList]}
+        contentContainerStyle={{ paddingBottom: 144 }}
+      />
     </BaseBottomSheet>
   );
 };
@@ -46,5 +57,9 @@ const LOCAL_STYLES = StyleSheet.create({
     overflow: "hidden",
     zIndex: 1,
     backgroundColor: COLORS.white,
+    flex: 1,
+  },
+  flatList: {
+    flex: 1,
   },
 });

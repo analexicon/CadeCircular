@@ -4,15 +4,14 @@ import { View, Text, StatusBar } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CommonHeader from "../components/Header";
-import BottomSheet from "../components/BottomSheet";
+import RoutesBottomSheet from "../components/RouteBottomSheet";
 
 interface ArrivalProps {
   navigation: NativeStackNavigationProp<any, any>;
 }
-
 const Arrival = (props: ArrivalProps): JSX.Element => {
   return (
-    <SafeAreaView style={STYLES.rows}>
+    <SafeAreaView style={STYLES.column}>
       <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader
         navigation={props.navigation}
@@ -25,12 +24,9 @@ const Arrival = (props: ArrivalProps): JSX.Element => {
         <View>
           <Text style={STYLES.simpleText}>Olá, mundo!</Text>
         </View>
+        <RoutesBottomSheet navigation={props.navigation} />
       </View>
-      <BottomSheet title="Rotas">
-        <Text>Banana</Text>
-      </BottomSheet>
     </SafeAreaView>
   );
 };
-
 export default Arrival;

@@ -12,7 +12,7 @@ interface ProfileProps {
 
 const Profile = (props: ProfileProps): JSX.Element => {
   return (
-    <SafeAreaView style={STYLES.rows}>
+    <SafeAreaView style={STYLES.column}>
       <StatusBar backgroundColor={COLORS.greenPrimary} />
       <View style={LOCAL_STYLES.header}>
         <CommonHeader

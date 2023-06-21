@@ -19,8 +19,8 @@ const CommonHeader = (props: CommonHeaderProps): JSX.Element => {
     ? [STYLES.largeTitleText, { color: COLORS.white }]
     : [STYLES.largeTitleText];
   const simpleTextStyle: TextStyle[] = props.filledBackground
-    ? [LOCAL_STYLES.headerSidesText, { color: COLORS.white }]
-    : [LOCAL_STYLES.headerSidesText];
+    ? [STYLES.linkText, { color: COLORS.white }]
+    : [STYLES.linkText];
   const headerStyle: ViewStyle[] = props.filledBackground
     ? [LOCAL_STYLES.header, { backgroundColor: COLORS.greenPrimary }]
     : [LOCAL_STYLES.header];
@@ -86,10 +86,5 @@ const LOCAL_STYLES = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   headerSidesView: { flex: 1, justifyContent: "center", alignItems: "center" },
-  headerSidesText: {
-    fontSize: 16,
-    textAlign: "center",
-    color: COLORS.greenPrimary,
-  },
   headerCenter: { flexGrow: 1, justifyContent: "center", alignItems: "center" },
 });
