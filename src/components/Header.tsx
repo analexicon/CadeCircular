@@ -16,8 +16,8 @@ interface CommonHeaderProps {
 
 const CommonHeader = (props: CommonHeaderProps): JSX.Element => {
   const titleTextStyle: TextStyle[] = props.filledBackground
-    ? [STYLES.titleText, { color: COLORS.white }]
-    : [STYLES.titleText];
+    ? [STYLES.largeTitleText, { color: COLORS.white }]
+    : [STYLES.largeTitleText];
   const simpleTextStyle: TextStyle[] = props.filledBackground
     ? [LOCAL_STYLES.headerSidesText, { color: COLORS.white }]
     : [LOCAL_STYLES.headerSidesText];

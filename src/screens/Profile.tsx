@@ -27,7 +27,7 @@ const Profile = (props: ProfileProps): JSX.Element => {
         />
       </View>
       <View style={LOCAL_STYLES.profileInfo}>
-        <Text style={STYLES.titleText}>Fulano de Tal</Text>
+        <Text style={STYLES.largeTitleText}>Fulano de Tal</Text>
         <Text style={STYLES.semiBoldText}>Motorista</Text>
         <Text style={[STYLES.semiBoldText, { color: COLORS.greenPrimary }]}>
           202098774

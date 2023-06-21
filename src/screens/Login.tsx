@@ -1,6 +1,7 @@
+import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import { useState } from "react";
-import { View } from "react-native";
+import { StatusBar, View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CommonHeader from "../components/Header";
@@ -23,6 +24,7 @@ const Login = (props: LoginProps): JSX.Element => {
 
   return (
     <SafeAreaView style={STYLES.rows}>
+      <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader navigation={props.navigation} centerText="Login" />
       <View style={[STYLES.container, STYLES.spaceBetweenRows24]}>
         <View style={STYLES.spaceBetweenRows12}>

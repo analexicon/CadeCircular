@@ -11,20 +11,29 @@ const text: TextStyle = {
   color: COLORS.black,
   textAlignVertical: "center",
 };
-const simpleText = {
+const simpleText: TextStyle = {
   ...text,
   fontFamily: "InterRegular",
   fontSize: 20,
 };
-const semiBoldText = {
+const semiBoldText: TextStyle = {
   ...text,
   fontFamily: "InterSemiBold",
   fontSize: 20,
 };
-const titleText = {
+const titleText: TextStyle = {
   ...text,
+  textAlign: "center",
+};
+const largeTitleText: TextStyle = {
+  ...titleText,
   fontFamily: "InterSemiBold",
   fontSize: 36,
+};
+const mediumTitleText: TextStyle = {
+  ...titleText,
+  fontFamily: "InterMedium",
+  fontSize: 24,
 };
 
 const rows: ViewStyle = {
@@ -46,11 +55,13 @@ const container: ViewStyle = {
   ...rows,
   height: "100%",
   padding: 8,
+  alignContent: "center",
 };
 
 const STYLES = StyleSheet.create({
-  titleText: { ...titleText },
+  largeTitleText: { ...largeTitleText },
   semiBoldText: { ...semiBoldText },
+  mediumTitleText: { ...mediumTitleText },
   simpleText: { ...simpleText },
   container: { ...container },
   rows: { ...rows },

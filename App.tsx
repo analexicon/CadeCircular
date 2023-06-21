@@ -2,9 +2,11 @@ import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   useFonts,
   Inter_400Regular,
+  Inter_500Medium,
   Inter_600SemiBold,
 } from "@expo-google-fonts/inter";
 import Arrival from "./src/screens/Arrival";
@@ -17,6 +19,7 @@ const Stack = createNativeStackNavigator();
 const App = (): JSX.Element => {
   let [fontsLoaded] = useFonts({
     InterRegular: Inter_400Regular,
+    InterMedium: Inter_500Medium,
     InterSemiBold: Inter_600SemiBold,
   });
   if (!fontsLoaded) {
@@ -25,20 +28,22 @@ const App = (): JSX.Element => {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Arrival"
-          screenOptions={{
-            headerShown: false,
-            animation: "slide_from_right",
-          }}
-        >
-          <Stack.Screen name="Arrival" component={Arrival} />
-          <Stack.Screen name="SelectDriver" component={SelectDriver} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Profile" component={Profile} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Arrival"
+            screenOptions={{
+              headerShown: false,
+              animation: "slide_from_right",
+            }}
+          >
+            <Stack.Screen name="Arrival" component={Arrival} />
+            <Stack.Screen name="SelectDriver" component={SelectDriver} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Profile" component={Profile} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   );
 };

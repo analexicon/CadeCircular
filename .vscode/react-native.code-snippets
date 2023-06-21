@@ -29,5 +29,21 @@
 		  ""
 		],
 		"description": ""
+	  },
+	  "React Native New Component": {
+		"prefix": "rnnc",
+		"body": [
+		  "import STYLES from \"../styles/styles\";",
+		  "import { View } from \"react-native\";",
+		  "",
+		  "interface ComponentProps {}",
+		  "",
+		  "const Component = (props: ComponentProps): JSX.Element => {",
+		  "  return <View></View>;",
+		  "};",
+		  "",
+		  "export default Component;"
+		],
+		"description": ""
 	  }
 }

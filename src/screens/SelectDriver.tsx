@@ -1,6 +1,7 @@
+import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import { Driver } from "../types";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, StatusBar, View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DriverButton } from "../components/Button";
@@ -17,6 +18,7 @@ const SelectDriver = (props: SelectDriverProps): JSX.Element => {
 
   return (
     <SafeAreaView style={STYLES.rows}>
+      <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader navigation={props.navigation} centerText="Motoristas" />
       <View>
         <FlatList
