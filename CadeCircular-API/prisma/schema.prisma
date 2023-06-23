@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id             String    @id @default(uuid())
+  name           String
+  username       String    @unique
+  password       String
+  identification String    @unique
+  drivers        Driver[]
+  managers       Manager[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Driver {
+  id         String    @id @default(uuid())
+  employee   Employee  @relation(fields: [employeeID], references: [id])
+  employeeID String
+  persursos  Journey[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Manager {
+  id         String   @id @default(uuid())
+  employee   Employee @relation(fields: [employeeID], references: [id])
+  employeeID String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Bus {
+  id           String    @id @default(uuid())
+  licensePlate String    @unique
+  model        String
+  capacity     Int
+  available    Boolean
+  journeys     Journey[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model BusStop {
+  id           String          @id @default(uuid())
+  name         String          @unique
+  reference    String
+  coordinates  String
+  busStopRoute BusStop_Route[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model Route {
+  id           String          @id @default(uuid())
+  nome         String
+  descricao    String
+  busStopRoute BusStop_Route[]
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+model BusStop_Route {
+  id        String     @id @default(uuid())
+  order     Int
+  busStop   BusStop    @relation(fields: [busStopID], references: [id])
+  busStopID String
+  route     Route      @relation(fields: [routeID], references: [id])
+  routeID   String
+  forecasts Forecast[]
+  journeys  Journey[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Forecast {
+  id             String        @id @default(uuid())
+  busStopRoute   BusStop_Route @relation(fields: [busStopRouteID], references: [id])
+  busStopRouteID String
+  schedule       DateTime
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model Journey {
+  id            String        @id @default(uuid())
+  nextBusStop   BusStop_Route @relation(fields: [nextBusStopID], references: [id])
+  nextBusStopID String
+  bus           Bus           @relation(fields: [busID], references: [id])
+  busID         String
+  driver        Driver        @relation(fields: [driverID], references: [id])
+  driverID      String
+  paused        Boolean
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
