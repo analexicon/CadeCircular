@@ -1,5 +1,6 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
+import screens from "../types/stackRoutes";
 import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -20,7 +21,9 @@ const RouteItem = (props: RouteItemProps): JSX.Element => {
       <Text style={[STYLES.mediumText, LOCAL_STYLES.routeName]}>
         {props.route}
       </Text>
-      <CommonButton handlePress={() => props.navigation.navigate("Details")}>
+      <CommonButton
+        handlePress={() => props.navigation.navigate(screens.Details)}
+      >
         <Text style={STYLES.linkText}>Detalhes</Text>
       </CommonButton>
     </View>

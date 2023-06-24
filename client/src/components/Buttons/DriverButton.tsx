@@ -1,5 +1,5 @@
 import STYLES from "../../styles/styles";
-import { Driver } from "../../types";
+import { Driver } from "../../types/types";
 import { Text } from "react-native";
 import CommonButton from "./CommonButton";
 

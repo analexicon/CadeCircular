@@ -5,9 +5,9 @@ import { determineErrorResponsePrismaQuery, formattedBus } from "../functions";
 // Query all buses
 router.get("/bus", async (request, response) => {
   try {
-    const foundBuss = await prisma.bus.findMany();
+    const foundBus = await prisma.bus.findMany();
 
-    const formmattedResponse: Bus[] = foundBuss.map((bus) => {
+    const formmattedResponse: Bus[] = foundBus.map((bus) => {
       return formattedBus(bus);
     });
 

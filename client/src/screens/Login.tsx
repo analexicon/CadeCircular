@@ -1,5 +1,6 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
+import screens from "../types/stackRoutes";
 import { useState } from "react";
 import { StatusBar, View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -17,7 +18,7 @@ const Login = (props: LoginProps): JSX.Element => {
   const [password, setPassword] = useState("");
 
   function authenticate() {
-    props.navigation.navigate("Profile");
+    props.navigation.navigate(screens.Profile);
     setPassword("");
     setUsername("");
   }

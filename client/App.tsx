@@ -13,6 +13,7 @@ import Arrival from "./src/screens/Arrival";
 import SelectDriver from "./src/screens/SelectDriver";
 import Login from "./src/screens/Login";
 import Profile from "./src/screens/Profile";
+import screens from "./src/types/stackRoutes";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,16 +32,19 @@ const App = (): JSX.Element => {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Arrival"
+            initialRouteName={screens.Arrival}
             screenOptions={{
               headerShown: false,
               animation: "slide_from_right",
             }}
           >
-            <Stack.Screen name="Arrival" component={Arrival} />
-            <Stack.Screen name="SelectDriver" component={SelectDriver} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name={screens.Arrival} component={Arrival} />
+            <Stack.Screen
+              name={screens.SelectDriver}
+              component={SelectDriver}
+            />
+            <Stack.Screen name={screens.Login} component={Login} />
+            <Stack.Screen name={screens.Profile} component={Profile} />
           </Stack.Navigator>
         </NavigationContainer>
       </GestureHandlerRootView>

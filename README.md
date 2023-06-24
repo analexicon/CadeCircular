@@ -1,13 +1,14 @@
 ![](https://www.ufjf.br/wp-content/plugins/imgpgprinc_novo/arquivos/deptocomputacao/1.jpg)
 
 # Practical Work of DCC196 - Mobile Device Programming Lab (Semester 2023-1)
+
 ## Professor Ronney Moreira de Castro
 
 ## 🚌 Cadê o Circular
 
 This is a monorepo with both frontend with React-Native and backend API service using NodeJs, Typescript, SQLite and Prisma.
 
-## 🚀 Quick start
+## 🌱 Setup
 
 1.  **Pre-requisites**
 
@@ -21,16 +22,50 @@ This is a monorepo with both frontend with React-Native and backend API service 
     git clone git@github.com:devgabmal/CadeCircular.git
     cd CadeCircular
     ```
+
 3.  **Install all libs and dependencie**
 
     ```shell
     npm install
-    cd CadeCircular-API
+    cd server
     yarn install
     ```
-4. **Set environment variables**
 
-   Inside `CadeCircular-API` folder, create a `.env` at the same level and same content as `.env.example`
+4.  **Set environment variables**
+    Inside `/server` folder, create and set a `.env` at the same level and same content as `/server/.env.example`
+    Inside `/client` folder, create and set a `.env` at the same level and same content as `/client/.env.example`
+
+## 🚀 Quick start
+
+# Server run
+
+1. **Run server**
+
+   ```shell
+   cd server
+   npm run dev
+   ```
+
+# Android Client run
+
+1. **Open client directory**
+
+   ```shell
+   cd client
+   ```
+
+2. **ADB**
+
+   ```shell
+   adb connect [your_phone_IP]
+   adb reverse tcp:3333 tcp:3333
+   ```
+
+3. **Expo Metro**
+
+   ```shell
+   npx expo start --localhost
+   ```
 
 ## 🔍 About the project
 
@@ -39,42 +74,48 @@ Students at the Federal University of Juiz de Fora JF campus use the free bus sy
 Given the number of buses, - one on the Circular route and four more on the Restaurant route - the waiting time at the stops is large and difficult to estimate. This is because there is no system for locating the cars, but rather a spreadsheet of times, often inaccurate.
 To help students in the decision on waiting for the bus, or use other means of transport, we idealized the development of an application that can estimate the real-time arrival forecast of vehicles on the campus. To do so, the information needs to be filled in by the driver before starting the route, and updated by a touch when passing by the bus stops. To a student user, the application should display a map with thumbnails of the cars on the last recorded location, along with the name of the route they are following.
 
-
 ## 👨‍💻 Conventions
 
 **Branch Names**
-  - all lowercase
-  - only dashes (-) to separate words
-  - should start with:
-    ```
-    feat_[api/front]_
-    fix_[api/front]_
-    docs_[api/front]_
-    style_[api/front]_
-    refactor_[api/front]_
-    build_[api/front]_
-    revert_[api/front]_
-    ```
-  - continue with short description
-      eg: `feat_api_implement-feature-x`
-  - please, keep it short!
-      good: `feat_front_implement-return-form`
-      bad: `feat_front_allow-users-to-fill-in-return-data-with-a-form`
+
+- all lowercase
+- only dashes (-) to separate words
+- should start with:
+  ```
+  feat_[api/front]_
+  fix_[api/front]_
+  docs_[api/front]_
+  style_[api/front]_
+  refactor_[api/front]_
+  build_[api/front]_
+  revert_[api/front]_
+  ```
+- continue with short description
+  eg: `feat_api_implement-feature-x`
+- please, keep it short!
+  good: `feat_front_implement-return-form`
+  bad: `feat_front_allow-users-to-fill-in-return-data-with-a-form`
 
 **Commit messages**
-  - All commit messages must follow conventions stated here
-    ```
-    git commit -m "feat(api/front): allow edit payment"
-                   ^--^             ^-----------------^
-                    |               |
-                    |               +-> Summary in present tense.
-                    |
-                    +-------> Type:  feat, fix, docs, style, refactor, build or revert.
-    ``` 
+
+- All commit messages must follow conventions stated here
+  ```
+  git commit -m "feat(api/front): allow edit payment"
+                 ^--^             ^-----------------^
+                  |               |
+                  |               +-> Summary in present tense.
+                  |
+                  +-------> Type:  feat, fix, docs, style, refactor, build or revert.
+  ```
 
 **Pull Request titles**
-  - All pull requests must follow the same convenvion stated on commit messages above.
+
+- All pull requests must follow the same convenvion stated on commit messages above.
+
 ---
+
 ###### This application was developed by Computer Science students at Universidade Federal de Juiz de Fora
+
 ###### Developed by: Alexandre Rocha da Silva, Celso Gabriel Malosto, Lucas Paiva, Maria Cecília Romão Santos, e Rodrigo Soares de Assis
+
 ###### tags: `React-Native` `API` `Typescript` `Prisma` `SQLite` `UFJF`
