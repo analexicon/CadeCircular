@@ -1,13 +1,19 @@
 // TODO: Implementar relações entre classes
 
 export class Bus {
-  constructor(
-    id: string,
-    licensePlate: string,
-    capacity: number,
-    model: string,
-    available: boolean
-  ) {
+  constructor({
+    id,
+    licensePlate,
+    capacity,
+    model,
+    available,
+  }: {
+    id: string;
+    licensePlate: string;
+    capacity: number;
+    model: string;
+    available: boolean;
+  }) {
     this.id = id;
     this.licensePlate = licensePlate;
     this.capacity = capacity;
@@ -45,25 +51,47 @@ export class Forecast {
 }
 
 export class Route {
-  constructor(id: string, name: string, description: string) {
+  constructor(
+    id: string,
+    name: string,
+    description: string,
+
+    busStop_RouteList: BusStop_Route[]
+  ) {
     this.id = id;
     this.name = name;
     this.description = description;
+
+    this.busStop_RouteList = busStop_RouteList;
   }
 
   id: string;
   name: string;
   description: string;
+
+  busStop_RouteList: BusStop_Route[];
 }
 
 export class BusStop_Route {
-  constructor(id: string, order: number) {
+  constructor(
+    id: string,
+    order: number,
+
+    busStop: BusStop,
+    forecasts: Forecast[]
+  ) {
     this.id = id;
     this.order = order;
+
+    this.busStop = busStop;
+    this.forecasts = forecasts;
   }
 
   id: string;
   order: number;
+
+  busStop: BusStop;
+  forecasts: Forecast[];
 }
 
 export class Journey {
@@ -100,7 +128,7 @@ export class Journey {
   route: Route;
 
   // TODO: Implementar métodos
-  getCurrentBusStop() {}
+  getNextBusStop() {}
   getSubsequentialBusStop() {}
 }
 

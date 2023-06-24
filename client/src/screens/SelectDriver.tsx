@@ -1,11 +1,13 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import { Driver } from "../types/types";
-import { FlatList, StatusBar, View } from "react-native";
+import { View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../components/Header";
 import { DriverButton } from "../components/Buttons/DriverButton";
+import { FlatList } from "react-native-gesture-handler";
 
 interface SelectDriverProps {
   navigation: NativeStackNavigationProp<any, any>;

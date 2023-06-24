@@ -1,31 +1,18 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
-import { Bus } from "../types/types";
-import { fetchRecordData } from "../controller";
-import { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
+import screens from "../types/stackRoutes";
 import { StyleSheet, Text, View, Image } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CommonHeader from "../components/Header";
 import { StatusBar } from "expo-status-bar";
+import CommonHeader from "../components/Header";
+import StyledButton from "../components/Buttons/StyledButton";
 
 interface ProfileProps {
   navigation: NativeStackNavigationProp<any, any>;
 }
 
 const Profile = (props: ProfileProps): JSX.Element => {
-  const [buses, setBuses] = useState<Bus[]>([]);
-  useEffect(() => {
-    fetchRecordData(
-      "/bus",
-      props.navigation,
-      function (response: AxiosResponse<any, any>) {
-        setBuses(response.data);
-      }
-    );
-  }, []);
-
   return (
     <SafeAreaView style={STYLES.column}>
       <StatusBar backgroundColor={COLORS.greenPrimary} />
@@ -51,13 +38,11 @@ const Profile = (props: ProfileProps): JSX.Element => {
       <View style={STYLES.container}>
         <View>
           <Text style={STYLES.simpleText}>Olá, mundo!</Text>
-          {buses.map((bus: Bus) => {
-            return (
-              <Text style={STYLES.simpleText} key={bus.id}>
-                {bus.licensePlate}
-              </Text>
-            );
-          })}
+
+          <StyledButton
+            text="Listar ônibus"
+            handlePress={() => props.navigation.navigate(screens.List)}
+          />
         </View>
       </View>
     </SafeAreaView>

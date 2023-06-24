@@ -8,6 +8,7 @@
 	"React Native New Screen": {
 		"prefix": "rnns",
 		"body": [
+		  "import COLORS from \"../styles/colors\";",
 		  "import STYLES from \"../styles/styles\";",
 		  "import { View } from \"react-native\";",
 		  "import type { NativeStackNavigationProp } from \"@react-navigation/native-stack\";",
@@ -19,7 +20,10 @@
 		  "const Page = (props: PageProps): JSX.Element => {",
 		  "  return (",
 		  "    <SafeAreaView style={STYLES.container}>",
-		  "      <View></View>",
+		  "      <StatusBar backgroundColor={COLORS.white} />",
+		  "      <View>",
+		  "        <CommonHeader navigation={props.navigation} centerText=\"Page\" />",
+		  "      </View>",
 		  "    </SafeAreaView>",
 		  "  );",
 		  "};",

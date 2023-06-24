@@ -1,13 +1,19 @@
 // TODO: Implementar relações entre classes
 
 export class Bus {
-  constructor(
-    id: string,
-    licensePlate: string,
-    capacity: number,
-    model: string,
-    available: boolean
-  ) {
+  constructor({
+    id,
+    licensePlate,
+    capacity,
+    model,
+    available,
+  }: {
+    id: string;
+    licensePlate: string;
+    capacity: number;
+    model: string;
+    available: boolean;
+  }) {
     this.id = id;
     this.licensePlate = licensePlate;
     this.capacity = capacity;
@@ -168,4 +174,12 @@ export class Manager extends Employee {
   createBus() {}
   createBusStop() {}
   createRoute() {}
+}
+
+export type CRUDRecord = Bus | BusStop | Route | Driver;
+export enum CRUDRecordEndpoints {
+  Bus = "bus",
+  BusStop = "bus-stop",
+  Route = "route",
+  Driver = "driver",
 }
