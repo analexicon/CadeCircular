@@ -5,15 +5,14 @@ import { determineErrorResponsePrismaQuery, formattedBus } from "../functions";
 // Query all buses
 router.get("/bus", async (request, response) => {
   try {
-    const foundProjects = await prisma.bus.findMany();
+    const foundBuss = await prisma.bus.findMany();
 
-    const formmattedResponse: Bus[] = foundProjects.map((bus) => {
+    const formmattedResponse: Bus[] = foundBuss.map((bus) => {
       return formattedBus(bus);
     });
 
     return response.status(200).json(formmattedResponse);
   } catch (error) {
-    console.log(error);
     const errorResponse = determineErrorResponsePrismaQuery(error);
     return response.status(errorResponse.code).json(errorResponse.body);
   }
@@ -23,7 +22,6 @@ router.get("/bus", async (request, response) => {
 router.get("/bus/:id", async (request, response) => {
   try {
     const foundBus = await prisma.bus.findUnique({
-      include: {},
       where: {
         id: request.params.id,
       },
@@ -34,6 +32,63 @@ router.get("/bus/:id", async (request, response) => {
     } else {
       return response.status(404).json({ message: "Bus not found!" });
     }
+  } catch (error) {
+    const errorResponse = determineErrorResponsePrismaQuery(error);
+    return response.status(errorResponse.code).json(errorResponse.body);
+  }
+});
+
+// Create bus
+router.post("/bus", async (request, response) => {
+  try {
+    const body: Bus = request.body;
+    const newBus = await prisma.bus.create({
+      data: {
+        licensePlate: body.licensePlate,
+        capacity: body.capacity,
+        model: body.model,
+        available: body.available,
+      },
+    });
+    return response.status(201).json(formattedBus(newBus));
+  } catch (error) {
+    const errorResponse = determineErrorResponsePrismaQuery(error);
+    return response.status(errorResponse.code).json(errorResponse.body);
+  }
+});
+
+// Update bus
+router.patch("/bus/:id", async (request, response) => {
+  try {
+    const body: Bus = request.body;
+    const updatedBus = await prisma.bus.update({
+      where: {
+        id: request.params.id,
+      },
+      data: {
+        licensePlate: body.licensePlate,
+        capacity: body.capacity,
+        model: body.model,
+        available: body.available,
+      },
+    });
+    return response.status(200).json(formattedBus(updatedBus));
+  } catch (error) {
+    const errorResponse = determineErrorResponsePrismaQuery(error);
+    return response.status(errorResponse.code).json(errorResponse.body);
+  }
+});
+
+// Delete bus
+router.delete("/bus/:id", async (request, response) => {
+  try {
+    await prisma.bus.delete({
+      where: {
+        id: request.params.id,
+      },
+    });
+
+    return response.status(200).json({ message: "Bus deleted!" });
   } catch (error) {
     const errorResponse = determineErrorResponsePrismaQuery(error);
     return response.status(errorResponse.code).json(errorResponse.body);

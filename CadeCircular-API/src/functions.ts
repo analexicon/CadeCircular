@@ -3,6 +3,8 @@ import { Bus } from "./types";
 
 // If an error occurs, try to determine the error type and return the apropriate response
 export function determineErrorResponsePrismaQuery(error: unknown) {
+  console.log(error);
+
   const response: {
     code: number;
     body: { message: string; prismaErrorCode?: string };
