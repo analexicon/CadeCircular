@@ -23,22 +23,15 @@ export class Bus {
 }
 
 export class BusStop {
-  constructor(
-    id: string,
-    name: string,
-    reference: string,
-    coordinates: string
-  ) {
+  constructor(id: string, name: string, description: string) {
     this.id = id;
     this.name = name;
-    this.reference = reference;
-    this.coordinates = coordinates;
+    this.description = description;
   }
 
   id: string;
   name: string;
-  reference: string;
-  coordinates: string;
+  description: string;
 }
 
 export class Forecast {
@@ -74,17 +67,40 @@ export class BusStop_Route {
 }
 
 export class Journey {
-  constructor(id: string, paused: boolean, nextBusStop: BusStop_Route) {
+  constructor(
+    id: string,
+    paused: boolean,
+    active: boolean,
+    startDate: Date,
+    nextBusStopIndex: number,
+
+    driver: Driver,
+    bus: Bus,
+    route: Route
+  ) {
     this.id = id;
     this.paused = paused;
-    this.nextBusStop = nextBusStop;
+    this.active = active;
+    this.startDate = startDate;
+    this.nextBusStopIndex = nextBusStopIndex;
+
+    this.driver = driver;
+    this.bus = bus;
+    this.route = route;
   }
 
   id: string;
   paused: boolean;
-  nextBusStop: BusStop_Route;
+  active: boolean;
+  startDate: Date;
+  nextBusStopIndex: number;
+
+  driver: Driver;
+  bus: Bus;
+  route: Route;
 
   // TODO: Implementar métodos
+  getCurrentBusStop() {}
   getSubsequentialBusStop() {}
 }
 
