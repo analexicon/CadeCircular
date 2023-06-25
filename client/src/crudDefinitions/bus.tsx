@@ -5,10 +5,12 @@ import {
   CRUDRecordTypes,
 } from "../types/types";
 import { ScrollView, View } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import InputGroup from "../components/InputGroup";
 import CheckboxInput from "../components/CheckboxInput";
+import screens from "../types/stackRoutes";
 
-export const recordItemText = (item: CRUDRecord): string => {
+const recordItemText = (item: CRUDRecord): string => {
   return item._endpoint === CRUDRecordEndpoints.Bus
     ? item.licensePlate + " - " + item.model
     : item.id;
@@ -21,6 +23,14 @@ export interface InputValues {
   capacity: string;
   available: boolean;
 }
+
+export const emptyInputValues: InputValues = {
+  _type: CRUDRecordTypes.Bus,
+  licensePlate: "",
+  model: "",
+  capacity: "",
+  available: false,
+};
 
 interface FormBodyProps {
   inputValues: InputValues;
@@ -67,12 +77,43 @@ export const FormBody = (props: FormBodyProps): JSX.Element => {
   );
 };
 
-export const handleUpdate = ({
-  recordId,
-  inputValues,
-}: {
-  recordId: string;
-  inputValues: InputValues;
-}): void => {
+function redirectToList(navigation: NativeStackNavigationProp<any, any>) {
+  navigation.pop();
+  navigation.pop();
+  navigation.push(screens.List, listNavigationParams);
+}
+
+export const handleCreate = (
+  inputValues: InputValues,
+  navigation: NativeStackNavigationProp<any, any>
+): void => {
   console.log(inputValues);
+  redirectToList(navigation);
+};
+
+export const handleUpdate = (
+  recordId: string,
+  inputValues: InputValues,
+  navigation: NativeStackNavigationProp<any, any>
+): void => {
+  console.log(inputValues);
+  redirectToList(navigation);
+};
+
+export const handleDelete = (
+  recordId: string,
+  navigation: NativeStackNavigationProp<any, any>
+): void => {
+  console.log(recordId);
+  redirectToList(navigation);
+};
+
+export const listNavigationParams = {
+  pageTitle: "Ônibus",
+  recordSingularName: "ônibus",
+  recordEndpoint: CRUDRecordEndpoints.Bus,
+  recordItemText: recordItemText,
+  handleCreate: handleCreate,
+  handleUpdate: handleUpdate,
+  handleDelete: handleDelete,
 };

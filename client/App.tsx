@@ -16,6 +16,7 @@ import SelectDriver from "./src/screens/SelectDriver";
 import Login from "./src/screens/Login";
 import Profile from "./src/screens/Profile";
 import List from "./src/screens/CRUD/List";
+import Create from "./src/screens/CRUD/Create";
 import Update from "./src/screens/CRUD/Update";
 
 const Stack = createNativeStackNavigator();
@@ -50,6 +51,7 @@ const App = (): JSX.Element => {
             <Stack.Screen name={screens.Login} component={Login} />
             <Stack.Screen name={screens.Profile} component={Profile} />
             <Stack.Screen name={screens.List} component={List} />
+            <Stack.Screen name={screens.Create} component={Create} />
             <Stack.Screen name={screens.Update} component={Update} />
           </Stack.Navigator>
         </NavigationContainer>

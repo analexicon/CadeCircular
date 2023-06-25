@@ -9,9 +9,11 @@ import CommonButton from "./Buttons/CommonButton";
 interface RecordItemProps {
   recordEndpoint: CRUDRecordEndpoints;
   recordId: string;
+  recordSingularName: string;
   recordText: string;
   followingPageTitle: string;
   handleUpdate: Function;
+  handleDelete: Function;
 }
 
 interface ListItemProps extends RecordItemProps {
@@ -26,8 +28,10 @@ const ListItem = (props: ListItemProps): JSX.Element => {
           props.navigation.push(screens.Update, {
             pageTitle: props.followingPageTitle,
             recordId: props.recordId,
+            recordSingularName: props.recordSingularName,
             recordEndpoint: props.recordEndpoint,
             handleUpdate: props.handleUpdate,
+            handleDelete: props.handleDelete,
           });
         }}
         style={[STYLES.row, LOCAL_STYLES.container]}

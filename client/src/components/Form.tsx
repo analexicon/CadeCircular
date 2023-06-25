@@ -5,26 +5,36 @@ import StyledButton from "./Buttons/StyledButton";
 
 interface FormProps {
   formBody: JSX.Element;
-  handleUpdate: Function;
+  handleSubmit: Function;
+  isEditing: boolean;
+  handlePressDelete?: Function;
 }
 const Form = (props: FormProps): JSX.Element => {
+  const buttons = props.isEditing ? (
+    <>
+      <StyledButton
+        handlePress={props.handleSubmit}
+        text="Editar"
+        color="yellow"
+      />
+      {props.handlePressDelete ? (
+        <StyledButton
+          handlePress={props.handlePressDelete}
+          text="Excluir"
+          color="red"
+        />
+      ) : null}
+    </>
+  ) : (
+    <StyledButton handlePress={props.handleSubmit} text="Criar" color="green" />
+  );
+
   return (
     <View style={[STYLES.container, LOCAL_STYLES.container]}>
       <View style={[STYLES.column, LOCAL_STYLES.formBody]}>
         {props.formBody}
       </View>
-      <View style={[STYLES.column, LOCAL_STYLES.buttons]}>
-        <StyledButton
-          handlePress={props.handleUpdate}
-          text="Editar"
-          color="yellow"
-        />
-        <StyledButton
-          handlePress={() => console.log("Excluir!")}
-          text="Excluir"
-          color="red"
-        />
-      </View>
+      <View style={[STYLES.column, LOCAL_STYLES.buttons]}>{buttons}</View>
     </View>
   );
 };

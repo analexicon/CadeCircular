@@ -3,8 +3,11 @@ import STYLES from "../styles/styles";
 import screens from "../types/stackRoutes";
 import { CRUDRecordEndpoints } from "../types/types";
 import {
-  recordItemText as busItemText,
+  listNavigationParams as busListNavigationParams,
+  handleCreate as busHandleCreate,
   handleUpdate as busHandleUpdate,
+  handleDelete as busHandleDelete,
+  listNavigationParams,
 } from "../crudDefinitions/bus";
 import { StyleSheet, Text, View, Image } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -41,19 +44,13 @@ const Profile = (props: ProfileProps): JSX.Element => {
         </Text>
       </View>
       <View style={STYLES.container}>
-        <View>
+        <View style={STYLES.spaceBetweenRows12}>
           <Text style={STYLES.simpleText}>Olá, mundo!</Text>
 
           <StyledButton
             text="Listar ônibus"
             handlePress={() =>
-              props.navigation.push(screens.List, {
-                pageTitle: "Ônibus",
-                recordSingularName: "ônibus",
-                recordEndpoint: CRUDRecordEndpoints.Bus,
-                recordItemText: busItemText,
-                handleUpdate: busHandleUpdate,
-              })
+              props.navigation.push(screens.List, listNavigationParams)
             }
           />
         </View>

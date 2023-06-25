@@ -18,7 +18,7 @@ const CheckboxInput = (props: CheckboxInputProps): JSX.Element => {
       style={[STYLES.row, LOCAL_STYLES.container]}
     >
       <View style={[STYLES.spaceBetweenColumns8, LOCAL_STYLES.innerContainer]}>
-        <Checkbox value={props.isChecked} />
+        <Checkbox value={props.isChecked} color={COLORS.greenPrimary} />
         <Text style={[STYLES.mediumTitleText]}>{props.label}</Text>
       </View>
     </CommonButton>
