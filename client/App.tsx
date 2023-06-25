@@ -18,6 +18,7 @@ import Profile from "./src/screens/Profile";
 import List from "./src/screens/CRUD/List";
 import Create from "./src/screens/CRUD/Create";
 import Update from "./src/screens/CRUD/Update";
+import ViewTime from "./src/screens/ViewTimes";
 
 const Stack = createNativeStackNavigator();
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
@@ -53,6 +54,7 @@ const App = (): JSX.Element => {
             <Stack.Screen name={screens.List} component={List} />
             <Stack.Screen name={screens.Create} component={Create} />
             <Stack.Screen name={screens.Update} component={Update} />
+            <Stack.Screen name={screens.ViewTime} component={ViewTime} />
           </Stack.Navigator>
         </NavigationContainer>
       </GestureHandlerRootView>

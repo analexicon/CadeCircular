@@ -8,6 +8,6 @@ enum screens {
   Create = "Create",
   Update = "Update",
 
-  Details = "Details",
+  ViewTime = "ViewTime",
 }
 export default screens;
