@@ -1,0 +1,121 @@
+[
+    {
+        "v": 1,
+        "name": "CadeCircular",
+        "folders": [
+            {
+            "v": 1,
+            "name": "Bus",
+            "folders": [],
+            "requests": [
+                {
+                "v": "1",
+                "endpoint": "http://localhost:3333/bus",
+                "name": "Get All Buses",
+                "params": [],
+                "headers": [],
+                "method": "GET",
+                "auth": {
+                    "authType": "none",
+                    "authActive": true,
+                    "addTo": "Headers",
+                    "key": "",
+                    "value": ""
+                },
+                "preRequestScript": "",
+                "testScript": "",
+                "body": {
+                    "contentType": null,
+                    "body": null
+                }
+                },
+                {
+                "v": "1",
+                "endpoint": "http://localhost:3333/bus/00000000-b000-0000-0000-000000000000",
+                "name": "Get Bus by ID",
+                "params": [],
+                "headers": [],
+                "method": "GET",
+                "auth": {
+                    "authType": "none",
+                    "authActive": true,
+                    "addTo": "Headers",
+                    "key": "",
+                    "value": ""
+                },
+                "preRequestScript": "",
+                "testScript": "",
+                "body": {
+                    "contentType": null,
+                    "body": null
+                }
+                },
+                {
+                "v": "1",
+                "endpoint": "http://localhost:3333/bus",
+                "name": "Create Bus",
+                "params": [],
+                "headers": [],
+                "method": "POST",
+                "auth": {
+                    "authType": "none",
+                    "authActive": true,
+                    "addTo": "Headers",
+                    "key": "",
+                    "value": ""
+                },
+                "preRequestScript": "",
+                "testScript": "",
+                "body": {
+                    "contentType": "application/json",
+                    "body": "{\n  \"id\": \"\",\n  \"licensePlate\": \"AAA-1000\",\n  \"capacity\": 20,\n  \"model\": \"Volkswagen\",\n  \"available\": true\n}"
+                }
+                },
+                {
+                "v": "1",
+                "endpoint": "http://localhost:3333/bus/00000000-b000-0000-0000-000000000000",
+                "name": "Update Bus",
+                "params": [],
+                "headers": [],
+                "method": "PATCH",
+                "auth": {
+                    "authType": "none",
+                    "authActive": true,
+                    "addTo": "Headers",
+                    "key": "",
+                    "value": ""
+                },
+                "preRequestScript": "",
+                "testScript": "",
+                "body": {
+                    "contentType": "application/json",
+                    "body": "{\n  \"id\": \"00000000-b000-0000-0000-000000000000\",\n  \"licensePlate\": \"ZZZ-1000\",\n  \"capacity\": 40,\n  \"model\": \"Caio\",\n  \"available\": false\n}"
+                }
+                },
+                {
+                "v": "1",
+                "endpoint": "http://localhost:3333/bus/00000000-b000-0000-0000-000000000000",
+                "name": "Delete Bus",
+                "params": [],
+                "headers": [],
+                "method": "DELETE",
+                "auth": {
+                    "authType": "none",
+                    "authActive": true,
+                    "addTo": "Headers",
+                    "key": "",
+                    "value": ""
+                },
+                "preRequestScript": "",
+                "testScript": "",
+                "body": {
+                    "contentType": null,
+                    "body": "{}"
+                }
+                }
+            ]
+            }
+        ],
+        "requests": []
+        }
+]

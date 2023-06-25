@@ -13,6 +13,21 @@ async function main() {
       journeys: { create: [] },
     },
   });
+
+  const driver = await prisma.driver.create({
+    data: {
+      employee: {
+        create: {
+          id: "00000000-e000-0000-0000-000000000000",
+          name: "Edenilson",
+          username: "Ede",
+          password: "cigarro",
+          identification: "123456",
+          type: 1,
+        },
+      },
+    },
+  });
 }
 
 main()
