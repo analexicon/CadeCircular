@@ -3,18 +3,22 @@ import { REACT_APP_SERVER_URL } from "@env";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import screens from "./types/stackRoutes";
 
-export function fetchRecordData(
+export async function fetchRecordData(
   relativeUrl: string,
   navigation: NativeStackNavigationProp<any, any>,
-  handleFetchResponse: Function
+  handleFetch: (data: any) => void
 ) {
-  axios(REACT_APP_SERVER_URL + relativeUrl, {
-    validateStatus: function (status) {
-      return status === 200;
-    },
-  })
-    .then((response) => handleFetchResponse(response))
-    .catch((error) => handleErrorRedirect(navigation, error));
+  try {
+    axios(REACT_APP_SERVER_URL + relativeUrl, {
+      validateStatus: function (status) {
+        return status === 200;
+      },
+    })
+      .then((response) => handleFetch(response.data))
+      .catch((error) => handleErrorRedirect(navigation, error));
+  } catch (error: unknown) {
+    handleErrorRedirect(navigation, error);
+  }
 }
 
 function handleErrorRedirect(

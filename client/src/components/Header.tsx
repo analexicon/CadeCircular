@@ -35,6 +35,7 @@ const CommonHeader = (props: CommonHeaderProps): JSX.Element => {
         text={props.leftText}
         navigation={props.navigation}
         color={linkColor}
+        align="left"
       />
     );
   }
@@ -45,6 +46,7 @@ const CommonHeader = (props: CommonHeaderProps): JSX.Element => {
         text="Voltar"
         navigation={props.navigation}
         color={linkColor}
+        align="left"
       />
     );
   }
@@ -57,6 +59,7 @@ const CommonHeader = (props: CommonHeaderProps): JSX.Element => {
         route={props.rightButtonRoute}
         navigation={props.navigation}
         color={linkColor}
+        align="right"
       />
     ) : (
       <></>
@@ -64,11 +67,19 @@ const CommonHeader = (props: CommonHeaderProps): JSX.Element => {
 
   return (
     <View style={headerStyle}>
-      <View style={LOCAL_STYLES.headerSidesView}>{leftChild}</View>
+      <View
+        style={[LOCAL_STYLES.headerSidesView, LOCAL_STYLES.headerSideLeftView]}
+      >
+        {leftChild}
+      </View>
       <View style={LOCAL_STYLES.headerCenter}>
         <Text style={titleTextStyle}>{props.centerText}</Text>
       </View>
-      <View style={LOCAL_STYLES.headerSidesView}>{rightChild}</View>
+      <View
+        style={[LOCAL_STYLES.headerSidesView, LOCAL_STYLES.headerSideRightView]}
+      >
+        {rightChild}
+      </View>
     </View>
   );
 };
@@ -86,6 +97,8 @@ const LOCAL_STYLES = StyleSheet.create({
     paddingBottom: 8,
     backgroundColor: COLORS.white,
   },
-  headerSidesView: { flex: 1, justifyContent: "center", alignItems: "center" },
+  headerSidesView: { flex: 1, justifyContent: "center" },
+  headerSideLeftView: { paddingLeft: 12 },
+  headerSideRightView: { paddingRight: 12 },
   headerCenter: { flexGrow: 1, justifyContent: "center", alignItems: "center" },
 });

@@ -1,19 +1,19 @@
-// TODO: Implementar relações entre classes
+export type CRUDRecord = Bus | BusStop | Route | Driver;
+export enum CRUDRecordEndpoints {
+  Bus = "bus",
+  BusStop = "bus-stop",
+  Route = "route",
+  Driver = "driver",
+}
+export enum CRUDRecordTypes {
+  Bus,
+  BusStop,
+  Route,
+  Driver,
+}
 
-export class Bus {
-  constructor(
-    id: string,
-    licensePlate: string,
-    capacity: number,
-    model: string,
-    available: boolean
-  ) {
-    this.id = id;
-    this.licensePlate = licensePlate;
-    this.capacity = capacity;
-    this.model = model;
-    this.available = available;
-  }
+export interface Bus {
+  _endpoint: CRUDRecordEndpoints.Bus;
 
   id: string;
   licensePlate: string;
@@ -22,73 +22,33 @@ export class Bus {
   available: boolean;
 }
 
-export class BusStop {
-  constructor(id: string, name: string, description: string) {
-    this.id = id;
-    this.name = name;
-    this.description = description;
-  }
+export interface BusStop {
+  _endpoint: CRUDRecordEndpoints.BusStop;
 
   id: string;
   name: string;
   description: string;
 }
 
-export class Forecast {
-  constructor(id: string, schedule: Date) {
-    this.id = id;
-    this.schedule = schedule;
-  }
-
+export interface Forecast {
   id: string;
   schedule: Date;
 }
 
-export class Route {
-  constructor(id: string, name: string, description: string) {
-    this.id = id;
-    this.name = name;
-    this.description = description;
-  }
+export interface Route {
+  _endpoint: CRUDRecordEndpoints.Route;
 
   id: string;
   name: string;
   description: string;
 }
 
-export class BusStop_Route {
-  constructor(id: string, order: number) {
-    this.id = id;
-    this.order = order;
-  }
-
+export interface BusStop_Route {
   id: string;
   order: number;
 }
 
-export class Journey {
-  constructor(
-    id: string,
-    paused: boolean,
-    active: boolean,
-    startDate: Date,
-    nextBusStopIndex: number,
-
-    driver: Driver,
-    bus: Bus,
-    route: Route
-  ) {
-    this.id = id;
-    this.paused = paused;
-    this.active = active;
-    this.startDate = startDate;
-    this.nextBusStopIndex = nextBusStopIndex;
-
-    this.driver = driver;
-    this.bus = bus;
-    this.route = route;
-  }
-
+export interface Journey {
   id: string;
   paused: boolean;
   active: boolean;
@@ -100,72 +60,40 @@ export class Journey {
   route: Route;
 
   // TODO: Implementar métodos
-  getCurrentBusStop() {}
-  getSubsequentialBusStop() {}
+  getCurrentBusStop: () => {};
+  getSubsequentialBusStop: () => {};
 }
 
-export abstract class Employee {
-  constructor(
-    id: string,
-    name: string,
-    identification: string,
-    username: string,
-    password: string
-  ) {
-    this.id = id;
-    this.name = name;
-    this.identification = identification;
-    this.username = username;
-    this.password = password;
-  }
-
+export interface Employee {
   id: string;
   name: string;
   identification: string;
   username: string;
   password: string;
 
-  authenticate(givenUsername: string, givenPassword: string) {
-    if (givenUsername === this.username && givenPassword === this.password) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  authenticate: (givenUsername: string, givenPassword: string) => boolean;
 }
 
-export class Driver extends Employee {
-  constructor(
-    id: string,
-    name: string,
-    identification: string,
-    username: string,
-    password: string
-  ) {
-    super(id, name, identification, username, password);
-  }
+// if (givenUsername === this.username && givenPassword === this.password) {
+//   return true;
+// } else {
+//   return false;
+// }
+
+export interface Driver extends Employee {
+  _endpoint: CRUDRecordEndpoints.Driver;
 
   // TODO: Implementar métodos
-  startJourney() {}
-  pauseJourney() {}
-  finishJourney() {}
-  arriveBusStop() {}
+  startJourney: () => {};
+  pauseJourney: () => {};
+  finishJourney: () => {};
+  arriveBusStop: () => {};
 }
 
-export class Manager extends Employee {
-  constructor(
-    id: string,
-    name: string,
-    identification: string,
-    username: string,
-    password: string
-  ) {
-    super(id, name, identification, username, password);
-  }
-
+export interface Manager extends Employee {
   // TODO: Implementar métodos
-  createDriver(driver: Driver) {}
-  createBus() {}
-  createBusStop() {}
-  createRoute() {}
+  createDriver: (driver: Driver) => {};
+  createBus: () => {};
+  createBusStop: () => {};
+  createRoute: () => {};
 }

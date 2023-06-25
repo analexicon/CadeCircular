@@ -1,6 +1,7 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
-import { View, Text, StatusBar } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { View, Text } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CommonHeader from "../components/Header";
@@ -11,7 +12,7 @@ interface ArrivalProps {
 }
 const Arrival = (props: ArrivalProps): JSX.Element => {
   return (
-    <SafeAreaView style={STYLES.column}>
+    <SafeAreaView style={STYLES.safeArea}>
       <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader
         navigation={props.navigation}

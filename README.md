@@ -23,17 +23,19 @@ This is a monorepo with both frontend with React-Native and backend API service 
     cd CadeCircular
     ```
 
-3.  **Install all libs and dependencie**
-
-    ```shell
-    npm install
-    cd server
-    yarn install
-    ```
-
-4.  **Set environment variables**
+3.  **Set environment variables**
     Inside `/server` folder, create and set a `.env` at the same level and same content as `/server/.env.example`
     Inside `/client` folder, create and set a `.env` at the same level and same content as `/client/.env.example`
+
+4.  **Install all libs and dependencies**
+
+    ```shell
+    cd client
+    npm install
+    cd ../server
+    npm install
+    npx prisma migrate reset
+    ```
 
 ## 🚀 Quick start
 
