@@ -3,6 +3,7 @@ enum screens {
   SelectDriver = "SelectDriver",
   Login = "Login",
   Profile = "Profile",
-  Details = "Details",
+  // Details = "Details",
+  ViewTime = "ViewTime",
 }
 export default screens;

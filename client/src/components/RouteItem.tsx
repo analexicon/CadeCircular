@@ -22,7 +22,7 @@ const RouteItem = (props: RouteItemProps): JSX.Element => {
         {props.route}
       </Text>
       <CommonButton
-        handlePress={() => props.navigation.navigate(screens.Details)}
+        handlePress={() => props.navigation.navigate(screens.ViewTime)}
       >
         <Text style={STYLES.linkText}>Detalhes</Text>
       </CommonButton>
