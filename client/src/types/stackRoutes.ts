@@ -5,8 +5,6 @@ enum screens {
   Profile = "Profile",
 
   List = "List",
-  ListBus = "ListBus",
-
   Create = "Create",
   Update = "Update",
 

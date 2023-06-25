@@ -1,6 +1,12 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import screens from "../types/stackRoutes";
+import { CRUDRecordEndpoints } from "../types/types";
+import {
+  recordItemText as busItemText,
+  FormBody as BusFormBody,
+  handleUpdate as busHandleUpdate,
+} from "../crudDefinitions/bus";
 import { StyleSheet, Text, View, Image } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,7 +20,7 @@ interface ProfileProps {
 
 const Profile = (props: ProfileProps): JSX.Element => {
   return (
-    <SafeAreaView style={STYLES.column}>
+    <SafeAreaView style={STYLES.safeArea}>
       <StatusBar backgroundColor={COLORS.greenPrimary} />
       <View style={LOCAL_STYLES.header}>
         <CommonHeader
@@ -41,7 +47,16 @@ const Profile = (props: ProfileProps): JSX.Element => {
 
           <StyledButton
             text="Listar ônibus"
-            handlePress={() => props.navigation.push(screens.ListBus)}
+            handlePress={() =>
+              props.navigation.push(screens.List, {
+                pageTitle: "Ônibus",
+                recordSingularName: "ônibus",
+                recordEndpoint: CRUDRecordEndpoints.Bus,
+                recordItemText: busItemText,
+                formBody: <BusFormBody />,
+                handleUpdate: busHandleUpdate,
+              })
+            }
           />
         </View>
       </View>

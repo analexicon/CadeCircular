@@ -12,7 +12,7 @@ interface ArrivalProps {
 }
 const Arrival = (props: ArrivalProps): JSX.Element => {
   return (
-    <SafeAreaView style={STYLES.column}>
+    <SafeAreaView style={STYLES.safeArea}>
       <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader
         navigation={props.navigation}

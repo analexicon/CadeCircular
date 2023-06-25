@@ -11,24 +11,39 @@ import CommonHeader from "../../components/Header";
 import ListItem from "../../components/ListItem";
 
 interface ListProps {
+  route: any;
   navigation: NativeStackNavigationProp<any, any>;
-  title: string;
+}
+interface ListParams {
+  pageTitle: string;
+  recordSingularName: string;
   recordEndpoint: CRUDRecordEndpoints;
   recordItemText: (item: CRUDRecord) => string;
+  formBody: JSX.Element;
+  handleUpdate: Function;
 }
 const List = (props: ListProps): JSX.Element => {
+  const {
+    pageTitle,
+    recordSingularName,
+    recordEndpoint,
+    recordItemText,
+    formBody,
+    handleUpdate,
+  }: ListParams = props.route.params;
+
   const [records, setRecords] = useState<CRUDRecord[]>([]);
   useEffect(() => {
-    fetchRecordData(`/${props.recordEndpoint}`, props.navigation, setRecords);
+    fetchRecordData(`/${recordEndpoint}`, props.navigation, setRecords);
   }, []);
 
-  if (!records)  {
+  if (!records) {
     return <></>;
   }
   return (
-    <SafeAreaView style={STYLES.container}>
+    <SafeAreaView style={STYLES.safeArea}>
       <StatusBar backgroundColor={COLORS.white} />
-      <CommonHeader navigation={props.navigation} centerText={props.title} />
+      <CommonHeader navigation={props.navigation} centerText={pageTitle} />
       <View style={STYLES.container}>
         <View>
           <FlatList
@@ -36,9 +51,12 @@ const List = (props: ListProps): JSX.Element => {
             renderItem={({ item }) =>
               ListItem({
                 navigation: props.navigation,
+                followingPageTitle: recordSingularName,
                 recordEndpoint: item._endpoint,
                 recordId: item.id,
-                recordText: props.recordItemText(item),
+                recordText: recordItemText(item),
+                formBody: formBody,
+                handleUpdate: handleUpdate,
               })
             }
           />
