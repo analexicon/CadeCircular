@@ -5,9 +5,9 @@ import { determineErrorResponsePrismaQuery, formattedBus } from "../functions";
 // Query all buses
 router.get("/bus", async (request, response) => {
   try {
-    const foundBus = await prisma.bus.findMany();
+    const foundBuses = await prisma.bus.findMany();
 
-    const formmattedResponse: Bus[] = foundBus.map((bus) => {
+    const formmattedResponse: Bus[] = foundBuses.map((bus) => {
       return formattedBus(bus);
     });
 
@@ -95,4 +95,4 @@ router.delete("/bus/:id", async (request, response) => {
   }
 });
 
-export = router;
+export default router;

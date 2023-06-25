@@ -40,6 +40,19 @@ export const PasswordInput = (props: CommonInputProps): JSX.Element => {
   );
 };
 
+export const NumericalInput = (props: CommonInputProps): JSX.Element => {
+  return (
+    <TextInput
+      value={props.value}
+      onChangeText={(value) => props.setValue(value.replace(/[^0-9]/g, ""))}
+      style={[STYLES.simpleText, LOCAL_STYLE.textInput]}
+      placeholder={props.placeholder}
+      autoComplete={props.autocomplete ?? "cc-number"}
+      keyboardType="numeric"
+    />
+  );
+};
+
 const LOCAL_STYLE = StyleSheet.create({
   textInput: {
     backgroundColor: COLORS.gray1,

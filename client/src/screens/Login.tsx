@@ -2,9 +2,10 @@ import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import screens from "../types/stackRoutes";
 import { useState } from "react";
-import { StatusBar, View } from "react-native";
+import { View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../components/Header";
 import StyledButton from "../components/Buttons/StyledButton";
 import CommonInput, { PasswordInput } from "../components/Input";
@@ -24,7 +25,7 @@ const Login = (props: LoginProps): JSX.Element => {
   }
 
   return (
-    <SafeAreaView style={STYLES.column}>
+    <SafeAreaView style={STYLES.safeArea}>
       <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader navigation={props.navigation} centerText="Login" />
       <View style={[STYLES.container, STYLES.spaceBetweenRows24]}>

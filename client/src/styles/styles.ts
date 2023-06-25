@@ -76,6 +76,14 @@ const column: ViewStyle = {
   ...base,
   flexDirection: "column",
 };
+const safeArea: ViewStyle = {
+  ...column,
+  flex: 1,
+};
+const spaceBetweenRows8: ViewStyle = {
+  ...column,
+  rowGap: 8,
+};
 const spaceBetweenRows12: ViewStyle = {
   ...column,
   rowGap: 12,
@@ -83,6 +91,10 @@ const spaceBetweenRows12: ViewStyle = {
 const spaceBetweenRows24: ViewStyle = {
   ...column,
   rowGap: 24,
+};
+const spaceBetweenColumns8: ViewStyle = {
+  ...row,
+  columnGap: 8,
 };
 
 const spaceBetweenColumn12: ViewStyle = {
@@ -98,8 +110,8 @@ const spaceBetweenColumn24: ViewStyle = {
 
 const container: ViewStyle = {
   ...column,
-  height: "100%",
-  padding: 8,
+  flex: 1,
+  paddingHorizontal: 8,
   alignContent: "center",
 };
 
@@ -128,8 +140,11 @@ const STYLES = StyleSheet.create({
   container: { ...container },
   row: { ...row },
   column: { ...column },
+  safeArea: { ...safeArea },
+  spaceBetweenRows8: { ...spaceBetweenRows8 },
   spaceBetweenRows12: { ...spaceBetweenRows12 },
   spaceBetweenRows24: { ...spaceBetweenRows24 },
+  spaceBetweenColumns8: { ...spaceBetweenColumns8 },
   spaceBetweenColumn12 :{...spaceBetweenColumn12},
   spaceBetweenColumn24 : {...spaceBetweenColumn24},
   viewTimeItem : {...viewTimeItem},
