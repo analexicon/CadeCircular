@@ -19,7 +19,7 @@ const LinkButton = (props: LinkButtonProps): JSX.Element => {
       handlePress={() =>
         // If route is defined, navigate to it, otherwise go back
         props.route
-          ? props.navigation.navigate(props.route)
+          ? props.navigation.push(props.route)
           : props.navigation.goBack()
       }
     >

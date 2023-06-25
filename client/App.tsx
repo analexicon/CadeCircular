@@ -9,13 +9,13 @@ import {
   Inter_500Medium,
   Inter_600SemiBold,
 } from "@expo-google-fonts/inter";
+import screens from "./src/types/stackRoutes";
 import Arrival from "./src/screens/Arrival";
 import SelectDriver from "./src/screens/SelectDriver";
 import Login from "./src/screens/Login";
 import Profile from "./src/screens/Profile";
-import screens from "./src/types/stackRoutes";
-import List from "./src/screens/Bus/List";
-import Update from "./src/screens/Bus/Update";
+import Update from "./src/screens/CRUD/Update";
+import ListBus from "./src/screens/Bus/ListBus";
 
 const Stack = createNativeStackNavigator();
 
@@ -47,7 +47,7 @@ const App = (): JSX.Element => {
             />
             <Stack.Screen name={screens.Login} component={Login} />
             <Stack.Screen name={screens.Profile} component={Profile} />
-            <Stack.Screen name={screens.List} component={List} />
+            <Stack.Screen name={screens.ListBus} component={ListBus} />
             <Stack.Screen name={screens.Update} component={Update} />
           </Stack.Navigator>
         </NavigationContainer>

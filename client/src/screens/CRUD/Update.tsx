@@ -1,7 +1,6 @@
 import STYLES from "../../styles/styles";
-import { Bus, CRUDRecord, CRUDRecordEndpoints } from "../../types/types";
+import { CRUDRecord, CRUDRecordEndpoints } from "../../types/types";
 import { fetchRecordData } from "../../controller";
-import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -22,13 +21,13 @@ const Update = (props: UpdateProps): JSX.Element => {
     fetchRecordData(
       `/${recordEndpoint}/${recordId}`,
       props.navigation,
-      function (response: AxiosResponse<any, any>) {
-        setRecord(new Bus({ ...response.data }));
-      }
+      setRecord
     );
   }, []);
 
-  if (!record) return <View></View>;
+  if (!record) {
+    return <></>;
+  }
   return (
     <SafeAreaView style={STYLES.container}>
       <View>

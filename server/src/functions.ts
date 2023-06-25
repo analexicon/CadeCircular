@@ -1,5 +1,5 @@
 import { Prisma, Bus as PrismaBus } from "@prisma/client";
-import { Bus } from "./types";
+import { Bus, CRUDRecordEndpoints } from "./types";
 
 // If an error occurs, try to determine the error type and return the apropriate response
 export function determineErrorResponsePrismaQuery(error: unknown) {
@@ -42,6 +42,7 @@ export function determineErrorResponsePrismaQuery(error: unknown) {
 type FullPrismaBus = PrismaBus & {};
 export const formattedBus = (bus: FullPrismaBus): Bus => {
   return {
+    _endpoint: CRUDRecordEndpoints.Bus,
     id: bus.id,
     available: bus.available,
     capacity: bus.capacity,

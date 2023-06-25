@@ -21,9 +21,7 @@ const RouteItem = (props: RouteItemProps): JSX.Element => {
       <Text style={[STYLES.mediumText, LOCAL_STYLES.routeName]}>
         {props.route}
       </Text>
-      <CommonButton
-        handlePress={() => props.navigation.navigate(screens.Details)}
-      >
+      <CommonButton handlePress={() => props.navigation.push(screens.Details)}>
         <Text style={STYLES.linkText}>Detalhes</Text>
       </CommonButton>
     </View>

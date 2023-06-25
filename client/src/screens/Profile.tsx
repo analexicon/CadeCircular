@@ -41,7 +41,7 @@ const Profile = (props: ProfileProps): JSX.Element => {
 
           <StyledButton
             text="Listar ônibus"
-            handlePress={() => props.navigation.navigate(screens.List)}
+            handlePress={() => props.navigation.push(screens.ListBus)}
           />
         </View>
       </View>

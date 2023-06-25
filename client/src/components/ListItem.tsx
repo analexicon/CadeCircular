@@ -1,44 +1,39 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
-import { Bus, CRUDRecord, CRUDRecordEndpoints } from "../types/types";
+import { Bus, CRUDRecordEndpoints } from "../types/types";
 import screens from "../types/stackRoutes";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import CommonButton from "./Buttons/CommonButton";
 
-interface ListItemProps {
+interface RecordItemProps {
+  recordEndpoint: CRUDRecordEndpoints;
+  recordId: string;
+  recordText: string;
+}
+
+interface ListItemProps extends RecordItemProps {
   navigation: NativeStackNavigationProp<any, any>;
-  record: CRUDRecord;
 }
 
 const ListItem = (props: ListItemProps): JSX.Element => {
-  let recordText = "";
-  let recordEndpoint = "";
-
-  console.log();
-
-  if (props.record instanceof Bus) {
-    recordText = props.record.licensePlate;
-    recordEndpoint = CRUDRecordEndpoints.Bus;
-    console.log("banana");
+  if ((props.recordEndpoint = CRUDRecordEndpoints.Bus)) {
+  } else {
+    props.navigation.pop();
+    return <></>;
   }
-  // TODO: remaining elses
-
   return (
-    <View style={[STYLES.row, LOCAL_STYLES.container]}>
-      {/* <Text style={[STYLES.mediumText, LOCAL_STYLES.routeName]}>
-        {recordText}
-      </Text> */}
+    <View>
       <CommonButton
-        handlePress={() =>
-          props.navigation.navigate(screens.Update, {
-            navigation: props.navigation,
-            recordId: props.record.id,
-            recordEndpoint: recordEndpoint,
-          })
-        }
+        handlePress={() => {
+          props.navigation.push(screens.Update, {
+            recordId: props.recordId,
+            recordEndpoint: props.recordEndpoint,
+          });
+        }}
+        style={[STYLES.row, LOCAL_STYLES.container]}
       >
-        {recordText}
+        <Text style={[STYLES.mediumTitleText]}>{props.recordText}</Text>
       </CommonButton>
     </View>
   );
@@ -52,9 +47,6 @@ const LOCAL_STYLES = StyleSheet.create({
     borderBottomWidth: 1,
     paddingVertical: 8,
     marginHorizontal: 4,
-  },
-  routeName: {
-    flex: 1,
     paddingHorizontal: 8,
   },
 });

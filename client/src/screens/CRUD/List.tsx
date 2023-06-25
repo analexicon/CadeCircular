@@ -1,10 +1,9 @@
 import COLORS from "../../styles/colors";
 import STYLES from "../../styles/styles";
-import { Bus } from "../../types/types";
+import { CRUDRecord, CRUDRecordEndpoints } from "../../types/types";
 import { fetchRecordData } from "../../controller";
-import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-import { StatusBar, View, Text } from "react-native";
+import { StatusBar, View } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
@@ -13,36 +12,34 @@ import ListItem from "../../components/ListItem";
 
 interface ListProps {
   navigation: NativeStackNavigationProp<any, any>;
+  title: string;
+  recordEndpoint: CRUDRecordEndpoints;
+  recordItemText: (item: CRUDRecord) => string;
 }
-const ListBus = (props: ListProps): JSX.Element => {
-  const [buses, setBuses] = useState<Bus[]>([]);
+const List = (props: ListProps): JSX.Element => {
+  const [records, setRecords] = useState<CRUDRecord[]>([]);
   useEffect(() => {
-    fetchRecordData(
-      "/bus",
-      props.navigation,
-      function (response: AxiosResponse<any, any>) {
-        const objectBuses = response.data.map((bus: any) => {
-          return new Bus({ ...bus });
-        });
-        setBuses(objectBuses);
-      }
-    );
+    fetchRecordData(`/${props.recordEndpoint}`, props.navigation, setRecords);
   }, []);
 
-  buses.forEach((bus) => {
-    console.log(bus instanceof Bus);
-  });
-
+  if (!records)  {
+    return <></>;
+  }
   return (
     <SafeAreaView style={STYLES.container}>
       <StatusBar backgroundColor={COLORS.white} />
-      <CommonHeader navigation={props.navigation} centerText="Ônibus" />
+      <CommonHeader navigation={props.navigation} centerText={props.title} />
       <View style={STYLES.container}>
         <View>
           <FlatList
-            data={buses}
+            data={records}
             renderItem={({ item }) =>
-              ListItem({ navigation: props.navigation, record: item })
+              ListItem({
+                navigation: props.navigation,
+                recordEndpoint: item._endpoint,
+                recordId: item.id,
+                recordText: props.recordItemText(item),
+              })
             }
           />
         </View>
@@ -50,4 +47,4 @@ const ListBus = (props: ListProps): JSX.Element => {
     </SafeAreaView>
   );
 };
-export default ListBus;
+export default List;
