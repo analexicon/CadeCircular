@@ -1,5 +1,11 @@
-import { Prisma, Bus as PrismaBus } from "@prisma/client";
-import { Bus, CRUDRecordEndpoints } from "./types";
+import {
+  Prisma,
+  Bus as PrismaBus,
+  BusStop as PrismaBusStop,
+  Driver as PrismaDriver,
+  Employee as PrismaEmployee,
+} from "@prisma/client";
+import { Bus, BusStop, CRUDRecordEndpoints, Driver, Employee } from "./types";
 
 // If an error occurs, try to determine the error type and return the apropriate response
 export function determineErrorResponsePrismaQuery(error: unknown) {
@@ -44,9 +50,42 @@ export const formattedBus = (bus: FullPrismaBus): Bus => {
   return {
     _endpoint: CRUDRecordEndpoints.Bus,
     id: bus.id,
-    available: bus.available,
-    capacity: bus.capacity,
     licensePlate: bus.licensePlate,
+    capacity: bus.capacity,
     model: bus.model,
+    available: bus.available,
+  };
+};
+
+type FullPrismaBusStop = PrismaBusStop & {};
+export const formattedBusStop = (busStop: FullPrismaBusStop): BusStop => {
+  return {
+    _endpoint: CRUDRecordEndpoints.BusStop,
+    id: busStop.id,
+    name: busStop.name,
+    description: busStop.description,
+  };
+};
+
+type FullPrismaEmployee = PrismaEmployee & {};
+export const formattedEmployee = (employee: FullPrismaEmployee): Employee => {
+  return {
+    id: employee.id,
+    name: employee.name,
+    identification: employee.identification,
+    username: employee.username,
+    password: employee.password,
+  };
+};
+
+type FullPrismaDriver = PrismaDriver & { employee: FullPrismaEmployee };
+export const formattedDriver = (driver: FullPrismaDriver): Driver => {
+  return {
+    _endpoint: CRUDRecordEndpoints.Driver,
+    id: driver.employeeId,
+    name: driver.employee.name,
+    identification: driver.employee.identification,
+    username: driver.employee.username,
+    password: driver.employee.password,
   };
 };

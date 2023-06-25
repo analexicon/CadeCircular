@@ -95,4 +95,4 @@ router.delete("/bus/:id", async (request, response) => {
   }
 });
 
-export = router;
+export default router;

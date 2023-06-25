@@ -71,7 +71,7 @@ export interface Employee {
   username: string;
   password: string;
 
-  authenticate: (givenUsername: string, givenPassword: string) => boolean;
+  // authenticate: (givenUsername: string, givenPassword: string) => boolean;
 }
 
 // if (givenUsername === this.username && givenPassword === this.password) {
@@ -84,10 +84,10 @@ export interface Driver extends Employee {
   _endpoint: CRUDRecordEndpoints.Driver;
 
   // TODO: Implementar métodos
-  startJourney: () => {};
-  pauseJourney: () => {};
-  finishJourney: () => {};
-  arriveBusStop: () => {};
+  // startJourney: () => {};
+  // pauseJourney: () => {};
+  // finishJourney: () => {};
+  // arriveBusStop: () => {};
 }
 
 export interface Manager extends Employee {
