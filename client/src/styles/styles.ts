@@ -107,6 +107,11 @@ const spaceBetweenColumn24: ViewStyle = {
   columnGap: 24,
 };
 
+const justifyContentSpaceBetween: ViewStyle = {
+  ...row,
+  justifyContent: "space-between",
+};
+
 
 const container: ViewStyle = {
   ...column,
@@ -115,19 +120,6 @@ const container: ViewStyle = {
   alignContent: "center",
 };
 
-const separator: ViewStyle = {
-  width: '100%',
-  height: 1,
-  backgroundColor: 'black',
-  marginVertical: 10,
-}
-
-const circle: ViewStyle = {
-  width: 30,
-  height: 30,
-  borderRadius: 50,
-  backgroundColor: 'lightgreen',
-}
 
 const STYLES = StyleSheet.create({
   simpleText: { ...simpleText },
@@ -148,8 +140,7 @@ const STYLES = StyleSheet.create({
   spaceBetweenColumn12 :{...spaceBetweenColumn12},
   spaceBetweenColumn24 : {...spaceBetweenColumn24},
   viewTimeItem : {...viewTimeItem},
-  separator  : {...separator},
-  circle : {...circle}
+  justifyContentSpaceBetween : {...justifyContentSpaceBetween}
 });
 
 export default STYLES;
