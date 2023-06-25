@@ -19,7 +19,6 @@ interface ListParams {
   recordSingularName: string;
   recordEndpoint: CRUDRecordEndpoints;
   recordItemText: (item: CRUDRecord) => string;
-  formBody: JSX.Element;
   handleUpdate: Function;
 }
 const List = (props: ListProps): JSX.Element => {
@@ -28,7 +27,6 @@ const List = (props: ListProps): JSX.Element => {
     recordSingularName,
     recordEndpoint,
     recordItemText,
-    formBody,
     handleUpdate,
   }: ListParams = props.route.params;
 
@@ -52,10 +50,9 @@ const List = (props: ListProps): JSX.Element => {
               ListItem({
                 navigation: props.navigation,
                 followingPageTitle: recordSingularName,
-                recordEndpoint: item._endpoint,
+                recordEndpoint: recordEndpoint,
                 recordId: item.id,
                 recordText: recordItemText(item),
-                formBody: formBody,
                 handleUpdate: handleUpdate,
               })
             }

@@ -4,7 +4,6 @@ import screens from "../types/stackRoutes";
 import { CRUDRecordEndpoints } from "../types/types";
 import {
   recordItemText as busItemText,
-  FormBody as BusFormBody,
   handleUpdate as busHandleUpdate,
 } from "../crudDefinitions/bus";
 import { StyleSheet, Text, View, Image } from "react-native";
@@ -53,7 +52,6 @@ const Profile = (props: ProfileProps): JSX.Element => {
                 recordSingularName: "ônibus",
                 recordEndpoint: CRUDRecordEndpoints.Bus,
                 recordItemText: busItemText,
-                formBody: <BusFormBody />,
                 handleUpdate: busHandleUpdate,
               })
             }

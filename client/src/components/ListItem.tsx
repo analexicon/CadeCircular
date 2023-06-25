@@ -11,7 +11,6 @@ interface RecordItemProps {
   recordId: string;
   recordText: string;
   followingPageTitle: string;
-  formBody: JSX.Element;
   handleUpdate: Function;
 }
 
@@ -28,7 +27,6 @@ const ListItem = (props: ListItemProps): JSX.Element => {
             pageTitle: props.followingPageTitle,
             recordId: props.recordId,
             recordEndpoint: props.recordEndpoint,
-            formBody: props.formBody,
             handleUpdate: props.handleUpdate,
           });
         }}

@@ -6,7 +6,7 @@ import screens from "./types/stackRoutes";
 export async function fetchRecordData(
   relativeUrl: string,
   navigation: NativeStackNavigationProp<any, any>,
-  setRecordData: Function
+  handleFetch: (data: any) => void
 ) {
   try {
     axios(REACT_APP_SERVER_URL + relativeUrl, {
@@ -14,7 +14,7 @@ export async function fetchRecordData(
         return status === 200;
       },
     })
-      .then((response) => setRecordData(response.data))
+      .then((response) => handleFetch(response.data))
       .catch((error) => handleErrorRedirect(navigation, error));
   } catch (error: unknown) {
     handleErrorRedirect(navigation, error);

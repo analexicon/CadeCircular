@@ -5,6 +5,12 @@ export enum CRUDRecordEndpoints {
   Route = "route",
   Driver = "driver",
 }
+export enum CRUDRecordTypes {
+  Bus,
+  BusStop,
+  Route,
+  Driver,
+}
 
 export interface Bus {
   _endpoint: CRUDRecordEndpoints.Bus;
