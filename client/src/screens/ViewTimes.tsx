@@ -7,15 +7,18 @@ import CommonHeader from "../components/Header";
 import TimeList from "../components/TimeList";
 import RoutesBottomSheet from "../components/RouteBottomSheet";
 import ViewTimesBottomSheet from "../components/ViewTimesBottomSheet";
+import { useRoute } from "@react-navigation/native";
 
-interface PageProps {
+interface ViewTimesProps {
   navigation: NativeStackNavigationProp<any, any>;
 }
-const ViewTime = (props: PageProps): JSX.Element => {
+const ViewTimes = (props: ViewTimesProps): JSX.Element => {
+  const router = useRoute();
+  const { route } : any = router.params;
   return (
     <SafeAreaView style={STYLES.container}>
       <StatusBar backgroundColor={COLORS.white} />
-      <CommonHeader navigation={props.navigation} centerText="RU HU" />
+      <CommonHeader navigation={props.navigation} centerText={route}/>
         <View>
           <TimeList />
         </View>
@@ -23,4 +26,4 @@ const ViewTime = (props: PageProps): JSX.Element => {
     </SafeAreaView>
   );
 };
-export default ViewTime;
+export default ViewTimes;
