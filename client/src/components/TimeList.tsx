@@ -1,5 +1,5 @@
 import STYLES from "../styles/styles";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import ViewTimeItem from "./ViewTimeItem";
 
 interface TimeListProps {}
@@ -9,6 +9,7 @@ const TimeList = (props: TimeListProps): JSX.Element => {
       <View>
         <Text style={STYLES.mediumTitleTextLeft}>Odonto</Text>
       </View>
+      <View>
       <FlatList
         data={[
           { key: "08:00" },
@@ -21,10 +22,13 @@ const TimeList = (props: TimeListProps): JSX.Element => {
           { key: "10:20" },
           { key: "12:20" },
           { key: "13:00" },
+          { key: "14:00" },
         ]}
         renderItem={({ item }) => <ViewTimeItem hour={item.key} />}
       />
+      </View>
     </View>
   );
 };
+
 export default TimeList;

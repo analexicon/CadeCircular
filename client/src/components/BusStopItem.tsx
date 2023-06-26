@@ -7,32 +7,29 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Checkbox from "expo-checkbox";
 import CommonButton from "./Buttons/CommonButton";
 
-interface RouteItemProps {
-  navigation: NativeStackNavigationProp<any, any>;
-  route: string;
+interface BusStopItemProps {
+  // navigation: NativeStackNavigationProp<any, any>;
+  stop: string;
 }
 
-const RouteItem = (props: RouteItemProps): JSX.Element => {
+const BusStopItem = (props: BusStopItemProps): JSX.Element => {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <View style={[STYLES.row, LOCAL_STYLES.container]}>
+    <View style={[STYLES.justifyContentSpaceBetween, LOCAL_STYLES.container]}>
+      <Text style={LOCAL_STYLES.textInput}>
+        {props.stop}
+      </Text>
       <Checkbox
         value={isChecked}
         onValueChange={setIsChecked}
         color={COLORS.greenPrimary}
       />
-      <Text style={[STYLES.mediumText, LOCAL_STYLES.routeName]}>
-        {props.route}
-      </Text>
-      <CommonButton handlePress={() => props.navigation.push(screens.ViewTimes, {route: props.route })}>
-        <Text style={STYLES.linkText}>Detalhes</Text>
-      </CommonButton>
     </View>
   );
 };
-export default RouteItem;
-
+export default BusStopItem;
+                
 const LOCAL_STYLES = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -44,5 +41,13 @@ const LOCAL_STYLES = StyleSheet.create({
   routeName: {
     flex: 1,
     paddingHorizontal: 8,
+  },
+  textInput: {
+    fontFamily: "InterRegular",
+    fontSize: 14,
+    color: COLORS.gray3,
+    height: 50,
+    paddingHorizontal: 8,
+    textAlignVertical: "center",
   },
 });
