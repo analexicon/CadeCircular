@@ -10,6 +10,7 @@ import CommonButton from "./Buttons/CommonButton";
 interface RouteItemProps {
   navigation: NativeStackNavigationProp<any, any>;
   route: string;
+  idRoute: string;
 }
 
 const RouteItem = (props: RouteItemProps): JSX.Element => {
@@ -25,7 +26,7 @@ const RouteItem = (props: RouteItemProps): JSX.Element => {
       <Text style={[STYLES.mediumText, LOCAL_STYLES.routeName]}>
         {props.route}
       </Text>
-      <CommonButton handlePress={() => props.navigation.push(screens.ViewTimes, {route: props.route })}>
+      <CommonButton handlePress={() => props.navigation.push(screens.ViewTimes, {route: props.route, idRoute: props.idRoute})}>
         <Text style={STYLES.linkText}>Detalhes</Text>
       </CommonButton>
     </View>
