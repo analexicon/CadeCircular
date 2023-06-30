@@ -11,14 +11,18 @@ interface BusStopItemProps {
   // navigation: NativeStackNavigationProp<any, any>;
   stop: string;
   setPointName: Function;
+  disableCheckBox: boolean; 
+  handleDisableCheckBox: Function; 
 }
 
 const BusStopItem = (props: BusStopItemProps): JSX.Element => {
   const [isChecked, setIsChecked] = useState(false);
-  
   useEffect(() => {
     if (isChecked === true) {
       props.setPointName(props.stop);
+      props.handleDisableCheckBox(true); 
+    }else{
+      props.handleDisableCheckBox(false); 
     }
   }, [isChecked]);
   
@@ -31,6 +35,7 @@ const BusStopItem = (props: BusStopItemProps): JSX.Element => {
       <Checkbox
         value={isChecked}
         onValueChange={setIsChecked}
+        disabled={(props.disableCheckBox && !isChecked)}
         color={COLORS.greenPrimary}
       />
     </View>

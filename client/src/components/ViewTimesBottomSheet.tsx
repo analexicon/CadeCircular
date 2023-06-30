@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import RouteItem from "./RouteItem";
 import BottomSheet from "./BottomSheet";
@@ -9,9 +9,13 @@ interface ViewTimesBottomSheetProps {
 }
 const ViewTimesBottomSheet = (props: ViewTimesBottomSheetProps): JSX.Element => {
   const snapPoints = useMemo(() => ["10%", "30%"], []);
+
+  const [disableCheckBox, setDisableCheckBox] = useState(false); 
+
   const renderItem = ({ item }: { item: string }) => {
-    return <BusStopItem stop={item} setPointName={props.setPointName}/>;
+    return <BusStopItem stop={item} setPointName={props.setPointName} disableCheckBox={disableCheckBox} handleDisableCheckBox={setDisableCheckBox}/>;
   };
+
   const data = ["Odonto", "ICH", "Direito", "Letras", "ICB"];
 
   return (

@@ -16,10 +16,18 @@ interface ViewTimesProps {
 const ViewTimes = (props: ViewTimesProps): JSX.Element => {
   const router = useRoute();
   const { route, idRoute }: any = router.params;
-  const [pointName, setPointName] = useState("ICH");
+  const [pointName, setPointName] = useState("");
+  
+  const [isCheckboxDisabled, setIsCheckboxDisabled] = useState(true);
+
+  const handleCheckboxToggle = () => {
+    setIsCheckboxDisabled(!isCheckboxDisabled);
+  };
+
+
   //TODO
   // const data  = searchTimesByIdRoute(idRoute);
-  const [data, setData] = useState<Array<TimeListData>>([])
+  const [data, setData] = useState<Array<TimeListData>>([]);
 
   useEffect(() => {
     switch (pointName) {
@@ -31,7 +39,7 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
           { key: "03:00" },
           { key: "04:00" },
           { key: "05:00" },
-        ])
+        ]);
         break;
       case "Odonto":
         setData([
@@ -41,7 +49,7 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
           { key: "03:30" },
           { key: "04:30" },
           { key: "05:30" },
-        ])
+        ]);
         break;
       case "Direito":
         setData([
@@ -51,7 +59,7 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
           { key: "23:00" },
           { key: "14:00" },
           { key: "15:00" },
-        ])
+        ]);
         break;
       case "Letras":
         setData([
@@ -61,7 +69,7 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
           { key: "13:00" },
           { key: "14:00" },
           { key: "18:00" },
-        ])
+        ]);
         break;
       case "ICB":
         setData([
@@ -71,9 +79,10 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
           { key: "09:00" },
           { key: "10:00" },
           { key: "18:00" },
-        ])
+        ]);
         break;
       default:
+        setData([{ key: "Selecione algum ponto" }]);
     }
   }, [pointName]);
 
