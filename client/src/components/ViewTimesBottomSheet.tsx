@@ -5,14 +5,14 @@ import BottomSheet from "./BottomSheet";
 import BusStopItem from "./BusStopItem";
 
 interface ViewTimesBottomSheetProps {
-  
+  setPointName : Function;
 }
 const ViewTimesBottomSheet = (props: ViewTimesBottomSheetProps): JSX.Element => {
   const snapPoints = useMemo(() => ["10%", "30%"], []);
   const renderItem = ({ item }: { item: string }) => {
-    return <BusStopItem stop={item}/>;
+    return <BusStopItem stop={item} setPointName={props.setPointName}/>;
   };
-  const data = ["Ponto 1", "Ponto 2", "Ponto 3", "Ponto 4", "Ponto 5"];
+  const data = ["Odonto", "ICH", "Direito", "Letras", "ICB"];
 
   return (
     <BottomSheet
