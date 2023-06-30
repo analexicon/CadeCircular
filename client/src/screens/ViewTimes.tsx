@@ -15,20 +15,20 @@ interface ViewTimesProps {
 }
 const ViewTimes = (props: ViewTimesProps): JSX.Element => {
   const router = useRoute();
+
+  //É necessário receber o id da rota que está sendo exibida para poder fazer a busca dos horarios daquela rota
   const { route, idRoute }: any = router.params;
+
+  //Estado para Controlar o nome do titulo exibido, o ponto de onibus selecionado
   const [pointName, setPointName] = useState("");
-  
-  const [isCheckboxDisabled, setIsCheckboxDisabled] = useState(true);
 
-  const handleCheckboxToggle = () => {
-    setIsCheckboxDisabled(!isCheckboxDisabled);
-  };
+  //TODO FUNÇÃO DE BUSCAR E RETORNAR OS HORARIOS DA ROTA DE ACORDO COM OS PONTOS
+  // const data = searchTimesByIdRoute(idRoute);
 
-
-  //TODO
-  // const data  = searchTimesByIdRoute(idRoute);
   const [data, setData] = useState<Array<TimeListData>>([]);
+  const allPoints = ["Odonto", "ICH", "Direito", "Letras", "ICB"];
 
+  //UseEffect que controla o data baseado na opção de ponto selecionada
   useEffect(() => {
     switch (pointName) {
       case "ICH":
@@ -93,7 +93,7 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
       <View>
         <TimeList listData={data} pointName={pointName} />
       </View>
-      <ViewTimesBottomSheet setPointName={setPointName} />
+      <ViewTimesBottomSheet data={allPoints} setPointName={setPointName} />
     </SafeAreaView>
   );
 };

@@ -6,23 +6,23 @@ import BusStopItem from "./BusStopItem";
 
 interface ViewTimesBottomSheetProps {
   setPointName : Function;
+  data : string[];
 }
 const ViewTimesBottomSheet = (props: ViewTimesBottomSheetProps): JSX.Element => {
   const snapPoints = useMemo(() => ["10%", "30%"], []);
 
+  //Estado para controlar o checkbox e permitir apenas um selecionado no checkbox
   const [disableCheckBox, setDisableCheckBox] = useState(false); 
 
   const renderItem = ({ item }: { item: string }) => {
     return <BusStopItem stop={item} setPointName={props.setPointName} disableCheckBox={disableCheckBox} handleDisableCheckBox={setDisableCheckBox}/>;
   };
-
-  const data = ["Odonto", "ICH", "Direito", "Letras", "ICB"];
-
+  
   return (
     <BottomSheet
       title="Pontos"
       snapPoints={snapPoints}
-      data={data}
+      data={props.data}
       renderItem={renderItem}
     />
   );
