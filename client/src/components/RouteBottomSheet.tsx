@@ -9,7 +9,7 @@ interface RoutesBottomSheetProps {
 const RoutesBottomSheet = (props: RoutesBottomSheetProps): JSX.Element => {
   const snapPoints = useMemo(() => ["25%", "40%"], []);
   const renderItem = ({ item }: { item: string }) => {
-    return <RouteItem route={item} navigation={props.navigation} />;
+    return <RouteItem route={item} navigation={props.navigation} idRoute="1"/>;
   };
   const data = ["Rota 1", "Rota 2", "Rota 3", "Rota 4", "Rota 5"];
 
