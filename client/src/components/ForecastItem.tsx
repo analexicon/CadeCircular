@@ -5,13 +5,13 @@ import JourneyItem from "./JourneyItem";
 
 interface ForecastItemProps {
     busStopName : string,
-    minimalBusDistanceNumber : string,
+    nextBusStopIndex : string,
 }
 const ForecastItem = (props: ForecastItemProps): JSX.Element => {
     const getBusNameTextColor = () => {
-        if (props.minimalBusDistanceNumber === "1") {
+        if (props.nextBusStopIndex === "1") {
           return COLORS.greenPrimary; 
-        } else if (props.minimalBusDistanceNumber === "2") {
+        } else if (props.nextBusStopIndex === "2") {
           return COLORS.yellowPrimary; 
         } else {
           return COLORS.gray2;
@@ -21,15 +21,15 @@ const ForecastItem = (props: ForecastItemProps): JSX.Element => {
     return (
     <View style={[LOCAL_STYLES.outsideContainer, STYLES.spaceBetweenColumn12]}>
       <View style={[LOCAL_STYLES.numberContainer , { backgroundColor: getBusNameTextColor() }]}>
-        <Text style={LOCAL_STYLES.numberText}>{+props.minimalBusDistanceNumber <= 2 ? props.minimalBusDistanceNumber : "-"}</Text>
+        <Text style={LOCAL_STYLES.numberText}>{+props.nextBusStopIndex <= 2 ? props.nextBusStopIndex : "-"}</Text>
       </View>
       <View style={STYLES.spaceBetweenRows12}>
         <View>
           <Text style={LOCAL_STYLES.pointName}>{props.busStopName}</Text>
         </View>
         <View style={LOCAL_STYLES.journeyContainer}>
-         <JourneyItem journeyName="RU HU" idxNextBusStop={props.minimalBusDistanceNumber}/>
-         <JourneyItem journeyName="Circular" idxNextBusStop={props.minimalBusDistanceNumber}/>
+         <JourneyItem routeName="RU HU" idxNextBusStop={props.nextBusStopIndex}/>
+         <JourneyItem routeName="Circular" idxNextBusStop={props.nextBusStopIndex}/>
         </View>
       </View>
     </View>

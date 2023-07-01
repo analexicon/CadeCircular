@@ -7,6 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CommonHeader from "../components/Header";
 import RoutesBottomSheet from "../components/RouteBottomSheet";
 import ForecastItem from "../components/ForecastItem";
+import { Route } from "../../../server/src/types";
 
 interface ArrivalProps {
   navigation: NativeStackNavigationProp<any, any>;
@@ -25,11 +26,11 @@ const Arrival = (props: ArrivalProps): JSX.Element => {
       <View style={STYLES.container}>
         <View>
           <Text style={STYLES.simpleText}>BARRA DE PESQUISA</Text>
-          <ForecastItem busStopName="Letras" minimalBusDistanceNumber="1"/>
-          <ForecastItem busStopName="ICH" minimalBusDistanceNumber="1"/>
-          <ForecastItem busStopName="ICB" minimalBusDistanceNumber="2"/>
-          <ForecastItem busStopName="Direito" minimalBusDistanceNumber="2"/>
-          <ForecastItem busStopName="Engenharia" minimalBusDistanceNumber="3"/>
+          <ForecastItem busStopName="RU" nextBusStopIndex="1"/>
+          <ForecastItem busStopName="ICH" nextBusStopIndex="1"/>
+          <ForecastItem busStopName="ICB" nextBusStopIndex="2"/>
+          <ForecastItem busStopName="Direito" nextBusStopIndex="2"/>
+          <ForecastItem busStopName="Engenharia" nextBusStopIndex="3"/>
         </View>
         <RoutesBottomSheet navigation={props.navigation} />
       </View>

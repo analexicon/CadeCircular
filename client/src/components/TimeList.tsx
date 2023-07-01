@@ -7,14 +7,14 @@ export interface TimeListData{
   key : string;
 }
 export interface TimeListProps {
-  pointName : string;
+  busStopName : string;
   listData : TimeListData[];
 }
 const TimeList = (props: TimeListProps): JSX.Element => {
   return (
     <View style={STYLES.spaceBetweenRows12}>
       <View>
-        <Text style={STYLES.mediumTitleTextLeft}>{props.pointName}</Text>
+        <Text style={STYLES.mediumTitleTextLeft}>{props.busStopName}</Text>
       </View>
       <View>
       <FlatList

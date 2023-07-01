@@ -3,13 +3,13 @@ import STYLES from "../styles/styles";
 import { View, StyleSheet , Text} from "react-native";
 
 interface JourneyItemProps {
-    journeyName : string,
+    routeName : string,
     idxNextBusStop : string, 
 }
 const JourneyItem = (props: JourneyItemProps): JSX.Element => {
   return (
     <View style={LOCAL_STYLES.journeyContainer}>
-      <Text style={LOCAL_STYLES.journeyText}>{props.journeyName}</Text>
+      <Text style={LOCAL_STYLES.journeyText}>{props.routeName}</Text>
       <Text style={LOCAL_STYLES.pointDistanceText}>{props.idxNextBusStop}</Text>
     </View>
   );
