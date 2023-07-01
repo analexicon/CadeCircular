@@ -15,4 +15,7 @@ app.use("", busStopRoute);
 import driverRoute from "./routes/driver";
 app.use("", driverRoute);
 
+import managerRoute from "./routes/manager";
+app.use("", managerRoute);
+
 app.listen(3333, () => console.log("Server is running on port 3333 🚀"));

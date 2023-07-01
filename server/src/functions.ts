@@ -3,10 +3,19 @@ import {
   Bus as PrismaBus,
   BusStop as PrismaBusStop,
   Driver as PrismaDriver,
+  Manager as PrismaManager,
   Employee as PrismaEmployee,
 } from "@prisma/client";
-import { Bus, BusStop, CRUDRecordEndpoints, Driver, Employee } from "./types";
+import {
+  Bus,
+  BusStop,
+  CRUDRecordEndpoints,
+  Driver,
+  Employee,
+  Manager,
+} from "./types";
 import { type } from "os";
+import manager from "./routes/manager";
 
 // If an error occurs, try to determine the error type and return the apropriate response
 export function determineErrorResponsePrismaQuery(error: unknown) {
@@ -88,5 +97,17 @@ export const formattedDriver = (driver: FullPrismaDriver): Driver => {
     identification: driver.employee.identification,
     username: driver.employee.username,
     password: driver.employee.password,
+  };
+};
+
+type FullPrismaManager = PrismaManager & { employee: FullPrismaEmployee };
+export const formattedManager = (manager: FullPrismaManager): Manager => {
+  return {
+    _endpoint: CRUDRecordEndpoints.Manager,
+    id: manager.employeeId,
+    name: manager.employee.name,
+    identification: manager.employee.identification,
+    username: manager.employee.username,
+    password: manager.employee.password,
   };
 };

@@ -4,12 +4,14 @@ export enum CRUDRecordEndpoints {
   BusStop = "bus-stop",
   Route = "route",
   Driver = "driver",
+  Manager = "Manager",
 }
 export enum CRUDRecordTypes {
   Bus,
   BusStop,
   Route,
   Driver,
+  Manager,
 }
 
 export interface Bus {
@@ -91,9 +93,11 @@ export interface Driver extends Employee {
 }
 
 export interface Manager extends Employee {
+  _endpoint: CRUDRecordEndpoints.Manager;
+
   // TODO: Implementar métodos
-  createDriver: (driver: Driver) => {};
-  createBus: () => {};
-  createBusStop: () => {};
-  createRoute: () => {};
+  // createDriver: (driver: Driver) => {};
+  // createBus: () => {};
+  // createBusStop: () => {};
+  // createRoute: () => {};
 }
