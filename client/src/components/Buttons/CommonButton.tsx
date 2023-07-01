@@ -11,8 +11,9 @@ const CommonButton = (props: CommonButtonProps): JSX.Element => {
     <TouchableHighlight
       underlayColor={COLORS.gray1}
       onPress={() => props.handlePress()}
+      style={props.style}
     >
-      <View style={props.style}>{props.children}</View>
+      {props.children}
     </TouchableHighlight>
   );
 };
