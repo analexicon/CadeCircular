@@ -20,7 +20,7 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
   const { route, idRoute }: any = router.params;
 
   //Estado para Controlar o nome do titulo exibido, o ponto de onibus selecionado
-  const [pointName, setPointName] = useState("");
+  const [busStopName, setBusStopName] = useState("");
 
   //TODO FUNÇÃO DE BUSCAR E RETORNAR OS HORARIOS DA ROTA DE ACORDO COM OS PONTOS
   // const data = searchTimesByIdRoute(idRoute);
@@ -30,7 +30,7 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
 
   //UseEffect que controla o data baseado na opção de ponto selecionada
   useEffect(() => {
-    switch (pointName) {
+    switch (busStopName) {
       case "ICH":
         setData([
           { key: "00:00" },
@@ -84,16 +84,16 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
       default:
         setData([{ key: "Selecione algum ponto" }]);
     }
-  }, [pointName]);
+  }, [busStopName]);
 
   return (
     <SafeAreaView style={STYLES.container}>
       <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader navigation={props.navigation} centerText={route} />
       <View>
-        <TimeList listData={data} pointName={pointName} />
+        <TimeList listData={data} busStopName={busStopName} />
       </View>
-      <ViewTimesBottomSheet data={allPoints} setPointName={setPointName} />
+      <ViewTimesBottomSheet data={allPoints} setBusStopName={setBusStopName} />
     </SafeAreaView>
   );
 };

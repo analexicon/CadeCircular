@@ -5,7 +5,7 @@ import BottomSheet from "./BottomSheet";
 import BusStopItem from "./BusStopItem";
 
 interface ViewTimesBottomSheetProps {
-  setPointName : Function;
+  setBusStopName : Function;
   data : string[];
 }
 const ViewTimesBottomSheet = (props: ViewTimesBottomSheetProps): JSX.Element => {
@@ -15,7 +15,7 @@ const ViewTimesBottomSheet = (props: ViewTimesBottomSheetProps): JSX.Element => 
   const [disableCheckBox, setDisableCheckBox] = useState(false); 
 
   const renderItem = ({ item }: { item: string }) => {
-    return <BusStopItem stop={item} setPointName={props.setPointName} disableCheckBox={disableCheckBox} handleDisableCheckBox={setDisableCheckBox}/>;
+    return <BusStopItem stop={item} setPointName={props.setBusStopName} disableCheckBox={disableCheckBox} handleDisableCheckBox={setDisableCheckBox}/>;
   };
   
   return (
