@@ -25,9 +25,11 @@ const Arrival = (props: ArrivalProps): JSX.Element => {
       <View style={STYLES.container}>
         <View>
           <Text style={STYLES.simpleText}>BARRA DE PESQUISA</Text>
-          <ForecastItem/>
-          <ForecastItem/>
-          <ForecastItem/>
+          <ForecastItem busStopName="Letras" minimalBusDistanceNumber="1"/>
+          <ForecastItem busStopName="ICH" minimalBusDistanceNumber="1"/>
+          <ForecastItem busStopName="ICB" minimalBusDistanceNumber="2"/>
+          <ForecastItem busStopName="Direito" minimalBusDistanceNumber="2"/>
+          <ForecastItem busStopName="Engenharia" minimalBusDistanceNumber="3"/>
         </View>
         <RoutesBottomSheet navigation={props.navigation} />
       </View>
