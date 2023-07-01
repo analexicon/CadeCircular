@@ -6,6 +6,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CommonHeader from "../components/Header";
 import RoutesBottomSheet from "../components/RouteBottomSheet";
+import ForecastItem from "../components/ForecastItem";
 
 interface ArrivalProps {
   navigation: NativeStackNavigationProp<any, any>;
@@ -23,7 +24,10 @@ const Arrival = (props: ArrivalProps): JSX.Element => {
       />
       <View style={STYLES.container}>
         <View>
-          <Text style={STYLES.simpleText}>Olá, mundo!</Text>
+          <Text style={STYLES.simpleText}>BARRA DE PESQUISA</Text>
+          <ForecastItem/>
+          <ForecastItem/>
+          <ForecastItem/>
         </View>
         <RoutesBottomSheet navigation={props.navigation} />
       </View>
@@ -31,3 +35,4 @@ const Arrival = (props: ArrivalProps): JSX.Element => {
   );
 };
 export default Arrival;
+
