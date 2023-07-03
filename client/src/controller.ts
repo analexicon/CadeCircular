@@ -41,6 +41,17 @@ export async function handleFormSubmit({
   if (validFields) {
     if (await decideOperation(isEditing)(relativeUrl, sendableData)) {
       // Sucesso
+      const successToast = () => {
+        Toast.show({
+          type: "success",
+          text1: "Salvo com sucesso!",
+          text2: `O registro foi ${
+            isEditing ? "atualizado" : "criado"
+          } com sucesso no sistema.`,
+          position: "bottom",
+        });
+      };
+      successToast();
       redirectToList(navigation);
     } else {
       // Falha
@@ -82,7 +93,7 @@ async function createRecordOnServer(
   sendableData: CRUDRecord
 ) {
   try {
-    // await axios.post(REACT_APP_SERVER_URL + relativeUrl, sendableData);
+    await axios.post(REACT_APP_SERVER_URL + relativeUrl, sendableData);
     return true;
   } catch (error) {
     console.error(error);

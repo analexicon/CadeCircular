@@ -16,7 +16,7 @@ import { ListNavigationParams } from "./common";
 
 const recordItemText = (item: CRUDRecord): string => {
   return item._endpoint === CRUDRecordEndpoints.Bus
-    ? item.licensePlate + " - " + item.model
+    ? item.licensePlate + " " + item.model
     : item.id;
 };
 
@@ -40,9 +40,9 @@ function getSendableData(inputValues: InputValues): Bus {
   return {
     _endpoint: CRUDRecordEndpoints.Bus,
     id: "",
-    licensePlate: inputValues.licensePlate,
-    model: inputValues.model,
-    capacity: convertStringToNumber(inputValues.capacity),
+    licensePlate: inputValues.licensePlate.toUpperCase().trim(),
+    model: inputValues.model.trim(),
+    capacity: convertStringToNumber(inputValues.capacity.trim()),
     available: inputValues.available,
   };
 }
@@ -50,8 +50,9 @@ function getSendableData(inputValues: InputValues): Bus {
 const validFields = (inputValues: InputValues): boolean => {
   return (
     inputValues.licensePlate !== "" &&
-    inputValues.licensePlate.match(/^[A-Z]{3}-[0-9]([A-Z]|[0-9])[0-9]{2}$/) !==
-      null &&
+    inputValues.licensePlate.match(
+      /^[a-zA-Z]{3}-[0-9]([a-zA-Z]|[0-9])[0-9]{2}$/
+    ) !== null &&
     inputValues.model !== "" &&
     inputValues.capacity !== ""
   );
@@ -144,8 +145,8 @@ export async function handleUpdate(
 ) {
   const record = getSendableData(inputValues);
   await handleFormSubmit({
-    isEditing: false,
-    validFields: true,
+    isEditing: true,
+    validFields: validFields(inputValues),
     relativeUrl: `/${CRUDRecordEndpoints.Bus}/${recordId}`,
     sendableData: record,
     navigation: navigation,
