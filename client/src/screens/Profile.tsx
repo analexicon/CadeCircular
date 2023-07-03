@@ -1,14 +1,7 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import screens from "../types/stackRoutes";
-import { CRUDRecordEndpoints } from "../types/types";
-import {
-  listNavigationParams as busListNavigationParams,
-  handleCreate as busHandleCreate,
-  handleUpdate as busHandleUpdate,
-  handleDelete as busHandleDelete,
-  listNavigationParams,
-} from "../crudDefinitions/bus";
+import { listNavigationParams as busListNavigationParams } from "../crudDefinitions/bus";
 import { StyleSheet, Text, View, Image } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -50,7 +43,7 @@ const Profile = (props: ProfileProps): JSX.Element => {
           <StyledButton
             text="Listar ônibus"
             handlePress={() =>
-              props.navigation.push(screens.List, listNavigationParams)
+              props.navigation.push(screens.List, busListNavigationParams)
             }
           />
         </View>

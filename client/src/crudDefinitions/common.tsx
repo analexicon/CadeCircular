@@ -19,6 +19,16 @@ interface UnknownInputValues {
 export const unknownInputValues: UnknownInputValues = { _type: "Unknown" };
 export type CRUDInputValues = BusInputValues | UnknownInputValues;
 
+export interface ListNavigationParams {
+  pageTitle: string;
+  recordSingularName: string;
+  recordEndpoint: CRUDRecordEndpoints;
+  recordItemText: (item: CRUDRecord) => string;
+  handleCreate: Function;
+  handleUpdate: Function;
+  handleDelete: Function;
+}
+
 interface GetFormBodyProps {
   recordEndpoint: CRUDRecordEndpoints;
   recordId?: string;

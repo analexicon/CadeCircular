@@ -4,11 +4,12 @@ import {
   Inter_500Medium,
   Inter_600SemiBold,
 } from "@expo-google-fonts/inter";
-import { View } from "react-native";
+import { LogBox, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Toast from "react-native-toast-message";
 import * as ScreenOrientation from "expo-screen-orientation";
 import screens from "./src/types/stackRoutes";
 import Arrival from "./src/screens/Arrival";
@@ -22,6 +23,9 @@ import ViewTimes from "./src/screens/ViewTimes";
 
 const Stack = createNativeStackNavigator();
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+LogBox.ignoreLogs([
+  "Non-serializable values were found in the navigation state",
+]);
 
 const App = (): JSX.Element => {
   let [fontsLoaded] = useFonts({
@@ -58,6 +62,7 @@ const App = (): JSX.Element => {
           </Stack.Navigator>
         </NavigationContainer>
       </GestureHandlerRootView>
+      <Toast />
     </SafeAreaProvider>
   );
 };

@@ -6,6 +6,7 @@ import {
   TextInput,
   TextInputAndroidProps,
 } from "react-native";
+import MaskInput, { Mask } from "react-native-mask-input";
 
 interface CommonInputProps {
   value: string;
@@ -49,6 +50,19 @@ export const NumericalInput = (props: CommonInputProps): JSX.Element => {
       placeholder={props.placeholder}
       autoComplete={props.autocomplete ?? "cc-number"}
       keyboardType="numeric"
+    />
+  );
+};
+
+export const MaskedInput = (
+  props: CommonInputProps & { mask: Mask }
+): JSX.Element => {
+  return (
+    <MaskInput
+      value={props.value}
+      onChangeText={(formatted) => props.setValue(formatted)}
+      style={[STYLES.simpleText, LOCAL_STYLE.textInput]}
+      mask={props.mask}
     />
   );
 };

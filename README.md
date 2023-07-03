@@ -56,17 +56,22 @@ This is a monorepo with both frontend with React-Native and backend API service 
    cd client
    ```
 
-2. **ADB**
+2. **ADB Connect**
 
    ```shell
    adb connect [your_phone_IP]
-   adb reverse tcp:3333 tcp:3333
    ```
 
 3. **Expo Metro**
 
    ```shell
    npx expo start --localhost
+   ```
+
+4. **ADB Reverse Port**
+
+   ```shell
+   adb reverse tcp:3333 tcp:3333
    ```
 
 ## 🔍 About the project

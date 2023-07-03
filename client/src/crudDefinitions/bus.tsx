@@ -1,18 +1,22 @@
 import STYLES from "../styles/styles";
 import {
+  Bus,
   CRUDRecord,
   CRUDRecordEndpoints,
   CRUDRecordTypes,
 } from "../types/types";
+import screens from "../types/stackRoutes";
+import { convertStringToNumber } from "../util";
+import { deleteRecordOnServer, handleFormSubmit } from "../controller";
 import { ScrollView, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import InputGroup from "../components/InputGroup";
 import CheckboxInput from "../components/CheckboxInput";
-import screens from "../types/stackRoutes";
+import { ListNavigationParams } from "./common";
 
 const recordItemText = (item: CRUDRecord): string => {
   return item._endpoint === CRUDRecordEndpoints.Bus
-    ? item.licensePlate + " - " + item.model
+    ? item.licensePlate + " " + item.model
     : item.id;
 };
 
@@ -32,6 +36,28 @@ export const emptyInputValues: InputValues = {
   available: false,
 };
 
+function getSendableData(inputValues: InputValues): Bus {
+  return {
+    _endpoint: CRUDRecordEndpoints.Bus,
+    id: "",
+    licensePlate: inputValues.licensePlate.toUpperCase().trim(),
+    model: inputValues.model.trim(),
+    capacity: convertStringToNumber(inputValues.capacity.trim()),
+    available: inputValues.available,
+  };
+}
+
+const validFields = (inputValues: InputValues): boolean => {
+  return (
+    inputValues.licensePlate !== "" &&
+    inputValues.licensePlate.match(
+      /^[a-zA-Z]{3}-[0-9]([a-zA-Z]|[0-9])[0-9]{2}$/
+    ) !== null &&
+    inputValues.model !== "" &&
+    inputValues.capacity !== ""
+  );
+};
+
 interface FormBodyProps {
   inputValues: InputValues;
   setInputValues: Function;
@@ -45,8 +71,22 @@ export const FormBody = (props: FormBodyProps): JSX.Element => {
           placeholder="Digite a placa do veículo"
           value={props.inputValues.licensePlate}
           setValue={(value) => {
-            props.setInputValues({ ...props.inputValues, licensePlate: value });
+            props.setInputValues({
+              ...props.inputValues,
+              licensePlate: value,
+            });
           }}
+          type="masked"
+          mask={[
+            /[a-zA-Z]/,
+            /[a-zA-Z]/,
+            /[a-zA-Z]/,
+            "-",
+            /\d/,
+            /[0-9a-zA-Z]/,
+            /\d/,
+            /\d/,
+          ]}
         />
         <InputGroup
           label="Modelo"
@@ -83,32 +123,49 @@ function redirectToList(navigation: NativeStackNavigationProp<any, any>) {
   navigation.push(screens.List, listNavigationParams);
 }
 
-export const handleCreate = (
+export async function handleCreate(
   inputValues: InputValues,
   navigation: NativeStackNavigationProp<any, any>
-): void => {
-  console.log(inputValues);
-  redirectToList(navigation);
-};
+) {
+  const record = getSendableData(inputValues);
+  await handleFormSubmit({
+    isEditing: false,
+    validFields: validFields(inputValues),
+    relativeUrl: `/${CRUDRecordEndpoints.Bus}`,
+    sendableData: record,
+    navigation: navigation,
+    redirectToList: redirectToList,
+  });
+}
 
-export const handleUpdate = (
+export async function handleUpdate(
   recordId: string,
   inputValues: InputValues,
   navigation: NativeStackNavigationProp<any, any>
-): void => {
-  console.log(inputValues);
-  redirectToList(navigation);
-};
+) {
+  const record = getSendableData(inputValues);
+  await handleFormSubmit({
+    isEditing: true,
+    validFields: validFields(inputValues),
+    relativeUrl: `/${CRUDRecordEndpoints.Bus}/${recordId}`,
+    sendableData: record,
+    navigation: navigation,
+    redirectToList: redirectToList,
+  });
+}
 
-export const handleDelete = (
+export async function handleDelete(
   recordId: string,
   navigation: NativeStackNavigationProp<any, any>
-): void => {
-  console.log(recordId);
-  redirectToList(navigation);
-};
+) {
+  await deleteRecordOnServer({
+    relativeUrl: `/${CRUDRecordEndpoints.Bus}/${recordId}`,
+    navigation: navigation,
+    redirectToList: redirectToList,
+  });
+}
 
-export const listNavigationParams = {
+export const listNavigationParams: ListNavigationParams = {
   pageTitle: "Ônibus",
   recordSingularName: "ônibus",
   recordEndpoint: CRUDRecordEndpoints.Bus,
