@@ -11,7 +11,7 @@ export async function fetchRecordData(
   handleFetch: (data: any) => void
 ) {
   try {
-    axios(REACT_APP_SERVER_URL + relativeUrl, {
+    await axios(REACT_APP_SERVER_URL + relativeUrl, {
       validateStatus: function (status) {
         return status === 200;
       },
@@ -111,6 +111,41 @@ async function updateRecordOnServer(
   } catch (error) {
     console.error(error);
     return false;
+  }
+}
+
+export async function deleteRecordOnServer({
+  relativeUrl,
+  navigation,
+  redirectToList,
+}: {
+  relativeUrl: string;
+  navigation: NativeStackNavigationProp<any, any>;
+  redirectToList: (navigation: NativeStackNavigationProp<any, any>) => void;
+}) {
+  try {
+    await axios.delete(REACT_APP_SERVER_URL + relativeUrl);
+    const successToast = () => {
+      Toast.show({
+        type: "success",
+        text1: "Excluído com sucesso!",
+        text2: `O registro foi removido com sucesso do sistema.`,
+        position: "bottom",
+      });
+    };
+    successToast();
+    redirectToList(navigation);
+  } catch (error) {
+    console.error(error);
+    const failureToast = () => {
+      Toast.show({
+        type: "error",
+        text1: "Falha ao deletar!",
+        text2: "Não foi possível se comunicar com o servidor, tente novamente.",
+        position: "bottom",
+      });
+    };
+    failureToast();
   }
 }
 

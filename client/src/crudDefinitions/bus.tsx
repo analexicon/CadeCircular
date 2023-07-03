@@ -7,7 +7,7 @@ import {
 } from "../types/types";
 import screens from "../types/stackRoutes";
 import { convertStringToNumber } from "../util";
-import { handleFormSubmit } from "../controller";
+import { deleteRecordOnServer, handleFormSubmit } from "../controller";
 import { ScrollView, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import InputGroup from "../components/InputGroup";
@@ -158,8 +158,11 @@ export async function handleDelete(
   recordId: string,
   navigation: NativeStackNavigationProp<any, any>
 ) {
-  console.log(recordId);
-  redirectToList(navigation);
+  await deleteRecordOnServer({
+    relativeUrl: `/${CRUDRecordEndpoints.Bus}/${recordId}`,
+    navigation: navigation,
+    redirectToList: redirectToList,
+  });
 }
 
 export const listNavigationParams: ListNavigationParams = {
