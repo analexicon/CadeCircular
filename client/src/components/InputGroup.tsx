@@ -1,13 +1,15 @@
 import STYLES from "../styles/styles";
 import { Text, View } from "react-native";
-import Input, { NumericalInput, PasswordInput } from "./Input";
+import { Mask } from "react-native-mask-input";
+import Input, { MaskedInput, NumericalInput, PasswordInput } from "./Input";
 
 interface InputGroupProps {
   label: string;
   value: string;
   placeholder: string;
   setValue: (value: string) => void;
-  type?: "common" | "password" | "numerical";
+  type?: "common" | "password" | "numerical" | "masked";
+  mask?: Mask;
 }
 const InputGroup = (props: InputGroupProps): JSX.Element => {
   let input = (
@@ -25,6 +27,14 @@ const InputGroup = (props: InputGroupProps): JSX.Element => {
         value={props.value}
         placeholder={props.placeholder}
         setValue={props.setValue}
+      />
+    );
+  } else if (props.type === "masked") {
+    input = (
+      <MaskedInput
+        value={props.value}
+        setValue={props.setValue}
+        mask={props.mask ? props.mask : [/\d/g]}
       />
     );
   }

@@ -75,6 +75,17 @@ export const FormBody = (props: FormBodyProps): JSX.Element => {
               licensePlate: value,
             });
           }}
+          type="masked"
+          mask={[
+            /[a-zA-Z]/,
+            /[a-zA-Z]/,
+            /[a-zA-Z]/,
+            "-",
+            /\d/,
+            /[0-9a-zA-Z]/,
+            /\d/,
+            /\d/,
+          ]}
         />
         <InputGroup
           label="Modelo"
