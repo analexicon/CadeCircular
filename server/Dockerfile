@@ -13,6 +13,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 
+## Compiler image
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
@@ -25,7 +26,7 @@ COPY --link package.json .
 RUN npm install --production=false
 
 # Generate Prisma Client
-COPY --link prisma .
+COPY --link prisma prisma
 RUN npx prisma generate
 
 # Copy application code
@@ -33,13 +34,13 @@ COPY --link . .
 
 # Build application
 RUN npm run build
-RUN npx prisma migrate reset -f
+
 
 # Remove development dependencies
-RUN npm install
+RUN npm install --omit=dev
 
 
-# Final stage for app image
+## Final stage for app image
 FROM base
 
 # Install packages needed for deployment
@@ -53,40 +54,14 @@ COPY --from=build /app /app
 # Setup sqlite3 on a separate volume
 RUN mkdir -p /data
 VOLUME /data
+
+# Set Environment Variable on the built image
 ENV DATABASE_URL="file:///data/circular.db"
 
 # Entrypoint prepares the database.
 ENTRYPOINT [ "/app/docker-entrypoint.js" ]
 
+
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
+EXPOSE 3333
 CMD [ "npm", "run", "start" ]
-
-
-# FROM node:slim as build-image
-# RUN apt-get -qy update && apt-get -qy install openssl
-# WORKDIR /app
-# COPY package*.json ./
-# COPY tsconfig.json ./
-# COPY ./prisma ./prisma
-# COPY ./src ./src
-# RUN npm i && npm ci
-# RUN npx prisma generate --schema=./prisma/schema.prisma
-# RUN npm run build
-
-# FROM node:slim
-# WORKDIR /app
-# COPY package*.json ./
-# COPY --from=build-image ./app/dist ./dist
-# RUN npm i && npm ci --omit=dev
-# COPY . .
-
-# # Setup sqlite3 on a separate volume
-# RUN mkdir -p /data
-# VOLUME /data
-# ENV DATABASE_URL="file:///data/circular.db"
-# # Entrypoint prepares the database.
-# ENTRYPOINT [ "/app/docker-entrypoint.js" ]
-
-# EXPOSE 3000
-# CMD [ "npm", "run", "start:migrate" ]

@@ -41,11 +41,27 @@ This is a monorepo with both frontend with React-Native and backend API service 
 
 # Server run
 
+## Development environment
+
 1. **Run server**
 
    ```shell
    cd server
    npm run dev
+   ```
+
+## Production environment
+
+1. **Create Docker image**
+
+   ```shell
+   cd server
+   docker build -t cade-circular .
+   ```
+
+2. **Run container**
+   ```shell
+   docker run -p 3333:3333 cade-circular
    ```
 
 # Android Client run
