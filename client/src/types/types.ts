@@ -75,7 +75,14 @@ export interface Journey {
   // getSubsequentialBusStop: () => {};
 }
 
-export interface Employee {
+export enum EmployeeTypes {
+  Driver = "driver",
+  Manager = "manager",
+}
+
+export type Employee = Driver | Manager;
+
+interface BaseEmployee {
   id: string;
   name: string;
   identification: string;
@@ -83,8 +90,9 @@ export interface Employee {
   password: string;
 }
 
-export interface Driver extends Employee {
+export interface Driver extends BaseEmployee {
   _endpoint: CRUDRecordEndpoints.Driver;
+  type: EmployeeTypes.Driver;
 
   // TODO: Implementar métodos
   // startJourney: () => {};
@@ -93,7 +101,8 @@ export interface Driver extends Employee {
   // arriveBusStop: () => {};
 }
 
-export interface Manager extends Employee {
+export interface Manager extends BaseEmployee {
+  type: EmployeeTypes.Manager;
   // TODO: Implementar métodos
   // createDriver: (driver: Driver) => {};
   // createBus: () => {};
