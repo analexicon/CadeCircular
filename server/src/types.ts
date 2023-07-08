@@ -4,12 +4,18 @@ export enum CRUDRecordEndpoints {
   BusStop = "bus-stop",
   Route = "route",
   Driver = "driver",
+  Manager = "Manager",
+  Forecast = "forecast",
+  // Journey = "journey",
 }
 export enum CRUDRecordTypes {
   Bus,
   BusStop,
   Route,
   Driver,
+  Manager,
+  Forecast,
+  // Journey,
 }
 
 export interface Bus {
@@ -31,6 +37,8 @@ export interface BusStop {
 }
 
 export interface Forecast {
+  _endpoint: CRUDRecordEndpoints.Forecast;
+
   id: string;
   schedule: Date;
 }
@@ -49,6 +57,8 @@ export interface BusStop_Route {
 }
 
 export interface Journey {
+  // _endpoint: CRUDRecordEndpoints.Journey;
+
   id: string;
   paused: boolean;
   active: boolean;
@@ -60,8 +70,8 @@ export interface Journey {
   route: Route;
 
   // TODO: Implementar métodos
-  getCurrentBusStop: () => {};
-  getSubsequentialBusStop: () => {};
+  // getCurrentBusStop: () => {};
+  // getSubsequentialBusStop: () => {};
 }
 
 export interface Employee {
@@ -91,9 +101,11 @@ export interface Driver extends Employee {
 }
 
 export interface Manager extends Employee {
+  _endpoint: CRUDRecordEndpoints.Manager;
+
   // TODO: Implementar métodos
-  createDriver: (driver: Driver) => {};
-  createBus: () => {};
-  createBusStop: () => {};
-  createRoute: () => {};
+  // createDriver: (driver: Driver) => {};
+  // createBus: () => {};
+  // createBusStop: () => {};
+  // createRoute: () => {};
 }
