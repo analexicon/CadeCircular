@@ -26,7 +26,7 @@ router.get("/manager", async (request, response) => {
 // Query a single manager stop by its id
 router.get("/manager/:employeeId", async (request, response) => {
   try {
-    const foundManager = await prisma.driver.findUnique({
+    const foundManager = await prisma.manager.findUnique({
       include: { employee: true },
       where: {
         employeeId: request.params.employeeId,
