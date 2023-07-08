@@ -4,18 +4,12 @@ export enum CRUDRecordEndpoints {
   BusStop = "bus-stop",
   Route = "route",
   Driver = "driver",
-  Manager = "Manager",
-  Forecast = "forecast",
-  // Journey = "journey",
 }
 export enum CRUDRecordTypes {
   Bus,
   BusStop,
   Route,
   Driver,
-  Manager,
-  Forecast,
-  // Journey,
 }
 
 export interface Bus {
@@ -34,13 +28,15 @@ export interface BusStop {
   id: string;
   name: string;
   description: string;
+
+  busStop_RouteList: BusStop_Route[];
 }
 
 export interface Forecast {
-  _endpoint: CRUDRecordEndpoints.Forecast;
-
   id: string;
   schedule: Date;
+
+  busStop_Route?: BusStop_Route;
 }
 
 export interface Route {
@@ -49,16 +45,21 @@ export interface Route {
   id: string;
   name: string;
   description: string;
+
+  busStop_RouteList: BusStop_Route[];
 }
 
 export interface BusStop_Route {
   id: string;
   order: number;
+
+  forecasts: Forecast[];
+
+  busStop?: BusStop;
+  route?: Route;
 }
 
 export interface Journey {
-  // _endpoint: CRUDRecordEndpoints.Journey;
-
   id: string;
   paused: boolean;
   active: boolean;
@@ -80,15 +81,7 @@ export interface Employee {
   identification: string;
   username: string;
   password: string;
-
-  // authenticate: (givenUsername: string, givenPassword: string) => boolean;
 }
-
-// if (givenUsername === this.username && givenPassword === this.password) {
-//   return true;
-// } else {
-//   return false;
-// }
 
 export interface Driver extends Employee {
   _endpoint: CRUDRecordEndpoints.Driver;
@@ -101,8 +94,6 @@ export interface Driver extends Employee {
 }
 
 export interface Manager extends Employee {
-  _endpoint: CRUDRecordEndpoints.Manager;
-
   // TODO: Implementar métodos
   // createDriver: (driver: Driver) => {};
   // createBus: () => {};

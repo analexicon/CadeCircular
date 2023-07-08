@@ -8,6 +8,7 @@ import {
   Journey as PrismaJourney,
   Route as PrismaRoute,
   Forecast as PrismaForecast,
+  BusStop_Route as PrismaBusStop_Route,
 } from "@prisma/client";
 import {
   Bus,
@@ -19,6 +20,7 @@ import {
   Manager,
   Route,
   Forecast,
+  BusStop_Route,
 } from "./types";
 
 // If an error occurs, try to determine the error type and return the apropriate response
@@ -71,14 +73,41 @@ export const formattedBus = (bus: FullPrismaBus): Bus => {
   };
 };
 
-type FullPrismaBusStop = PrismaBusStop & {};
+type FullPrismaBusStop = PrismaBusStop & {
+  busStop_RouteList?: FullPrismaBusStop_Route[];
+};
 export const formattedBusStop = (busStop: FullPrismaBusStop): BusStop => {
   return {
     _endpoint: CRUDRecordEndpoints.BusStop,
     id: busStop.id,
     name: busStop.name,
     description: busStop.description,
+    busStop_RouteList: busStop.busStop_RouteList
+      ? busStop.busStop_RouteList.map((busStop_Route) => {
+          return formattedBusStop_Route(busStop_Route);
+        })
+      : [],
   };
+};
+
+type FullPrismaBusStop_Route = PrismaBusStop_Route & {
+  busStop?: FullPrismaBusStop;
+  forecasts: FullPrismaForecast[];
+};
+export const formattedBusStop_Route = (
+  busStop_Route: FullPrismaBusStop_Route
+): BusStop_Route => {
+  const objectToReturn: BusStop_Route = {
+    id: busStop_Route.id,
+    order: busStop_Route.order,
+    forecasts: busStop_Route.forecasts.map((forecast) => {
+      return formattedForecast(forecast);
+    }),
+  };
+  if (busStop_Route.busStop) {
+    objectToReturn.busStop = formattedBusStop(busStop_Route.busStop);
+  }
+  return objectToReturn;
 };
 
 type FullPrismaEmployee = PrismaEmployee & {};
@@ -107,7 +136,6 @@ export const formattedDriver = (driver: FullPrismaDriver): Driver => {
 type FullPrismaManager = PrismaManager & { employee: FullPrismaEmployee };
 export const formattedManager = (manager: FullPrismaManager): Manager => {
   return {
-    _endpoint: CRUDRecordEndpoints.Manager,
     id: manager.employeeId,
     name: manager.employee.name,
     identification: manager.employee.identification,
@@ -116,22 +144,29 @@ export const formattedManager = (manager: FullPrismaManager): Manager => {
   };
 };
 
-type FullPrismaRoute = PrismaRoute & {};
+type FullPrismaRoute = PrismaRoute & {
+  busStop_RouteList: FullPrismaBusStop_Route[];
+};
 export const formattedRoute = (route: FullPrismaRoute): Route => {
   return {
     _endpoint: CRUDRecordEndpoints.Route,
     id: route.id,
     name: route.name,
     description: route.description,
+    busStop_RouteList: route.busStop_RouteList.map((busStop_Route) => {
+      return formattedBusStop_Route(busStop_Route);
+    }),
   };
 };
 
-type FullPrismaForecast = PrismaForecast & {};
+type FullPrismaForecast = PrismaForecast & {
+  busStop_Route: FullPrismaBusStop_Route;
+};
 export const formattedForecast = (forecast: FullPrismaForecast): Forecast => {
   return {
-    _endpoint: CRUDRecordEndpoints.Forecast,
     id: forecast.id,
     schedule: forecast.schedule,
+    busStop_Route: formattedBusStop_Route(forecast.busStop_Route),
   };
 };
 

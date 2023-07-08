@@ -28,11 +28,15 @@ export interface BusStop {
   id: string;
   name: string;
   description: string;
+
+  busStop_RouteList: BusStop_Route[];
 }
 
 export interface Forecast {
   id: string;
   schedule: Date;
+
+  busStop_Route?: BusStop_Route;
 }
 
 export interface Route {
@@ -41,11 +45,18 @@ export interface Route {
   id: string;
   name: string;
   description: string;
+
+  busStop_RouteList: BusStop_Route[];
 }
 
 export interface BusStop_Route {
   id: string;
   order: number;
+
+  forecasts: Forecast[];
+
+  busStop?: BusStop;
+  route?: Route;
 }
 
 export interface Journey {
@@ -70,15 +81,7 @@ export interface Employee {
   identification: string;
   username: string;
   password: string;
-
-  // authenticate: (givenUsername: string, givenPassword: string) => boolean;
 }
-
-// if (givenUsername === this.username && givenPassword === this.password) {
-//   return true;
-// } else {
-//   return false;
-// }
 
 export interface Driver extends Employee {
   _endpoint: CRUDRecordEndpoints.Driver;
