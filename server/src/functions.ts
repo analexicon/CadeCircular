@@ -5,6 +5,9 @@ import {
   Driver as PrismaDriver,
   Manager as PrismaManager,
   Employee as PrismaEmployee,
+  Journey as PrismaJourney,
+  Route as PrismaRoute,
+  Forecast as PrismaForecast,
 } from "@prisma/client";
 import {
   Bus,
@@ -12,10 +15,11 @@ import {
   CRUDRecordEndpoints,
   Driver,
   Employee,
+  Journey,
   Manager,
+  Route,
+  Forecast,
 } from "./types";
-import { type } from "os";
-import manager from "./routes/manager";
 
 // If an error occurs, try to determine the error type and return the apropriate response
 export function determineErrorResponsePrismaQuery(error: unknown) {
@@ -109,5 +113,42 @@ export const formattedManager = (manager: FullPrismaManager): Manager => {
     identification: manager.employee.identification,
     username: manager.employee.username,
     password: manager.employee.password,
+  };
+};
+
+type FullPrismaRoute = PrismaRoute & {};
+export const formattedRoute = (route: FullPrismaRoute): Route => {
+  return {
+    _endpoint: CRUDRecordEndpoints.Route,
+    id: route.id,
+    name: route.name,
+    description: route.description,
+  };
+};
+
+type FullPrismaForecast = PrismaForecast & {};
+export const formattedForecast = (forecast: FullPrismaForecast): Forecast => {
+  return {
+    _endpoint: CRUDRecordEndpoints.Forecast,
+    id: forecast.id,
+    schedule: forecast.schedule,
+  };
+};
+
+type FullPrismaJourney = PrismaJourney & {
+  driver: FullPrismaDriver;
+  bus: FullPrismaBus;
+  route: FullPrismaRoute;
+};
+export const formattedJourney = (busStop: FullPrismaJourney): Journey => {
+  return {
+    id: busStop.id,
+    paused: busStop.paused,
+    active: busStop.active,
+    startDate: busStop.startDate,
+    nextBusStopIndex: busStop.nextBusStopIndex,
+    driver: formattedDriver(busStop.driver),
+    bus: formattedBus(busStop.bus),
+    route: formattedRoute(busStop.route),
   };
 };
