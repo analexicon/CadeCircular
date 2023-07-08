@@ -37,15 +37,41 @@ This is a monorepo with both frontend with React-Native and backend API service 
     npx prisma migrate reset
     ```
 
+5.  **Install all libs and dependencie**
+
+    ```shell
+    cd client
+    npm install
+    cd ../server
+    npm install
+    npx prisma migrate reset
+    ```
+
 ## 🚀 Quick start
 
 # Server run
+
+## Development environment
 
 1. **Run server**
 
    ```shell
    cd server
    npm run dev
+   ```
+
+## Production environment
+
+1. **Create Docker image**
+
+   ```shell
+   cd server
+   docker build -t cade-circular .
+   ```
+
+2. **Run container**
+   ```shell
+   docker run -p 3333:3333 cade-circular
    ```
 
 # Android Client run
@@ -56,17 +82,22 @@ This is a monorepo with both frontend with React-Native and backend API service 
    cd client
    ```
 
-2. **ADB**
+2. **ADB Connect**
 
    ```shell
    adb connect [your_phone_IP]
-   adb reverse tcp:3333 tcp:3333
    ```
 
 3. **Expo Metro**
 
    ```shell
    npx expo start --localhost
+   ```
+
+4. **ADB Reverse Port**
+
+   ```shell
+   adb reverse tcp:3333 tcp:3333
    ```
 
 ## 🔍 About the project

@@ -1,7 +1,7 @@
 import STYLES from "../styles/styles";
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import StyledButton from "./Buttons/StyledButton";
+import StyledButton from "./buttons/StyledButton";
 
 interface FormProps {
   formBody: JSX.Element;

@@ -2,7 +2,7 @@ import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import { View, StyleSheet, Text } from "react-native";
 import Checkbox from "expo-checkbox";
-import CommonButton from "./Buttons/CommonButton";
+import CommonButton from "./buttons/CommonButton";
 
 interface CheckboxInputProps {
   isChecked: boolean;
@@ -18,7 +18,12 @@ const CheckboxInput = (props: CheckboxInputProps): JSX.Element => {
       style={[STYLES.row, LOCAL_STYLES.container]}
     >
       <View style={[STYLES.spaceBetweenColumns8, LOCAL_STYLES.innerContainer]}>
-        <Checkbox value={props.isChecked} color={COLORS.greenPrimary} />
+        <Checkbox
+          value={props.isChecked}
+          color={COLORS.greenPrimary}
+          style={LOCAL_STYLES.checkbox}
+          pointerEvents={"none"}
+        />
         <Text style={[STYLES.mediumTitleText]}>{props.label}</Text>
       </View>
     </CommonButton>
@@ -44,5 +49,9 @@ const LOCAL_STYLES = StyleSheet.create({
     alignItems: "center",
     backgroundOpacity: 0,
     backgroundColor: COLORS.transparent,
+  },
+  checkbox: {
+    zIndex: -1,
+    elevation: -1,
   },
 });

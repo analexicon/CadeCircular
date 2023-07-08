@@ -11,6 +11,16 @@ const text: TextStyle = {
   color: COLORS.black,
   textAlignVertical: "center",
 };
+const smallText: TextStyle = {
+  ...text,
+  fontFamily: "InterRegular",
+  fontSize: 16,
+};
+const linkText: TextStyle = {
+  ...smallText,
+  textAlign: "center",
+  color: COLORS.greenPrimary,
+};
 const simpleText: TextStyle = {
   ...text,
   fontFamily: "InterRegular",
@@ -25,12 +35,6 @@ const semiBoldText: TextStyle = {
   ...text,
   fontFamily: "InterSemiBold",
   fontSize: 20,
-};
-const linkText: TextStyle = {
-  ...text,
-  fontSize: 16,
-  textAlign: "center",
-  color: COLORS.greenPrimary,
 };
 const titleText: TextStyle = {
   ...text,
@@ -59,13 +63,12 @@ const mediumTitleTextLeft: TextStyle = {
   fontSize: 24,
 };
 
-const viewTimeItem : TextStyle = {
+const viewTimeItem: TextStyle = {
   ...mediumText,
-}
+};
 
 const base: ViewStyle = {
   // ...debug,
-  backgroundColor: COLORS.white,
   display: "flex",
 };
 const row: ViewStyle = {
@@ -97,12 +100,12 @@ const spaceBetweenColumns8: ViewStyle = {
   columnGap: 8,
 };
 
-const spaceBetweenColumn12: ViewStyle = {
+const spaceBetweenColumns12: ViewStyle = {
   ...row,
   columnGap: 12,
 };
 
-const spaceBetweenColumn24: ViewStyle = {
+const spaceBetweenColumns24: ViewStyle = {
   ...row,
   columnGap: 24,
 };
@@ -112,22 +115,22 @@ const justifyContentSpaceBetween: ViewStyle = {
   justifyContent: "space-between",
 };
 
-
 const container: ViewStyle = {
   ...column,
   flex: 1,
   paddingHorizontal: 8,
   alignContent: "center",
+  backgroundColor: COLORS.white,
 };
 
-
 const STYLES = StyleSheet.create({
+  smallText: { ...smallText },
   simpleText: { ...simpleText },
   mediumText: { ...mediumText },
   semiBoldText: { ...semiBoldText },
   linkText: { ...linkText },
   mediumTitleText: { ...mediumTitleText },
-  mediumTitleTextLeft : {...mediumTitleTextLeft}, 
+  mediumTitleTextLeft: { ...mediumTitleTextLeft },
   largeTitleText: { ...largeTitleText },
   container: { ...container },
   row: { ...row },
@@ -137,10 +140,10 @@ const STYLES = StyleSheet.create({
   spaceBetweenRows12: { ...spaceBetweenRows12 },
   spaceBetweenRows24: { ...spaceBetweenRows24 },
   spaceBetweenColumns8: { ...spaceBetweenColumns8 },
-  spaceBetweenColumn12 :{...spaceBetweenColumn12},
-  spaceBetweenColumn24 : {...spaceBetweenColumn24},
-  viewTimeItem : {...viewTimeItem},
-  justifyContentSpaceBetween : {...justifyContentSpaceBetween}
+  spaceBetweenColumns12: { ...spaceBetweenColumns12 },
+  spaceBetweenColumns24: { ...spaceBetweenColumns24 },
+  viewTimeItem: { ...viewTimeItem },
+  justifyContentSpaceBetween: { ...justifyContentSpaceBetween },
 });
 
 export default STYLES;

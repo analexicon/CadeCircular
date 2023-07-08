@@ -3,7 +3,7 @@ import STYLES from "../styles/styles";
 import React from "react";
 import { StyleSheet, View, Text, TextStyle, ViewStyle } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import LinkButton from "./Buttons/LinkButton";
+import LinkButton from "./buttons/LinkButton";
 
 interface CommonHeaderProps {
   navigation: NativeStackNavigationProp<any, any>;

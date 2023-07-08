@@ -5,7 +5,7 @@ import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Checkbox from "expo-checkbox";
-import CommonButton from "./Buttons/CommonButton";
+import CommonButton from "./buttons/CommonButton";
 
 interface RouteItemProps {
   navigation: NativeStackNavigationProp<any, any>;
@@ -26,7 +26,14 @@ const RouteItem = (props: RouteItemProps): JSX.Element => {
       <Text style={[STYLES.mediumText, LOCAL_STYLES.routeName]}>
         {props.route}
       </Text>
-      <CommonButton handlePress={() => props.navigation.push(screens.ViewTimes, {route: props.route, idRoute: props.idRoute})}>
+      <CommonButton
+        handlePress={() =>
+          props.navigation.push(screens.ViewTimes, {
+            route: props.route,
+            idRoute: props.idRoute,
+          })
+        }
+      >
         <Text style={STYLES.linkText}>Detalhes</Text>
       </CommonButton>
     </View>

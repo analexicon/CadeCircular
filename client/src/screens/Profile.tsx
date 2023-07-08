@@ -1,26 +1,34 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import screens from "../types/stackRoutes";
-import { CRUDRecordEndpoints } from "../types/types";
-import {
-  listNavigationParams as busListNavigationParams,
-  handleCreate as busHandleCreate,
-  handleUpdate as busHandleUpdate,
-  handleDelete as busHandleDelete,
-  listNavigationParams,
-} from "../crudDefinitions/bus";
+import { listNavigationParams as busListNavigationParams } from "../crudDefinitions/bus";
 import { StyleSheet, Text, View, Image } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../components/Header";
-import StyledButton from "../components/Buttons/StyledButton";
+import StyledButton from "../components/buttons/StyledButton";
 
 interface ProfileProps {
   navigation: NativeStackNavigationProp<any, any>;
 }
 
 const Profile = (props: ProfileProps): JSX.Element => {
+  const isAdmin = false;
+  const actions = isAdmin ? (
+    <StyledButton
+      text="Listar ônibus"
+      handlePress={() =>
+        props.navigation.push(screens.List, busListNavigationParams)
+      }
+    />
+  ) : (
+    <StyledButton
+      text="Iniciar Rota"
+      handlePress={() => props.navigation.push(screens.PickBus)}
+    />
+  );
+
   return (
     <SafeAreaView style={STYLES.safeArea}>
       <StatusBar backgroundColor={COLORS.greenPrimary} />
@@ -43,17 +51,8 @@ const Profile = (props: ProfileProps): JSX.Element => {
           202098774
         </Text>
       </View>
-      <View style={STYLES.container}>
-        <View style={STYLES.spaceBetweenRows12}>
-          <Text style={STYLES.simpleText}>Olá, mundo!</Text>
-
-          <StyledButton
-            text="Listar ônibus"
-            handlePress={() =>
-              props.navigation.push(screens.List, listNavigationParams)
-            }
-          />
-        </View>
+      <View style={[STYLES.container, STYLES.spaceBetweenRows12]}>
+        {actions}
       </View>
     </SafeAreaView>
   );
@@ -65,6 +64,7 @@ const LOCAL_STYLES = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     marginTop: 60,
+    marginBottom: 24,
   },
   header: {
     backgroundColor: COLORS.greenPrimary,

@@ -7,7 +7,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../components/Header";
-import StyledButton from "../components/Buttons/StyledButton";
+import StyledButton from "../components/buttons/StyledButton";
 import CommonInput, { PasswordInput } from "../components/Input";
 
 interface LoginProps {

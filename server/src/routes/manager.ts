@@ -1,19 +1,19 @@
 import { prisma, router } from "../prismaClient";
-import { Driver } from "../types";
+import { Manager } from "../types";
 import {
   determineErrorResponsePrismaQuery,
-  formattedDriver,
+  formattedManager,
 } from "../functions";
 
-// Query all drivers
-router.get("/driver", async (request, response) => {
+// Query all managers
+router.get("/manager", async (request, response) => {
   try {
-    const foundDriver = await prisma.driver.findMany({
+    const foundManager = await prisma.manager.findMany({
       include: { employee: true },
     });
 
-    const formmattedResponse: Driver[] = foundDriver.map((driver) => {
-      return formattedDriver(driver);
+    const formmattedResponse: Manager[] = foundManager.map((manager) => {
+      return formattedManager(manager);
     });
 
     return response.status(200).json(formmattedResponse);
@@ -23,20 +23,20 @@ router.get("/driver", async (request, response) => {
   }
 });
 
-// Query a single driver stop by its id
-router.get("/driver/:employeeId", async (request, response) => {
+// Query a single manager stop by its id
+router.get("/manager/:employeeId", async (request, response) => {
   try {
-    const foundDriver = await prisma.driver.findUnique({
+    const foundManager = await prisma.driver.findUnique({
       include: { employee: true },
       where: {
         employeeId: request.params.employeeId,
       },
     });
 
-    if (foundDriver) {
-      return response.status(200).json(formattedDriver(foundDriver));
+    if (foundManager) {
+      return response.status(200).json(formattedManager(foundManager));
     } else {
-      return response.status(404).json({ message: "Driver not found!" });
+      return response.status(404).json({ message: "manager not found!" });
     }
   } catch (error) {
     const errorResponse = determineErrorResponsePrismaQuery(error);
@@ -44,11 +44,11 @@ router.get("/driver/:employeeId", async (request, response) => {
   }
 });
 
-// Create driver
-router.post("/driver", async (request, response) => {
+// Create manager
+router.post("/manager", async (request, response) => {
   try {
-    const body: Driver = request.body;
-    const newDriver = await prisma.driver.create({
+    const body: Manager = request.body;
+    const newManager = await prisma.manager.create({
       include: { employee: true },
       data: {
         employee: {
@@ -57,23 +57,23 @@ router.post("/driver", async (request, response) => {
             username: body.username,
             password: body.password,
             identification: body.identification,
-            type: 1,
+            type: 2,
           },
         },
       },
     });
-    return response.status(201).json(formattedDriver(newDriver));
+    return response.status(201).json(formattedManager(newManager));
   } catch (error) {
     const errorResponse = determineErrorResponsePrismaQuery(error);
     return response.status(errorResponse.code).json(errorResponse.body);
   }
 });
 
-// Update driver
-router.patch("/driver/:employeeId", async (request, response) => {
+// Update manager
+router.patch("/manager/:employeeId", async (request, response) => {
   try {
-    const body: Driver = request.body;
-    const updatedDriver = await prisma.driver.update({
+    const body: Manager = request.body;
+    const updatedManager = await prisma.manager.update({
       where: {
         employeeId: request.params.employeeId,
       },
@@ -89,24 +89,24 @@ router.patch("/driver/:employeeId", async (request, response) => {
         },
       },
     });
-    return response.status(200).json(formattedDriver(updatedDriver));
+    return response.status(200).json(formattedManager(updatedManager));
   } catch (error) {
     const errorResponse = determineErrorResponsePrismaQuery(error);
     return response.status(errorResponse.code).json(errorResponse.body);
   }
 });
 
-// Delete driver
-router.delete("/driver/:employeeId", async (request, response) => {
+// Delete manager
+router.delete("/manager/:employeeId", async (request, response) => {
   try {
-    await prisma.driver.delete({
+    await prisma.manager.delete({
       where: {
         employeeId: request.params.employeeId,
       },
       include: { employee: true },
     });
 
-    return response.status(200).json({ message: "Driver deleted!" });
+    return response.status(200).json({ message: "Manager deleted!" });
   } catch (error) {
     const errorResponse = determineErrorResponsePrismaQuery(error);
     return response.status(errorResponse.code).json(errorResponse.body);

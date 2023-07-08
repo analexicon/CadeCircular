@@ -8,8 +8,8 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 import CommonHeader from "../../components/Header";
-import ListItem from "../../components/ListItem";
-import StyledButton from "../../components/Buttons/StyledButton";
+import CrudListItem from "../../components/listItems/CrudListItem";
+import StyledButton from "../../components/buttons/StyledButton";
 import screens from "../../types/stackRoutes";
 
 interface ListProps {
@@ -53,7 +53,7 @@ const List = (props: ListProps): JSX.Element => {
           <FlatList
             data={records}
             renderItem={({ item }) =>
-              ListItem({
+              CrudListItem({
                 navigation: props.navigation,
                 recordSingularName: recordSingularName,
                 followingPageTitle: `Editar ${recordSingularName}`,

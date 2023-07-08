@@ -4,24 +4,30 @@ import {
   Inter_500Medium,
   Inter_600SemiBold,
 } from "@expo-google-fonts/inter";
-import { View } from "react-native";
+import { LogBox, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Toast from "react-native-toast-message";
 import * as ScreenOrientation from "expo-screen-orientation";
 import screens from "./src/types/stackRoutes";
 import Arrival from "./src/screens/Arrival";
 import SelectDriver from "./src/screens/SelectDriver";
 import Login from "./src/screens/Login";
 import Profile from "./src/screens/Profile";
-import List from "./src/screens/CRUD/List";
-import Create from "./src/screens/CRUD/Create";
-import Update from "./src/screens/CRUD/Update";
+import List from "./src/screens/crud/List";
+import Create from "./src/screens/crud/Create";
+import Update from "./src/screens/crud/Update";
 import ViewTimes from "./src/screens/ViewTimes";
+import PickBus from "./src/screens/startJourney/PickBus";
+import PickRoute from "./src/screens/startJourney/PickRoute";
 
 const Stack = createNativeStackNavigator();
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+LogBox.ignoreLogs([
+  "Non-serializable values were found in the navigation state",
+]);
 
 const App = (): JSX.Element => {
   let [fontsLoaded] = useFonts({
@@ -55,9 +61,12 @@ const App = (): JSX.Element => {
             <Stack.Screen name={screens.Create} component={Create} />
             <Stack.Screen name={screens.Update} component={Update} />
             <Stack.Screen name={screens.ViewTimes} component={ViewTimes} />
+            <Stack.Screen name={screens.PickBus} component={PickBus} />
+            <Stack.Screen name={screens.PickRoute} component={PickRoute} />
           </Stack.Navigator>
         </NavigationContainer>
       </GestureHandlerRootView>
+      <Toast />
     </SafeAreaProvider>
   );
 };

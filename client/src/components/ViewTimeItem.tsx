@@ -8,7 +8,9 @@ interface ViewTimeItemProps {
 const ViewTimeItem = (props: ViewTimeItemProps): JSX.Element => {
   return (
     <View style={LOCAL_STYLES.container}>
-      <View style={[STYLES.spaceBetweenColumn24,LOCAL_STYLES.internContainer]}>
+      <View
+        style={[STYLES.spaceBetweenColumns24, LOCAL_STYLES.internContainer]}
+      >
         <View style={LOCAL_STYLES.circle} />
         <Text style={STYLES.viewTimeItem}>{props.hour}</Text>
       </View>
@@ -24,13 +26,13 @@ const LOCAL_STYLES = StyleSheet.create({
     marginHorizontal: 4,
   },
   internContainer: {
-    alignItems: "center", 
+    alignItems: "center",
   },
-  circle:  {
+  circle: {
     width: 20,
     height: 20,
     borderRadius: 50,
-    backgroundColor: 'lightgreen',
+    backgroundColor: "lightgreen",
   },
 });
 
