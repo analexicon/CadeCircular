@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../components/Header";
-import { DriverButton } from "../components/Buttons/DriverButton";
+import { DriverButton } from "../components/buttons/DriverButton";
 import { FlatList } from "react-native-gesture-handler";
 
 interface SelectDriverProps {

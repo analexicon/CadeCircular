@@ -2,7 +2,7 @@ import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import { View, StyleSheet, Text } from "react-native";
 import Checkbox from "expo-checkbox";
-import CommonButton from "./Buttons/CommonButton";
+import CommonButton from "./buttons/CommonButton";
 
 interface CheckboxInputProps {
   isChecked: boolean;

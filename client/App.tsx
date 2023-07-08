@@ -16,10 +16,11 @@ import Arrival from "./src/screens/Arrival";
 import SelectDriver from "./src/screens/SelectDriver";
 import Login from "./src/screens/Login";
 import Profile from "./src/screens/Profile";
-import List from "./src/screens/CRUD/List";
-import Create from "./src/screens/CRUD/Create";
-import Update from "./src/screens/CRUD/Update";
+import List from "./src/screens/crud/List";
+import Create from "./src/screens/crud/Create";
+import Update from "./src/screens/crud/Update";
 import ViewTimes from "./src/screens/ViewTimes";
+import PickBus from "./src/screens/startJourney/PickBus";
 
 const Stack = createNativeStackNavigator();
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
@@ -42,7 +43,7 @@ const App = (): JSX.Element => {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName={screens.Arrival}
+            initialRouteName={screens.PickBus}
             screenOptions={{
               headerShown: false,
               animation: "slide_from_right",
@@ -59,6 +60,7 @@ const App = (): JSX.Element => {
             <Stack.Screen name={screens.Create} component={Create} />
             <Stack.Screen name={screens.Update} component={Update} />
             <Stack.Screen name={screens.ViewTimes} component={ViewTimes} />
+            <Stack.Screen name={screens.PickBus} component={PickBus} />
           </Stack.Navigator>
         </NavigationContainer>
       </GestureHandlerRootView>
