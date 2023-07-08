@@ -11,7 +11,7 @@ interface IconListItemProps {
   iconDefinition: IconDefinition;
   title: string;
   content: JSX.Element;
-  handlePress: Function;
+  handlePress?: Function;
 }
 const IconListItem = (props: IconListItemProps): JSX.Element => {
   let backgroundColor = COLORS.greenPrimary;
@@ -33,7 +33,7 @@ const IconListItem = (props: IconListItemProps): JSX.Element => {
     <ListItem
       navigation={props.navigation}
       handlePress={() => {
-        props.handlePress();
+        if (props.handlePress) props.handlePress();
       }}
     >
       <View style={STYLES.spaceBetweenColumns12}>
@@ -48,9 +48,9 @@ const IconListItem = (props: IconListItemProps): JSX.Element => {
             style={[STYLES.largeTitleText, { color: iconColor }]}
           />
         </View>
-        <View style={STYLES.column}>
-          <Text style={STYLES.mediumTitleText}>{props.title}</Text>
-          <View>{props.content}</View>
+        <View style={[STYLES.column]}>
+          <Text style={STYLES.mediumTitleTextLeft}>{props.title}</Text>
+          <View style={STYLES.spaceBetweenColumns8}>{props.content}</View>
         </View>
       </View>
     </ListItem>

@@ -1,6 +1,6 @@
 import COLORS from "../../styles/colors";
 import STYLES from "../../styles/styles";
-import { Bus } from "../../types/types";
+import { Bus, Driver } from "../../types/types";
 import screens from "../../types/stackRoutes";
 import { fetchRecordData } from "../../controller";
 import { useEffect, useState } from "react";
@@ -15,9 +15,15 @@ import { SearchInput } from "../../components/Input";
 import BottomProgression from "../../components/BottomProgression";
 
 interface PickBusProps {
+  route: any;
   navigation: NativeStackNavigationProp<any, any>;
 }
+interface PickBusParams {
+  driver: Driver;
+}
 const PickBus = (props: PickBusProps): JSX.Element => {
+  const { driver }: PickBusParams = props.route.params;
+
   const [records, setRecords] = useState<Bus[]>([]);
   useEffect(() => {
     fetchRecordData(`/bus`, props.navigation, setRecords);
@@ -44,7 +50,10 @@ const PickBus = (props: PickBusProps): JSX.Element => {
             IconListItem({
               navigation: props.navigation,
               handlePress: () => {
-                props.navigation.push(screens.PickRoute, { bus: item });
+                props.navigation.push(screens.PickRoute, {
+                  driver: driver,
+                  bus: item,
+                });
               },
               color: "green",
               title: `Placa ${item.licensePlate}`,

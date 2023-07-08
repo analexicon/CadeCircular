@@ -19,7 +19,6 @@ async function main() {
       id: "00000000-b100-0000-0000-000000000000",
       name: "ponto da letras",
       description: "ponto em frente ao predio do curso de letras",
-      busStopRoute: { create: [] },
     },
   });
 
@@ -43,7 +42,6 @@ async function main() {
       id: "00000000-r000-0000-0000-000000000000",
       name: "Restaurante universitario",
       description: "Rota que passa pelo restaurante universitario",
-      busStopRoute: { create: [] },
     },
   });
 

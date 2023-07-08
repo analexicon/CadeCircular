@@ -1,9 +1,9 @@
 import COLORS from "../../styles/colors";
 import STYLES from "../../styles/styles";
-import { Bus, Route } from "../../types/types";
+import { Bus, Driver, Route } from "../../types/types";
 import { fetchRecordData } from "../../controller";
 import { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
@@ -18,10 +18,11 @@ interface PickRouteProps {
   navigation: NativeStackNavigationProp<any, any>;
 }
 interface PickRouteParams {
+  driver: Driver;
   bus: Bus;
 }
 const PickRoute = (props: PickRouteProps): JSX.Element => {
-  const { bus }: PickRouteParams = props.route.params;
+  const { bus, driver }: PickRouteParams = props.route.params;
 
   const [records, setRecords] = useState<Route[]>([]);
   useEffect(() => {
@@ -46,7 +47,13 @@ const PickRoute = (props: PickRouteProps): JSX.Element => {
           renderItem={({ item }) =>
             IconListItem({
               navigation: props.navigation,
-              handlePress: () => {},
+              handlePress: () => {
+                props.navigation.navigate("StartJourney", {
+                  bus,
+                  driver,
+                  route: item,
+                });
+              },
               color: "green",
               title: item.name,
               iconDefinition: {
@@ -55,9 +62,9 @@ const PickRoute = (props: PickRouteProps): JSX.Element => {
                 name: "route",
               },
               content: (
-                <View style={STYLES.column}>
-                  <Text style={STYLES.smallText}>{item.description}</Text>
-                </View>
+                <Text style={[STYLES.smallText, STYLES.paragraph]}>
+                  {item.description}
+                </Text>
               ),
             })
           }

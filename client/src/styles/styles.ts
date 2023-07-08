@@ -83,6 +83,7 @@ const safeArea: ViewStyle = {
   ...column,
   flex: 1,
 };
+
 const spaceBetweenRows8: ViewStyle = {
   ...column,
   rowGap: 8,
@@ -95,16 +96,15 @@ const spaceBetweenRows24: ViewStyle = {
   ...column,
   rowGap: 24,
 };
+
 const spaceBetweenColumns8: ViewStyle = {
   ...row,
   columnGap: 8,
 };
-
 const spaceBetweenColumns12: ViewStyle = {
   ...row,
   columnGap: 12,
 };
-
 const spaceBetweenColumns24: ViewStyle = {
   ...row,
   columnGap: 24,
@@ -123,7 +123,13 @@ const container: ViewStyle = {
   backgroundColor: COLORS.white,
 };
 
+const paragraph: ViewStyle = {
+  flex: 1,
+  flexWrap: "wrap",
+};
+
 const STYLES = StyleSheet.create({
+  debug: { ...debug },
   smallText: { ...smallText },
   simpleText: { ...simpleText },
   mediumText: { ...mediumText },
@@ -144,6 +150,7 @@ const STYLES = StyleSheet.create({
   spaceBetweenColumns24: { ...spaceBetweenColumns24 },
   viewTimeItem: { ...viewTimeItem },
   justifyContentSpaceBetween: { ...justifyContentSpaceBetween },
+  paragraph: { ...paragraph },
 });
 
 export default STYLES;

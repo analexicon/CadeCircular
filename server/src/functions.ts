@@ -21,6 +21,7 @@ import {
   Route,
   Forecast,
   BusStop_Route,
+  EmployeeTypes,
 } from "./types";
 
 // If an error occurs, try to determine the error type and return the apropriate response
@@ -111,20 +112,21 @@ export const formattedBusStop_Route = (
 };
 
 type FullPrismaEmployee = PrismaEmployee & {};
-export const formattedEmployee = (employee: FullPrismaEmployee): Employee => {
-  return {
-    id: employee.id,
-    name: employee.name,
-    identification: employee.identification,
-    username: employee.username,
-    password: employee.password,
-  };
-};
+// export const formattedEmployee = (employee: FullPrismaEmployee): Employee => {
+//   return {
+//     id: employee.id,
+//     name: employee.name,
+//     identification: employee.identification,
+//     username: employee.username,
+//     password: employee.password,
+//   };
+// };
 
 type FullPrismaDriver = PrismaDriver & { employee: FullPrismaEmployee };
 export const formattedDriver = (driver: FullPrismaDriver): Driver => {
   return {
     _endpoint: CRUDRecordEndpoints.Driver,
+    type: EmployeeTypes.Driver,
     id: driver.employeeId,
     name: driver.employee.name,
     identification: driver.employee.identification,
@@ -136,6 +138,7 @@ export const formattedDriver = (driver: FullPrismaDriver): Driver => {
 type FullPrismaManager = PrismaManager & { employee: FullPrismaEmployee };
 export const formattedManager = (manager: FullPrismaManager): Manager => {
   return {
+    type: EmployeeTypes.Manager,
     id: manager.employeeId,
     name: manager.employee.name,
     identification: manager.employee.identification,
