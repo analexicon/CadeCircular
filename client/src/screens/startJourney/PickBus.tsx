@@ -36,7 +36,7 @@ const PickBus = (props: PickBusProps): JSX.Element => {
         <IconListItem
           navigation={props.navigation}
           handlePress={() => {}}
-          icon={<Ionicons name="bus-outline" size={24} color="black" />}
+          iconDefinition={{ type: "icon", set: "Ionicons", name: "bus-sharp" }}
         ></IconListItem>
       </View>
     </SafeAreaView>
