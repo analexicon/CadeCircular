@@ -8,7 +8,13 @@ import {
 // Query all routes
 router.get("/route", async (request, response) => {
   try {
-    const foundRoutes = await prisma.route.findMany();
+    const foundRoutes = await prisma.route.findMany({
+      include: {
+        busStop_RouteList: {
+          include: { busStop: true, forecasts: true },
+        },
+      },
+    });
 
     const formmattedResponse: Route[] = foundRoutes.map((route) => {
       return formattedRoute(route);
@@ -25,6 +31,11 @@ router.get("/route", async (request, response) => {
 router.get("/route/:id", async (request, response) => {
   try {
     const foundRoute = await prisma.route.findUnique({
+      include: {
+        busStop_RouteList: {
+          include: { busStop: true, forecasts: true },
+        },
+      },
       where: {
         id: request.params.id,
       },
@@ -42,10 +53,16 @@ router.get("/route/:id", async (request, response) => {
 });
 
 // Create route
+//TODO criar relacao entre os pontos
 router.post("/route", async (request, response) => {
   try {
     const body: Route = request.body;
     const newRoute = await prisma.route.create({
+      include: {
+        busStop_RouteList: {
+          include: { busStop: true, forecasts: true },
+        },
+      },
       data: {
         name: body.name,
         description: body.description,
@@ -63,6 +80,11 @@ router.patch("/route/:id", async (request, response) => {
   try {
     const body: Route = request.body;
     const updatedRoute = await prisma.route.update({
+      include: {
+        busStop_RouteList: {
+          include: { busStop: true, forecasts: true },
+        },
+      },
       where: {
         id: request.params.id,
       },

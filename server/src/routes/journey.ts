@@ -12,7 +12,9 @@ router.get("/journey", async (request, response) => {
       include: {
         driver: { include: { employee: true } },
         bus: true,
-        route: true,
+        route: {
+          include: { busStop_RouteList: { include: { forecasts: true } } },
+        },
       },
     });
 
@@ -34,7 +36,11 @@ router.get("/journey/:id", async (request, response) => {
       include: {
         driver: { include: { employee: true } },
         bus: true,
-        route: true,
+        route: {
+          include: {
+            busStop_RouteList: { include: { busStop: true, forecasts: true } },
+          },
+        },
       },
       where: {
         id: request.params.id,
@@ -78,7 +84,11 @@ router.post("/journey", async (request, response) => {
       include: {
         driver: { include: { employee: true } },
         bus: true,
-        route: true,
+        route: {
+          include: {
+            busStop_RouteList: { include: { busStop: true, forecasts: true } },
+          },
+        },
       },
       data: {
         paused: body.paused,
@@ -105,7 +115,11 @@ router.patch("/journey/:id", async (request, response) => {
       include: {
         driver: { include: { employee: true } },
         bus: true,
-        route: true,
+        route: {
+          include: {
+            busStop_RouteList: { include: { busStop: true, forecasts: true } },
+          },
+        },
       },
       where: {
         id: request.params.id,
