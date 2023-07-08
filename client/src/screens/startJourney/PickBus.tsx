@@ -10,6 +10,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../../components/Header";
 import IconListItem from "../../components/listItems/IconListItem";
+import { SearchInput } from "../../components/Input";
 
 interface PickBusProps {
   navigation: NativeStackNavigationProp<any, any>;
@@ -20,11 +21,21 @@ const PickBus = (props: PickBusProps): JSX.Element => {
     fetchRecordData(`/bus`, props.navigation, setRecords);
   }, []);
 
+  const [search, setSearch] = useState<string>("");
+  const shownBuses = records.filter(
+    (bus) => bus.available && bus.licensePlate.includes(search)
+  );
+
   return (
     <SafeAreaView style={STYLES.safeArea}>
       <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader navigation={props.navigation} centerText="Veículos" />
-      <View style={STYLES.container}>
+      <View style={[STYLES.spaceBetweenRows12, STYLES.container]}>
+        <SearchInput
+          search={search}
+          setSearch={setSearch}
+          placeholder="Buscar veículo"
+        />
         <FlatList
           data={shownBuses}
           renderItem={({ item }) =>

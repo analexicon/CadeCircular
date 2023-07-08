@@ -43,7 +43,7 @@ const App = (): JSX.Element => {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName={screens.Arrival}
+            initialRouteName={screens.PickBus}
             screenOptions={{
               headerShown: false,
               animation: "slide_from_right",

@@ -20,7 +20,7 @@ const CommonInput = (props: CommonInputProps): JSX.Element => {
     <TextInput
       value={props.value}
       onChangeText={(value) => props.setValue(value)}
-      style={[STYLES.simpleText, LOCAL_STYLE.textInput]}
+      style={[STYLES.simpleText, LOCAL_STYLES.textInput, props.style]}
       placeholder={props.placeholder}
       autoComplete={props.autocomplete}
     />
@@ -33,7 +33,7 @@ export const PasswordInput = (props: CommonInputProps): JSX.Element => {
     <TextInput
       value={props.value}
       onChangeText={(value) => props.setValue(value)}
-      style={[STYLES.simpleText, LOCAL_STYLE.textInput]}
+      style={[STYLES.simpleText, LOCAL_STYLES.textInput, props.style]}
       placeholder={props.placeholder ?? "Senha"}
       autoComplete={props.autocomplete ?? "password"}
       secureTextEntry={true}
@@ -46,7 +46,7 @@ export const NumericalInput = (props: CommonInputProps): JSX.Element => {
     <TextInput
       value={props.value}
       onChangeText={(value) => props.setValue(value.replace(/[^0-9]/g, ""))}
-      style={[STYLES.simpleText, LOCAL_STYLE.textInput]}
+      style={[STYLES.simpleText, LOCAL_STYLES.textInput, props.style]}
       placeholder={props.placeholder}
       autoComplete={props.autocomplete ?? "cc-number"}
       keyboardType="numeric"
@@ -61,13 +61,29 @@ export const MaskedInput = (
     <MaskInput
       value={props.value}
       onChangeText={(formatted) => props.setValue(formatted)}
-      style={[STYLES.simpleText, LOCAL_STYLE.textInput]}
+      style={[STYLES.simpleText, LOCAL_STYLES.textInput, props.style]}
       mask={props.mask}
     />
   );
 };
 
-const LOCAL_STYLE = StyleSheet.create({
+interface SearchInputProps {
+  search: string;
+  setSearch: (search: string) => void;
+  placeholder?: string;
+}
+export const SearchInput = (props: SearchInputProps): JSX.Element => {
+  return (
+    <CommonInput
+      value={props.search}
+      setValue={props.setSearch}
+      placeholder={props.placeholder ? props.placeholder : "Buscar"}
+      style={LOCAL_STYLES.searchInput}
+    />
+  );
+};
+
+const LOCAL_STYLES = StyleSheet.create({
   textInput: {
     backgroundColor: COLORS.gray1,
     borderColor: COLORS.gray2,
@@ -75,5 +91,10 @@ const LOCAL_STYLE = StyleSheet.create({
     borderWidth: 1,
     height: 64,
     paddingHorizontal: 8,
+  },
+  searchInput: {
+    borderRadius: 100,
+    paddingHorizontal: 16,
+    marginHorizontal: 8,
   },
 });
