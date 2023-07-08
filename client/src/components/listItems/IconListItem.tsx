@@ -30,7 +30,12 @@ const IconListItem = (props: IconListItemProps): JSX.Element => {
   }
 
   return (
-    <ListItem navigation={props.navigation} handlePress={() => {}}>
+    <ListItem
+      navigation={props.navigation}
+      handlePress={() => {
+        props.handlePress();
+      }}
+    >
       <View style={STYLES.spaceBetweenColumns12}>
         <View
           style={[

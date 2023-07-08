@@ -21,6 +21,7 @@ import Create from "./src/screens/crud/Create";
 import Update from "./src/screens/crud/Update";
 import ViewTimes from "./src/screens/ViewTimes";
 import PickBus from "./src/screens/startJourney/PickBus";
+import PickRoute from "./src/screens/startJourney/PickRoute";
 
 const Stack = createNativeStackNavigator();
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
@@ -43,7 +44,7 @@ const App = (): JSX.Element => {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName={screens.PickBus}
+            initialRouteName={screens.Arrival}
             screenOptions={{
               headerShown: false,
               animation: "slide_from_right",
@@ -61,6 +62,7 @@ const App = (): JSX.Element => {
             <Stack.Screen name={screens.Update} component={Update} />
             <Stack.Screen name={screens.ViewTimes} component={ViewTimes} />
             <Stack.Screen name={screens.PickBus} component={PickBus} />
+            <Stack.Screen name={screens.PickRoute} component={PickRoute} />
           </Stack.Navigator>
         </NavigationContainer>
       </GestureHandlerRootView>

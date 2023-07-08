@@ -1,7 +1,6 @@
 import COLORS from "../../styles/colors";
 import STYLES from "../../styles/styles";
-import { Bus } from "../../types/types";
-import screens from "../../types/stackRoutes";
+import { Bus, Route } from "../../types/types";
 import { fetchRecordData } from "../../controller";
 import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
@@ -13,52 +12,50 @@ import CommonHeader from "../../components/Header";
 import IconListItem from "../../components/listItems/IconListItem";
 import { SearchInput } from "../../components/Input";
 
-interface PickBusProps {
+interface PickRouteProps {
+  route: any;
   navigation: NativeStackNavigationProp<any, any>;
 }
-const PickBus = (props: PickBusProps): JSX.Element => {
-  const [records, setRecords] = useState<Bus[]>([]);
+interface PickRouteParams {
+  bus: Bus;
+}
+const PickRoute = (props: PickRouteProps): JSX.Element => {
+  const { bus }: PickRouteParams = props.route.params;
+
+  const [records, setRecords] = useState<Route[]>([]);
   useEffect(() => {
-    fetchRecordData(`/bus`, props.navigation, setRecords);
+    fetchRecordData(`/route`, props.navigation, setRecords);
   }, []);
 
   const [search, setSearch] = useState<string>("");
-  const shownBuses = records.filter(
-    (bus) => bus.available && bus.licensePlate.includes(search)
-  );
+  const shownRoutes = records.filter((route) => route.name.includes(search));
 
   return (
     <SafeAreaView style={STYLES.safeArea}>
       <StatusBar backgroundColor={COLORS.white} />
-      <CommonHeader navigation={props.navigation} centerText="Veículos" />
+      <CommonHeader navigation={props.navigation} centerText="Rotas" />
       <View style={[STYLES.spaceBetweenRows12, STYLES.container]}>
         <SearchInput
           search={search}
           setSearch={setSearch}
-          placeholder="Buscar veículo"
+          placeholder="Buscar rota"
         />
         <FlatList
-          data={shownBuses}
+          data={shownRoutes}
           renderItem={({ item }) =>
             IconListItem({
               navigation: props.navigation,
-              handlePress: () => {
-                console.log("ois");
-                props.navigation.push(screens.PickRoute, { bus: item });
-              },
+              handlePress: () => {},
               color: "green",
-              title: `Placa ${item.licensePlate}`,
+              title: item.name,
               iconDefinition: {
                 type: "icon",
-                set: "Ionicons",
-                name: "bus-sharp",
+                set: "FontAwesome5",
+                name: "route",
               },
               content: (
                 <View style={STYLES.column}>
-                  <Text style={STYLES.smallText}>{item.model}</Text>
-                  <Text
-                    style={STYLES.smallText}
-                  >{`${item.capacity} pessoas`}</Text>
+                  <Text style={STYLES.smallText}>{item.description}</Text>
                 </View>
               ),
             })
@@ -68,4 +65,4 @@ const PickBus = (props: PickBusProps): JSX.Element => {
     </SafeAreaView>
   );
 };
-export default PickBus;
+export default PickRoute;

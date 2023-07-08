@@ -1,10 +1,12 @@
 import { StyleProp, TextStyle, Text } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
-type IconNames = { set: "Ionicons"; name: IoniconsNames };
-// | { set: "FontAwesome"; name: FontAwesomeNames };
+type IconNames =
+  | { set: "Ionicons"; name: IoniconsNames }
+  | { set: "FontAwesome5"; name: FontAwesome5Names };
 type IoniconsNames = "bus-sharp";
-// type FontAwesomeNames = "bus";
+type FontAwesome5Names = "route";
 
 export type IconDefinition = IconFromSet | TextAsIcon;
 
@@ -27,6 +29,8 @@ const Icon = (props: IconProps): JSX.Element => {
   else {
     if (props.icon.set === "Ionicons")
       return <Ionicons style={props.style} name={props.icon.name} />;
+    else if (props.icon.set === "FontAwesome5")
+      return <FontAwesome5 style={props.style} name={props.icon.name} />;
     else return <Text>?</Text>;
   }
 };
