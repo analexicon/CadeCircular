@@ -1,10 +1,10 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
-import { View, StyleSheet , Text} from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 interface JourneyItemProps {
-    routeName : string,
-    idxNextBusStop : string, 
+  routeName: string;
+  idxNextBusStop: string;
 }
 const JourneyItem = (props: JourneyItemProps): JSX.Element => {
   return (
@@ -18,7 +18,7 @@ export default JourneyItem;
 
 const LOCAL_STYLES = StyleSheet.create({
   journeyContainer: {
-    ...STYLES.spaceBetweenColumn12,
+    ...STYLES.spaceBetweenColumns12,
     alignItems: "center",
     backgroundColor: COLORS.gray1,
     borderRadius: 10,
