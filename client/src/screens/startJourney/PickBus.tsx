@@ -12,6 +12,7 @@ import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../../components/Header";
 import IconListItem from "../../components/listItems/IconListItem";
 import { SearchInput } from "../../components/Input";
+import BottomProgression from "../../components/BottomProgression";
 
 interface PickBusProps {
   navigation: NativeStackNavigationProp<any, any>;
@@ -43,7 +44,6 @@ const PickBus = (props: PickBusProps): JSX.Element => {
             IconListItem({
               navigation: props.navigation,
               handlePress: () => {
-                console.log("ois");
                 props.navigation.push(screens.PickRoute, { bus: item });
               },
               color: "green",
@@ -65,6 +65,7 @@ const PickBus = (props: PickBusProps): JSX.Element => {
           }
         />
       </View>
+      <BottomProgression steps={3} currentStep={1} />
     </SafeAreaView>
   );
 };

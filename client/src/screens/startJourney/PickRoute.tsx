@@ -11,6 +11,7 @@ import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../../components/Header";
 import IconListItem from "../../components/listItems/IconListItem";
 import { SearchInput } from "../../components/Input";
+import BottomProgression from "../../components/BottomProgression";
 
 interface PickRouteProps {
   route: any;
@@ -62,6 +63,7 @@ const PickRoute = (props: PickRouteProps): JSX.Element => {
           }
         />
       </View>
+      <BottomProgression steps={3} currentStep={2} />
     </SafeAreaView>
   );
 };
