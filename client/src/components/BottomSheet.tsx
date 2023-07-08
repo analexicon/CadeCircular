@@ -7,12 +7,13 @@ import {
   BottomSheetFlatList,
 } from "@gorhom/bottom-sheet";
 import { SharedValue } from "react-native-reanimated";
+import { CRUDRecord } from "../types/types";
 
 interface BottomSheetProps {
   title: string;
   snapPoints?: (string | number)[] | SharedValue<(string | number)[]>;
-  data: string[];
-  renderItem: ({ item }: { item: string }) => JSX.Element;
+  data: CRUDRecord[];
+  renderItem: ({ item }: { item: CRUDRecord }) => JSX.Element;
 }
 
 const BottomSheet = (props: BottomSheetProps): JSX.Element => {
