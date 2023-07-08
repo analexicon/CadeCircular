@@ -5,28 +5,28 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CommonHeader from "../components/Header";
 import TimeList, { TimeListData } from "../components/TimeList";
-import RoutesBottomSheet from "../components/RouteBottomSheet";
 import ViewTimesBottomSheet from "../components/ViewTimesBottomSheet";
-import { useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
+import { Route } from "../types/types";
 
 interface ViewTimesProps {
+  route : any;
   navigation: NativeStackNavigationProp<any, any>;
 }
+
+interface ViewTimesParams {
+  route: Route;
+}
+
 const ViewTimes = (props: ViewTimesProps): JSX.Element => {
-  const router = useRoute();
 
   //É necessário receber o id da rota que está sendo exibida para poder fazer a busca dos horarios daquela rota
-  const { route, idRoute }: any = router.params;
+  const { route }: ViewTimesParams = props.route.params;
 
   //Estado para Controlar o nome do titulo exibido, o ponto de onibus selecionado
   const [busStopName, setBusStopName] = useState("");
-
-  //TODO FUNÇÃO DE BUSCAR E RETORNAR OS HORARIOS DA ROTA DE ACORDO COM OS PONTOS
-  // const data = searchTimesByIdRoute(idRoute);
-
+  
   const [data, setData] = useState<Array<TimeListData>>([]);
-  const allPoints = ["Odonto", "ICH", "Direito", "Letras", "ICB"];
 
   //UseEffect que controla o data baseado na opção de ponto selecionada
   useEffect(() => {
@@ -86,14 +86,15 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
     }
   }, [busStopName]);
 
+  console.log(route)
   return (
     <SafeAreaView style={STYLES.container}>
       <StatusBar backgroundColor={COLORS.white} />
-      <CommonHeader navigation={props.navigation} centerText={route} />
+      <CommonHeader navigation={props.navigation} centerText={route.name} />
       <View>
         <TimeList listData={data} busStopName={busStopName} />
       </View>
-      <ViewTimesBottomSheet data={allPoints} setBusStopName={setBusStopName} />
+      <ViewTimesBottomSheet data={route.busStop_RouteList} setBusStopName={setBusStopName} />
     </SafeAreaView>
   );
 };
