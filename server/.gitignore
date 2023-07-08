@@ -4,3 +4,4 @@ node_modules
 
 /dist
 prisma/circular.db
+prisma/circular.db-journal
