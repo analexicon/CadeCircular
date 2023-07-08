@@ -37,6 +37,16 @@ This is a monorepo with both frontend with React-Native and backend API service 
     npx prisma migrate reset
     ```
 
+5.  **Install all libs and dependencie**
+
+    ```shell
+    cd client
+    npm install
+    cd ../server
+    npm install
+    npx prisma migrate reset
+    ```
+
 ## 🚀 Quick start
 
 # Server run
