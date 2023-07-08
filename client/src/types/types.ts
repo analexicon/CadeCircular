@@ -55,7 +55,7 @@ export interface BusStop_Route {
 
   forecasts: Forecast[];
 
-  busStop?: BusStop;
+  busStop: BusStop;
   route?: Route;
 }
 

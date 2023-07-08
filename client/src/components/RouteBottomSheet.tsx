@@ -18,12 +18,12 @@ const RoutesBottomSheet = (props: RoutesBottomSheetProps): JSX.Element => {
 
   const renderItem = ({ item }: { item: CRUDRecord }) => {
     if(item._endpoint === CRUDRecordEndpoints.Route){
-      return <RouteItem route={item.name} navigation={props.navigation} idRoute={item.id}/>;
+      return <RouteItem route={item} navigation={props.navigation}/>;
     }else{
       return <></>
     }
   };
-
+  
   return (
     <BottomSheet
       title="Rotas"
