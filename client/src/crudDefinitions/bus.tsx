@@ -1,10 +1,5 @@
 import STYLES from "../styles/styles";
-import {
-  Bus,
-  CRUDRecord,
-  CRUDRecordEndpoints,
-  CRUDRecordTypes,
-} from "../types/types";
+import { Bus, CRUDRecord, RecordTypes } from "../types/types";
 import screens from "../types/stackRoutes";
 import { convertStringToNumber } from "../util";
 import { deleteRecordOnServer, handleFormSubmit } from "../controller";
@@ -15,13 +10,13 @@ import CheckboxInput from "../components/CheckboxInput";
 import { ListNavigationParams } from "./common";
 
 const recordItemText = (item: CRUDRecord): string => {
-  return item._endpoint === CRUDRecordEndpoints.Bus
+  return item._type === RecordTypes.Bus
     ? item.licensePlate + " " + item.model
     : item.id;
 };
 
 export interface InputValues {
-  _type: CRUDRecordTypes.Bus;
+  _type: RecordTypes.Bus;
   licensePlate: string;
   model: string;
   capacity: string;
@@ -29,7 +24,7 @@ export interface InputValues {
 }
 
 export const emptyInputValues: InputValues = {
-  _type: CRUDRecordTypes.Bus,
+  _type: RecordTypes.Bus,
   licensePlate: "",
   model: "",
   capacity: "",
@@ -38,7 +33,7 @@ export const emptyInputValues: InputValues = {
 
 function getSendableData(inputValues: InputValues): Bus {
   return {
-    _endpoint: CRUDRecordEndpoints.Bus,
+    _type: RecordTypes.Bus,
     id: "",
     licensePlate: inputValues.licensePlate.toUpperCase().trim(),
     model: inputValues.model.trim(),
@@ -131,7 +126,7 @@ export async function handleCreate(
   await handleFormSubmit({
     isEditing: false,
     validFields: validFields(inputValues),
-    relativeUrl: `/${CRUDRecordEndpoints.Bus}`,
+    relativeUrl: `/${RecordTypes.Bus}`,
     sendableData: record,
     navigation: navigation,
     redirectToList: redirectToList,
@@ -147,7 +142,7 @@ export async function handleUpdate(
   await handleFormSubmit({
     isEditing: true,
     validFields: validFields(inputValues),
-    relativeUrl: `/${CRUDRecordEndpoints.Bus}/${recordId}`,
+    relativeUrl: `/${RecordTypes.Bus}/${recordId}`,
     sendableData: record,
     navigation: navigation,
     redirectToList: redirectToList,
@@ -159,7 +154,7 @@ export async function handleDelete(
   navigation: NativeStackNavigationProp<any, any>
 ) {
   await deleteRecordOnServer({
-    relativeUrl: `/${CRUDRecordEndpoints.Bus}/${recordId}`,
+    relativeUrl: `/${RecordTypes.Bus}/${recordId}`,
     navigation: navigation,
     redirectToList: redirectToList,
   });
@@ -168,7 +163,7 @@ export async function handleDelete(
 export const listNavigationParams: ListNavigationParams = {
   pageTitle: "Ônibus",
   recordSingularName: "ônibus",
-  recordEndpoint: CRUDRecordEndpoints.Bus,
+  _recordType: RecordTypes.Bus,
   recordItemText: recordItemText,
   handleCreate: handleCreate,
   handleUpdate: handleUpdate,

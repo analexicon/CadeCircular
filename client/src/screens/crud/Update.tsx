@@ -1,5 +1,6 @@
 import COLORS from "../../styles/colors";
 import STYLES from "../../styles/styles";
+import { RecordTypes } from "../../types/types";
 import {
   CRUDInputValues,
   CommonFormBody,
@@ -12,7 +13,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../../components/Header";
 import Form from "../../components/Form";
-import { CRUDRecordEndpoints } from "../../types/types";
 
 interface UpdateProps {
   route: any;
@@ -20,7 +20,7 @@ interface UpdateProps {
 }
 interface UpdateParams {
   pageTitle: string;
-  recordEndpoint: CRUDRecordEndpoints;
+  _recordType: RecordTypes;
   recordId: string;
   recordSingularName: string;
   handleUpdate: Function;
@@ -29,7 +29,7 @@ interface UpdateParams {
 const Update = (props: UpdateProps): JSX.Element => {
   const {
     pageTitle,
-    recordEndpoint,
+    _recordType,
     recordId,
     recordSingularName,
     handleUpdate,
@@ -68,7 +68,7 @@ const Update = (props: UpdateProps): JSX.Element => {
             navigation={props.navigation}
             inputValues={inputValues}
             setInputValues={setInputValues}
-            recordEndpoint={recordEndpoint}
+            _recordType={_recordType}
             recordId={recordId}
           />
         }

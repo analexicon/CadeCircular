@@ -4,11 +4,7 @@ import {
   FormBody as BusFormBody,
   emptyInputValues as busEmptyInputValues,
 } from "./bus";
-import {
-  CRUDRecord,
-  CRUDRecordEndpoints,
-  CRUDRecordTypes,
-} from "../types/types";
+import { CRUDRecord, RecordTypes } from "../types/types";
 import { fetchRecordData } from "../controller";
 import { useEffect } from "react";
 
@@ -22,7 +18,7 @@ export type CRUDInputValues = BusInputValues | UnknownInputValues;
 export interface ListNavigationParams {
   pageTitle: string;
   recordSingularName: string;
-  recordEndpoint: CRUDRecordEndpoints;
+  _recordType: RecordTypes;
   recordItemText: (item: CRUDRecord) => string;
   handleCreate: Function;
   handleUpdate: Function;
@@ -30,7 +26,7 @@ export interface ListNavigationParams {
 }
 
 interface GetFormBodyProps {
-  recordEndpoint: CRUDRecordEndpoints;
+  _recordType: RecordTypes;
   recordId?: string;
   navigation: NativeStackNavigationProp<any, any>;
   inputValues: CRUDInputValues;
@@ -40,10 +36,10 @@ export function CommonFormBody(props: GetFormBodyProps): JSX.Element {
   const isEditing = props.recordId && props.recordId !== undefined;
 
   useEffect(() => {
-    if (props.recordEndpoint === CRUDRecordEndpoints.Bus) {
+    if (props._recordType === RecordTypes.Bus) {
       if (isEditing)
         fetchRecordData(
-          `/${props.recordEndpoint}/${props.recordId}`,
+          `/${props._recordType}/${props.recordId}`,
           props.navigation,
           setInputValuesBus
         );
@@ -52,9 +48,9 @@ export function CommonFormBody(props: GetFormBodyProps): JSX.Element {
   }, []);
 
   function setInputValuesBus(record: CRUDRecord) {
-    if (record._endpoint === CRUDRecordEndpoints.Bus)
+    if (record._type === RecordTypes.Bus)
       props.setInputValues({
-        _type: CRUDRecordTypes.Bus,
+        _type: RecordTypes.Bus,
         licensePlate: record.licensePlate,
         model: record.model,
         capacity: record.capacity.toString(),
@@ -62,7 +58,7 @@ export function CommonFormBody(props: GetFormBodyProps): JSX.Element {
       });
   }
 
-  if (props.inputValues._type === CRUDRecordTypes.Bus) {
+  if (props.inputValues._type === RecordTypes.Bus) {
     return (
       <BusFormBody
         inputValues={props.inputValues}

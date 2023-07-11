@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import RouteItem from "./RouteItem";
 import BottomSheet from "./BottomSheet";
-import { CRUDRecord, CRUDRecordEndpoints, Route } from "../types/types";
+import { CRUDRecord, RecordTypes, Route } from "../types/types";
 import { fetchRecordData } from "../controller";
 
 interface RoutesBottomSheetProps {
@@ -17,7 +17,7 @@ const RoutesBottomSheet = (props: RoutesBottomSheetProps): JSX.Element => {
   }, []);
 
   const renderItem = ({ item }: { item: CRUDRecord }) => {
-    if(item._endpoint === CRUDRecordEndpoints.Route){
+    if(item._type === RecordTypes.Route){
       return <RouteItem route={item} navigation={props.navigation}/>;
     }else{
       return <></>

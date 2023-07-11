@@ -13,7 +13,6 @@ import Toast from "react-native-toast-message";
 import * as ScreenOrientation from "expo-screen-orientation";
 import screens from "./src/types/stackRoutes";
 import Arrival from "./src/screens/Arrival";
-import SelectDriver from "./src/screens/SelectDriver";
 import Login from "./src/screens/Login";
 import Profile from "./src/screens/Profile";
 import List from "./src/screens/crud/List";
@@ -23,6 +22,7 @@ import ViewTimes from "./src/screens/ViewTimes";
 import PickBus from "./src/screens/startJourney/PickBus";
 import PickRoute from "./src/screens/startJourney/PickRoute";
 import StartJourney from "./src/screens/startJourney/StartJourney";
+import TravelJourney from "./src/screens/TravelJourney";
 
 const Stack = createNativeStackNavigator();
 ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
@@ -52,21 +52,25 @@ const App = (): JSX.Element => {
             }}
           >
             <Stack.Screen name={screens.Arrival} component={Arrival} />
-            <Stack.Screen
-              name={screens.SelectDriver}
-              component={SelectDriver}
-            />
+            <Stack.Screen name={screens.ViewTimes} component={ViewTimes} />
+
             <Stack.Screen name={screens.Login} component={Login} />
             <Stack.Screen name={screens.Profile} component={Profile} />
+
             <Stack.Screen name={screens.List} component={List} />
             <Stack.Screen name={screens.Create} component={Create} />
             <Stack.Screen name={screens.Update} component={Update} />
-            <Stack.Screen name={screens.ViewTimes} component={ViewTimes} />
+
             <Stack.Screen name={screens.PickBus} component={PickBus} />
             <Stack.Screen name={screens.PickRoute} component={PickRoute} />
             <Stack.Screen
               name={screens.StartJourney}
               component={StartJourney}
+            />
+
+            <Stack.Screen
+              name={screens.TravelJourney}
+              component={TravelJourney}
             />
           </Stack.Navigator>
         </NavigationContainer>

@@ -17,9 +17,8 @@ async function main() {
   const busStop = await prisma.busStop.create({
     data: {
       id: "00000000-b100-0000-0000-000000000000",
-      name: "ponto da letras",
-      description: "ponto em frente ao predio do curso de letras",
-      // busStopRoute: { create: [] },
+      name: "Letras",
+      description: "Ponto em frente ao predio do curso de letras",
     },
   });
 
@@ -41,9 +40,24 @@ async function main() {
   const route = await prisma.route.create({
     data: {
       id: "00000000-r000-0000-0000-000000000000",
-      name: "Restaurante universitario",
-      description: "Rota que passa pelo restaurante universitario",
-      // busStopRoute: { create: [] },
+      name: "RU",
+      description: "Rota que passa pelo restaurante universitário",
+      busStop_RouteList: {
+        create: [
+          {
+            busStopId: "00000000-b100-0000-0000-000000000000",
+            order: 0,
+            forecasts: {
+              create: [
+                {
+                  id: "00000000-f000-0000-0000-000000000000",
+                  schedule: "2023-07-11T18:00:00.005Z",
+                },
+              ],
+            },
+          },
+        ],
+      },
     },
   });
 

@@ -1,6 +1,6 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
-import { CRUDRecordEndpoints, Employee, EmployeeTypes } from "../types/types";
+import { RecordTypes, Employee, EmployeeTypes } from "../types/types";
 import screens from "../types/stackRoutes";
 import { listNavigationParams as busListNavigationParams } from "../crudDefinitions/bus";
 import { useState } from "react";
@@ -17,7 +17,7 @@ interface ProfileProps {
 
 const Profile = (props: ProfileProps): JSX.Element => {
   const [employee, setEmployee] = useState<Employee>({
-    _endpoint: CRUDRecordEndpoints.Driver,
+    _type: RecordTypes.Driver,
     type: EmployeeTypes.Driver,
     name: "Fulano de Tal",
     id: "00000000-d000-0000-0000-000000000000",

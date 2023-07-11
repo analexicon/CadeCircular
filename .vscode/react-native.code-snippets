@@ -14,7 +14,7 @@
 		  "import type { NativeStackNavigationProp } from \"@react-navigation/native-stack\";",
 		  "import { SafeAreaView } from \"react-native-safe-area-context\";",
 		  "import { StatusBar } from \"expo-status-bar\";",
-		  "import CommonHeader from \"../components/common-header\";",
+		  "import CommonHeader from \"../components/Header\";",
 		  "",
 		  "interface PageProps {",
 		  "  navigation: NativeStackNavigationProp<any, any>;",
