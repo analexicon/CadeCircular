@@ -1,5 +1,6 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
+import { CRUDRecord } from "../types/types";
 import { useMemo, useRef } from "react";
 import { Text, StyleSheet } from "react-native";
 import {
@@ -7,7 +8,6 @@ import {
   BottomSheetFlatList,
 } from "@gorhom/bottom-sheet";
 import { SharedValue } from "react-native-reanimated";
-import { CRUDRecord } from "../types/types";
 
 interface BottomSheetProps {
   title: string;
@@ -23,7 +23,7 @@ const BottomSheet = (props: BottomSheetProps): JSX.Element => {
   return (
     <BaseBottomSheet
       index={1}
-      snapPoints={props.snapPoints ?? snapPoints}
+      snapPoints={props.snapPoints ? props.snapPoints : snapPoints}
       ref={bottomSheetRef}
       style={LOCAL_STYLES.bottomSheet}
     >
@@ -32,7 +32,7 @@ const BottomSheet = (props: BottomSheetProps): JSX.Element => {
         data={props.data}
         renderItem={props.renderItem}
         style={[STYLES.container, LOCAL_STYLES.flatList]}
-        contentContainerStyle={{ paddingBottom: 64 }}
+        contentContainerStyle={{ paddingBottom: 48 }}
       />
     </BaseBottomSheet>
   );

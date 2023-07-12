@@ -9,7 +9,7 @@ interface RoutesBottomSheetProps {
   navigation: NativeStackNavigationProp<any, any>;
 }
 const RoutesBottomSheet = (props: RoutesBottomSheetProps): JSX.Element => {
-  const snapPoints = useMemo(() => ["10%", "30%"], []);
+  const snapPoints = useMemo(() => ["15%", "40%"], []);
 
   const [records, setRecords] = useState<Route[]>([]);
   useEffect(() => {

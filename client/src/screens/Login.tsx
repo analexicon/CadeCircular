@@ -40,18 +40,16 @@ const Login = (props: LoginProps): JSX.Element => {
   };
 
   function authenticate() {
-    // if (username === managerExample.username) {
-    //   props.navigation.navigate(screens.Profile, {
-    //     employee: managerExample,
-    //   });
-    // } else {
-    //   props.navigation.navigate(screens.Profile, {
-    //     employee: driverExample,
-    //   });
-    // }
-    props.navigation.navigate(screens.Profile, {
-          employee: managerExample,
-        });
+    if (username === managerExample.username) {
+      props.navigation.navigate(screens.Profile, {
+        employee: managerExample,
+      });
+    } else {
+      props.navigation.navigate(screens.Profile, {
+        employee: driverExample,
+      });
+    }
+
     setPassword("");
     setUsername("");
   }

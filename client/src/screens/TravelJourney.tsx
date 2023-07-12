@@ -20,10 +20,10 @@ interface TravelJourneyParams {
 const TravelJourney = (props: TravelJourneyProps): JSX.Element => {
   const { newJourney }: TravelJourneyParams = props.route.params;
 
-  function handleLeaveScreen(e: { preventDefault: () => void }) {
-    e.preventDefault();
-  }
-  props.navigation.addListener("beforeRemove", handleLeaveScreen);
+  // function handleLeaveScreen(e: { preventDefault: () => void }) {
+  //   e.preventDefault();
+  // }
+  // props.navigation.addListener("beforeRemove", handleLeaveScreen);
 
   const [journey, setJourney] = useState<Journey>(newJourney);
   const nextBusStop =
@@ -48,7 +48,7 @@ const TravelJourney = (props: TravelJourneyProps): JSX.Element => {
     // TODO: deletar percurso no BD
 
     setJourney({ ...journey, id: "" });
-    props.navigation.removeListener("beforeRemove", handleLeaveScreen);
+    // props.navigation.removeListener("beforeRemove", handleLeaveScreen);
     // Return to Profile screen
     props.navigation.pop(4);
   }

@@ -36,7 +36,6 @@ const StartJourney = (props: StartJourneyProps): JSX.Element => {
       bus: bus,
       route: route,
     });
-    console.log(newJourney.route.busStop_RouteList);
     if (newJourney)
       props.navigation.navigate(screens.TravelJourney, {
         newJourney,

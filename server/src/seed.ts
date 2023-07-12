@@ -114,7 +114,7 @@ async function main() {
     },
   });
 
-  const route = await prisma.route.create({
+  await prisma.route.create({
     data: {
       id: "00000000-r000-0000-0000-000000000000",
       name: "RU - Odonto",
@@ -195,6 +195,164 @@ async function main() {
           {
             busStopId: "00000011-b100-0000-0000-000000000000",
             order: 10,
+            forecasts: {
+              create: [],
+            },
+          },
+        ],
+      },
+    },
+  });
+
+  await prisma.route.create({
+    data: {
+      id: "00000001-r000-0000-0000-000000000000",
+      name: "RU - HU",
+      description: "Atende à Via Local e ao HU, em horários de almoço e jantar",
+      busStop_RouteList: {
+        create: [
+          {
+            busStopId: "00000000-b100-0000-0000-000000000000",
+            order: 0,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000001-b100-0000-0000-000000000000",
+            order: 1,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000002-b100-0000-0000-000000000000",
+            order: 2,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000003-b100-0000-0000-000000000000",
+            order: 3,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000004-b100-0000-0000-000000000000",
+            order: 4,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000005-b100-0000-0000-000000000000",
+            order: 5,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000006-b100-0000-0000-000000000000",
+            order: 6,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000007-b100-0000-0000-000000000000",
+            order: 7,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000008-b100-0000-0000-000000000000",
+            order: 8,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000009-b100-0000-0000-000000000000",
+            order: 9,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000010-b100-0000-0000-000000000000",
+            order: 10,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000011-b100-0000-0000-000000000000",
+            order: 11,
+            forecasts: {
+              create: [],
+            },
+          },
+        ],
+      },
+    },
+  });
+
+  await prisma.route.create({
+    data: {
+      id: "00000002-r000-0000-0000-000000000000",
+      name: "Circular",
+      description: "Atende à Via Local e ao HU, em horários de almoço e jantar",
+      busStop_RouteList: {
+        create: [
+          {
+            busStopId: "00000000-b100-0000-0000-000000000000",
+            order: 0,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000002-b100-0000-0000-000000000000",
+            order: 1,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000003-b100-0000-0000-000000000000",
+            order: 2,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000004-b100-0000-0000-000000000000",
+            order: 3,
+            forecasts: {
+              create: [],
+            },
+          },
+
+          {
+            busStopId: "00000008-b100-0000-0000-000000000000",
+            order: 4,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000010-b100-0000-0000-000000000000",
+            order: 5,
+            forecasts: {
+              create: [],
+            },
+          },
+          {
+            busStopId: "00000011-b100-0000-0000-000000000000",
+            order: 6,
             forecasts: {
               create: [],
             },
