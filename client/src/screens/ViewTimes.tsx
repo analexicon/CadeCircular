@@ -86,7 +86,7 @@ const ViewTimes = (props: ViewTimesProps): JSX.Element => {
     }
   }, [busStopName]);
 
-  console.log(route)
+
   return (
     <SafeAreaView style={STYLES.container}>
       <StatusBar backgroundColor={COLORS.white} />
