@@ -36,7 +36,7 @@ const IconListItem = (props: IconListItemProps): JSX.Element => {
         if (props.handlePress) props.handlePress();
       }}
     >
-      <View style={STYLES.spaceBetweenColumns12}>
+      <View style={STYLES.row}>
         <View
           style={[
             LOCAL_STYLES.iconContainer,
@@ -48,9 +48,9 @@ const IconListItem = (props: IconListItemProps): JSX.Element => {
             style={[STYLES.largeTitleText, { color: iconColor }]}
           />
         </View>
-        <View style={[STYLES.column]}>
+        <View style={LOCAL_STYLES.container}>
           <Text style={STYLES.mediumTitleTextLeft}>{props.title}</Text>
-          <View style={STYLES.spaceBetweenColumns8}>{props.content}</View>
+          <View>{props.content}</View>
         </View>
       </View>
     </ListItem>
@@ -59,15 +59,15 @@ const IconListItem = (props: IconListItemProps): JSX.Element => {
 export default IconListItem;
 
 const LOCAL_STYLES = StyleSheet.create({
-  row: {
-    flex: 1,
+  container: {
+    marginLeft: 8,
   },
   iconContainer: {
     display: "flex",
-    aspectRatio: 1,
-    flexBasis: "16%",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
+    width: 60,
+    height: 60,
   },
 });

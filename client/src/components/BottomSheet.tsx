@@ -32,7 +32,7 @@ const BottomSheet = (props: BottomSheetProps): JSX.Element => {
         data={props.data}
         renderItem={props.renderItem}
         style={[STYLES.container, LOCAL_STYLES.flatList]}
-        contentContainerStyle={{ paddingBottom: 144 }}
+        contentContainerStyle={{ paddingBottom: 64 }}
       />
     </BaseBottomSheet>
   );

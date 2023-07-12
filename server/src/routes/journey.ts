@@ -5,6 +5,9 @@ import {
   formattedJourney,
 } from "../functions";
 
+// TODO: Delete journeys that are not active for a long time
+// TODO: Delete all other active journeys if a new one is created
+
 // Query all journeys stops
 router.get("/journey", async (request, response) => {
   try {
@@ -13,7 +16,14 @@ router.get("/journey", async (request, response) => {
         driver: { include: { employee: true } },
         bus: true,
         route: {
-          include: { busStop_RouteList: { include: { forecasts: true } } },
+          include: {
+            busStop_RouteList: {
+              include: { forecasts: true },
+              orderBy: {
+                order: "asc",
+              },
+            },
+          },
         },
       },
     });
@@ -38,7 +48,12 @@ router.get("/journey/:id", async (request, response) => {
         bus: true,
         route: {
           include: {
-            busStop_RouteList: { include: { busStop: true, forecasts: true } },
+            busStop_RouteList: {
+              include: { busStop: true, forecasts: true },
+              orderBy: {
+                order: "asc",
+              },
+            },
           },
         },
       },
@@ -86,7 +101,12 @@ router.post("/journey", async (request, response) => {
         bus: true,
         route: {
           include: {
-            busStop_RouteList: { include: { busStop: true, forecasts: true } },
+            busStop_RouteList: {
+              include: { busStop: true, forecasts: true },
+              orderBy: {
+                order: "asc",
+              },
+            },
           },
         },
       },
@@ -100,6 +120,7 @@ router.post("/journey", async (request, response) => {
         route: { connect: { id: routeId } },
       },
     });
+    console.log(newJourney);
     return response.status(201).json(formattedJourney(newJourney));
   } catch (error) {
     const errorResponse = determineErrorResponsePrismaQuery(error);
@@ -117,7 +138,12 @@ router.patch("/journey/:id", async (request, response) => {
         bus: true,
         route: {
           include: {
-            busStop_RouteList: { include: { busStop: true, forecasts: true } },
+            busStop_RouteList: {
+              include: { busStop: true, forecasts: true },
+              orderBy: {
+                order: "asc",
+              },
+            },
           },
         },
       },

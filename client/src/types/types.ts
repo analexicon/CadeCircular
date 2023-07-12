@@ -1,10 +1,11 @@
 export type Record = CRUDRecord | Journey;
-export type CRUDRecord = Bus | BusStop | Route | Driver;
+export type CRUDRecord = Bus | BusStop | Route | Driver | Manager;
 export enum RecordTypes {
   Bus = "bus",
   BusStop = "bus-stop",
   Route = "route",
   Driver = "driver",
+  Manager = "manager",
   Journey = "journey",
 }
 
@@ -100,6 +101,7 @@ export interface Driver extends BaseEmployee {
 }
 
 export interface Manager extends BaseEmployee {
+  _type: RecordTypes.Manager;
   type: EmployeeTypes.Manager;
   // TODO: Implementar métodos
   // createDriver: (driver: Driver) => {};

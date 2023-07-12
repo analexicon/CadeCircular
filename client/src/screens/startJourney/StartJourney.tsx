@@ -1,7 +1,9 @@
 import COLORS from "../../styles/colors";
 import STYLES from "../../styles/styles";
-import { Bus, Driver, Journey, Route } from "../../types/types";
-import { View, Text, StyleSheet } from "react-native";
+import { Bus, Driver, RecordTypes, Route } from "../../types/types";
+import screens from "../../types/stackRoutes";
+import { createRecordOnServer } from "../../controller";
+import { View, Text } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
@@ -9,8 +11,6 @@ import CommonHeader from "../../components/Header";
 import IconListItem from "../../components/listItems/IconListItem";
 import BottomProgression from "../../components/BottomProgression";
 import StyledButton from "../../components/buttons/StyledButton";
-import { createRecordOnServer } from "../../controller";
-import screens from "../../types/stackRoutes";
 
 interface StartJourneyProps {
   route: any;
@@ -24,20 +24,24 @@ interface StartJourneyParams {
 const StartJourney = (props: StartJourneyProps): JSX.Element => {
   const { driver, bus, route }: StartJourneyParams = props.route.params;
 
-  // function handleStartJourney() {
-  // const journey: Journey  =
-  // await createRecordOnServer(
-  //   `/journey`,
-  //   {
-  //     id: "",
-  //     paused: false,
-  //     active: true,
-  //     startDate: new Date(),
-  //     nextBusStopIndex: 0,
-  //     driver: driver,
-  //     bus: bus,
-  //     route: route,
-  //   });
+  async function handleStartJourney() {
+    const newJourney = await createRecordOnServer(`/journey`, {
+      _type: RecordTypes.Journey,
+      id: "",
+      paused: false,
+      active: true,
+      startDate: new Date(),
+      nextBusStopIndex: 0,
+      driver: driver,
+      bus: bus,
+      route: route,
+    });
+    console.log(newJourney.route.busStop_RouteList);
+    if (newJourney)
+      props.navigation.navigate(screens.TravelJourney, {
+        newJourney,
+      });
+  }
 
   return (
     <SafeAreaView style={STYLES.safeArea}>
@@ -86,13 +90,7 @@ const StartJourney = (props: StartJourneyProps): JSX.Element => {
         <StyledButton
           text="Iniciar percurso"
           color="green"
-          handlePress={() => {
-            props.navigation.navigate(screens.TravelJourney, {
-              driver,
-              bus,
-              route,
-            });
-          }}
+          handlePress={() => handleStartJourney()}
         />
       </View>
       <BottomProgression steps={3} currentStep={3} />
@@ -100,9 +98,3 @@ const StartJourney = (props: StartJourneyProps): JSX.Element => {
   );
 };
 export default StartJourney;
-
-const LOCAL_STYLES = StyleSheet.create({
-  container: {
-    paddingBottom: 16,
-  },
-});

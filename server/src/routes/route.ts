@@ -12,6 +12,9 @@ router.get("/route", async (request, response) => {
       include: {
         busStop_RouteList: {
           include: { busStop: true, forecasts: true },
+          orderBy: {
+            order: "asc",
+          },
         },
       },
     });
@@ -34,6 +37,9 @@ router.get("/route/:id", async (request, response) => {
       include: {
         busStop_RouteList: {
           include: { busStop: true, forecasts: true },
+          orderBy: {
+            order: "asc",
+          },
         },
       },
       where: {
@@ -61,6 +67,9 @@ router.post("/route", async (request, response) => {
       include: {
         busStop_RouteList: {
           include: { busStop: true, forecasts: true },
+          orderBy: {
+            order: "asc",
+          },
         },
       },
       data: {
@@ -83,6 +92,9 @@ router.patch("/route/:id", async (request, response) => {
       include: {
         busStop_RouteList: {
           include: { busStop: true, forecasts: true },
+          orderBy: {
+            order: "asc",
+          },
         },
       },
       where: {

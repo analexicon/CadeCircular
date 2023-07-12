@@ -138,6 +138,7 @@ export const formattedDriver = (driver: FullPrismaDriver): Driver => {
 type FullPrismaManager = PrismaManager & { employee: FullPrismaEmployee };
 export const formattedManager = (manager: FullPrismaManager): Manager => {
   return {
+    _type: RecordTypes.Manager,
     type: EmployeeTypes.Manager,
     id: manager.employeeId,
     name: manager.employee.name,

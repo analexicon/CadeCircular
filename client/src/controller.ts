@@ -1,6 +1,6 @@
 import { REACT_APP_SERVER_URL } from "@env";
 import screens from "./types/stackRoutes";
-import { CRUDRecord } from "./types/types";
+import { CRUDRecord, Record } from "./types/types";
 import axios from "axios";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Toast from "react-native-toast-message";
@@ -39,7 +39,9 @@ export async function handleFormSubmit({
   redirectToList: (navigation: NativeStackNavigationProp<any, any>) => void;
 }) {
   if (validFields) {
-    if (await decideOperation(isEditing)(relativeUrl, sendableData)) {
+    const operation = decideOperation(isEditing);
+    try {
+      await operation(relativeUrl, sendableData);
       // Sucesso
       const successToast = () => {
         Toast.show({
@@ -53,7 +55,7 @@ export async function handleFormSubmit({
       };
       successToast();
       redirectToList(navigation);
-    } else {
+    } catch (error) {
       // Falha
       const failureToast = () => {
         Toast.show({
@@ -90,27 +92,33 @@ function decideOperation(isEditing: boolean) {
 
 export async function createRecordOnServer(
   relativeUrl: string,
-  sendableData: CRUDRecord
+  sendableData: Record
 ) {
   try {
-    await axios.post(REACT_APP_SERVER_URL + relativeUrl, sendableData);
-    return true;
+    const response = await axios.post(
+      REACT_APP_SERVER_URL + relativeUrl,
+      sendableData
+    );
+    return response.data;
   } catch (error) {
     console.error(error);
-    return false;
+    throw error;
   }
 }
 
 export async function updateRecordOnServer(
   relativeUrl: string,
-  sendableData: CRUDRecord
+  sendableData: Record
 ) {
   try {
-    await axios.patch(REACT_APP_SERVER_URL + relativeUrl, sendableData);
-    return true;
+    const response = await axios.patch(
+      REACT_APP_SERVER_URL + relativeUrl,
+      sendableData
+    );
+    return response.data;
   } catch (error) {
     console.error(error);
-    return false;
+    throw error;
   }
 }
 

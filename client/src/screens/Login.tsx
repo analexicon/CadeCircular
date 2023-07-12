@@ -1,5 +1,6 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
+import { EmployeeTypes, RecordTypes } from "../types/types";
 import screens from "../types/stackRoutes";
 import { useState } from "react";
 import { View } from "react-native";
@@ -18,8 +19,37 @@ const Login = (props: LoginProps): JSX.Element => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const driverExample = {
+    _type: RecordTypes.Driver,
+    type: EmployeeTypes.Driver,
+    name: "Douglas",
+    id: "00000000-e000-0000-0000-000000000000",
+    identification: "202098774",
+    username: "driver",
+    password: "123456",
+  };
+
+  const managerExample = {
+    _type: RecordTypes.Manager,
+    type: EmployeeTypes.Manager,
+    name: "Marcelo",
+    id: "00000000-e001-0000-0000-000000000000",
+    identification: "202098775",
+    username: "manager",
+    password: "123456",
+  };
+
   function authenticate() {
-    props.navigation.navigate(screens.Profile);
+    if (username === managerExample.username) {
+      props.navigation.navigate(screens.Profile, {
+        employee: managerExample,
+      });
+    } else {
+      props.navigation.navigate(screens.Profile, {
+        employee: driverExample,
+      });
+    }
+
     setPassword("");
     setUsername("");
   }

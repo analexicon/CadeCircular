@@ -1,6 +1,6 @@
 import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
-import { RecordTypes, Employee, EmployeeTypes } from "../types/types";
+import { Employee, EmployeeTypes } from "../types/types";
 import screens from "../types/stackRoutes";
 import { listNavigationParams as busListNavigationParams } from "../crudDefinitions/bus";
 import { useState } from "react";
@@ -12,19 +12,16 @@ import CommonHeader from "../components/Header";
 import StyledButton from "../components/buttons/StyledButton";
 
 interface ProfileProps {
+  route: any;
   navigation: NativeStackNavigationProp<any, any>;
 }
-
+interface ProfileParams {
+  employee: Employee;
+}
 const Profile = (props: ProfileProps): JSX.Element => {
-  const [employee, setEmployee] = useState<Employee>({
-    _type: RecordTypes.Driver,
-    type: EmployeeTypes.Driver,
-    name: "Fulano de Tal",
-    id: "00000000-d000-0000-0000-000000000000",
-    identification: "202098774",
-    username: "fulano",
-    password: "123456",
-  });
+  const params = props.route.params as ProfileParams;
+
+  const [employee, setEmployee] = useState<Employee>(params.employee);
 
   const actions =
     employee.type === EmployeeTypes.Manager ? (

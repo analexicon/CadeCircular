@@ -5,11 +5,12 @@ import ButtonProps from "./Button";
 
 interface CommonButtonProps extends PropsWithChildren, ButtonProps {
   style?: ViewStyle[];
+  underlayColor?: string;
 }
 const CommonButton = (props: CommonButtonProps): JSX.Element => {
   return (
     <TouchableHighlight
-      underlayColor={COLORS.gray1}
+      underlayColor={props.underlayColor ? props.underlayColor : COLORS.gray1}
       onPress={() => props.handlePress()}
       style={props.style}
     >

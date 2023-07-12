@@ -113,8 +113,7 @@ export const FormBody = (props: FormBodyProps): JSX.Element => {
 };
 
 function redirectToList(navigation: NativeStackNavigationProp<any, any>) {
-  navigation.pop();
-  navigation.pop();
+  navigation.pop(2);
   navigation.push(screens.List, listNavigationParams);
 }
 

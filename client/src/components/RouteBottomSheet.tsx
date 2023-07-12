@@ -9,7 +9,7 @@ interface RoutesBottomSheetProps {
   navigation: NativeStackNavigationProp<any, any>;
 }
 const RoutesBottomSheet = (props: RoutesBottomSheetProps): JSX.Element => {
-  const snapPoints = useMemo(() => ["25%", "40%"], []);
+  const snapPoints = useMemo(() => ["10%", "30%"], []);
 
   const [records, setRecords] = useState<Route[]>([]);
   useEffect(() => {
@@ -17,13 +17,13 @@ const RoutesBottomSheet = (props: RoutesBottomSheetProps): JSX.Element => {
   }, []);
 
   const renderItem = ({ item }: { item: CRUDRecord }) => {
-    if(item._type === RecordTypes.Route){
-      return <RouteItem route={item} navigation={props.navigation}/>;
-    }else{
-      return <></>
+    if (item._type === RecordTypes.Route) {
+      return <RouteItem route={item} navigation={props.navigation} />;
+    } else {
+      return <></>;
     }
   };
-  
+
   return (
     <BottomSheet
       title="Rotas"
