@@ -1,6 +1,5 @@
 enum screens {
   Arrival = "Arrival",
-  SelectDriver = "SelectDriver",
 
   Login = "Login",
   Profile = "Profile",
@@ -15,6 +14,8 @@ enum screens {
   // Start Journey
   PickBus = "PickBus",
   PickRoute = "PickRoute",
-  StartJourney = "StartJourney"
+  StartJourney = "StartJourney",
+
+  TravelJourney = "TravelJourney",
 }
 export default screens;

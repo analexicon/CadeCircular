@@ -1,19 +1,15 @@
+export type Record = CRUDRecord | Journey;
 export type CRUDRecord = Bus | BusStop | Route | Driver;
-export enum CRUDRecordEndpoints {
+export enum RecordTypes {
   Bus = "bus",
   BusStop = "bus-stop",
   Route = "route",
   Driver = "driver",
-}
-export enum CRUDRecordTypes {
-  Bus,
-  BusStop,
-  Route,
-  Driver,
+  Journey = "journey",
 }
 
 export interface Bus {
-  _endpoint: CRUDRecordEndpoints.Bus;
+  _type: RecordTypes.Bus;
 
   id: string;
   licensePlate: string;
@@ -23,7 +19,7 @@ export interface Bus {
 }
 
 export interface BusStop {
-  _endpoint: CRUDRecordEndpoints.BusStop;
+  _type: RecordTypes.BusStop;
 
   id: string;
   name: string;
@@ -40,7 +36,7 @@ export interface Forecast {
 }
 
 export interface Route {
-  _endpoint: CRUDRecordEndpoints.Route;
+  _type: RecordTypes.Route;
 
   id: string;
   name: string;
@@ -55,11 +51,13 @@ export interface BusStop_Route {
 
   forecasts: Forecast[];
 
-  busStop: BusStop;
+  busStop?: BusStop;
   route?: Route;
 }
 
 export interface Journey {
+  _type: RecordTypes.Journey;
+
   id: string;
   paused: boolean;
   active: boolean;
@@ -91,7 +89,7 @@ interface BaseEmployee {
 }
 
 export interface Driver extends BaseEmployee {
-  _endpoint: CRUDRecordEndpoints.Driver;
+  _type: RecordTypes.Driver;
   type: EmployeeTypes.Driver;
 
   // TODO: Implementar métodos

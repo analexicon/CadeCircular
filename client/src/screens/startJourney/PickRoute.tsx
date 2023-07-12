@@ -44,6 +44,7 @@ const PickRoute = (props: PickRouteProps): JSX.Element => {
         />
         <FlatList
           data={shownRoutes}
+          style={STYLES.container}
           renderItem={({ item }) =>
             IconListItem({
               navigation: props.navigation,

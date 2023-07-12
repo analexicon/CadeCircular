@@ -11,9 +11,9 @@ import {
   BusStop_Route as PrismaBusStop_Route,
 } from "@prisma/client";
 import {
+  RecordTypes,
   Bus,
   BusStop,
-  CRUDRecordEndpoints,
   Driver,
   Employee,
   Journey,
@@ -65,7 +65,7 @@ export function determineErrorResponsePrismaQuery(error: unknown) {
 type FullPrismaBus = PrismaBus & {};
 export const formattedBus = (bus: FullPrismaBus): Bus => {
   return {
-    _endpoint: CRUDRecordEndpoints.Bus,
+    _type: RecordTypes.Bus,
     id: bus.id,
     licensePlate: bus.licensePlate,
     capacity: bus.capacity,
@@ -79,7 +79,7 @@ type FullPrismaBusStop = PrismaBusStop & {
 };
 export const formattedBusStop = (busStop: FullPrismaBusStop): BusStop => {
   return {
-    _endpoint: CRUDRecordEndpoints.BusStop,
+    _type: RecordTypes.BusStop,
     id: busStop.id,
     name: busStop.name,
     description: busStop.description,
@@ -125,7 +125,7 @@ type FullPrismaEmployee = PrismaEmployee & {};
 type FullPrismaDriver = PrismaDriver & { employee: FullPrismaEmployee };
 export const formattedDriver = (driver: FullPrismaDriver): Driver => {
   return {
-    _endpoint: CRUDRecordEndpoints.Driver,
+    _type: RecordTypes.Driver,
     type: EmployeeTypes.Driver,
     id: driver.employeeId,
     name: driver.employee.name,
@@ -152,7 +152,7 @@ type FullPrismaRoute = PrismaRoute & {
 };
 export const formattedRoute = (route: FullPrismaRoute): Route => {
   return {
-    _endpoint: CRUDRecordEndpoints.Route,
+    _type: RecordTypes.Route,
     id: route.id,
     name: route.name,
     description: route.description,
@@ -163,14 +163,19 @@ export const formattedRoute = (route: FullPrismaRoute): Route => {
 };
 
 type FullPrismaForecast = PrismaForecast & {
-  busStop_Route: FullPrismaBusStop_Route;
+  busStop_Route?: FullPrismaBusStop_Route;
 };
 export const formattedForecast = (forecast: FullPrismaForecast): Forecast => {
-  return {
+  const objectToReturn: Forecast = {
     id: forecast.id,
     schedule: forecast.schedule,
-    busStop_Route: formattedBusStop_Route(forecast.busStop_Route),
   };
+  if (forecast.busStop_Route) {
+    objectToReturn.busStop_Route = formattedBusStop_Route(
+      forecast.busStop_Route
+    );
+  }
+  return objectToReturn;
 };
 
 type FullPrismaJourney = PrismaJourney & {
@@ -180,6 +185,7 @@ type FullPrismaJourney = PrismaJourney & {
 };
 export const formattedJourney = (busStop: FullPrismaJourney): Journey => {
   return {
+    _type: RecordTypes.Journey,
     id: busStop.id,
     paused: busStop.paused,
     active: busStop.active,

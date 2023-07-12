@@ -88,7 +88,7 @@ function decideOperation(isEditing: boolean) {
   }
 }
 
-async function createRecordOnServer(
+export async function createRecordOnServer(
   relativeUrl: string,
   sendableData: CRUDRecord
 ) {
@@ -101,7 +101,7 @@ async function createRecordOnServer(
   }
 }
 
-async function updateRecordOnServer(
+export async function updateRecordOnServer(
   relativeUrl: string,
   sendableData: CRUDRecord
 ) {

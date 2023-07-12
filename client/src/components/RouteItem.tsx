@@ -15,7 +15,6 @@ interface RouteItemProps {
 
 const RouteItem = (props: RouteItemProps): JSX.Element => {
   const [isChecked, setIsChecked] = useState(false);
-  console.log(props.route);
   return (
     <View style={[STYLES.row, LOCAL_STYLES.container]}>
       <Checkbox

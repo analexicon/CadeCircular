@@ -1,6 +1,7 @@
 import COLORS from "../../styles/colors";
 import STYLES from "../../styles/styles";
-import { CRUDRecord, CRUDRecordEndpoints } from "../../types/types";
+import { CRUDRecord, RecordTypes } from "../../types/types";
+import screens from "../../types/stackRoutes";
 import { fetchRecordData } from "../../controller";
 import { useEffect, useState } from "react";
 import { StatusBar, View } from "react-native";
@@ -10,7 +11,6 @@ import { FlatList } from "react-native-gesture-handler";
 import CommonHeader from "../../components/Header";
 import CrudListItem from "../../components/listItems/CrudListItem";
 import StyledButton from "../../components/buttons/StyledButton";
-import screens from "../../types/stackRoutes";
 
 interface ListProps {
   route: any;
@@ -19,7 +19,7 @@ interface ListProps {
 interface ListParams {
   pageTitle: string;
   recordSingularName: string;
-  recordEndpoint: CRUDRecordEndpoints;
+  _recordType: RecordTypes;
   recordItemText: (item: CRUDRecord) => string;
   handleCreate: Function;
   handleUpdate: Function;
@@ -29,7 +29,7 @@ const List = (props: ListProps): JSX.Element => {
   const {
     pageTitle,
     recordSingularName,
-    recordEndpoint,
+    _recordType,
     recordItemText,
     handleCreate,
     handleUpdate,
@@ -38,7 +38,7 @@ const List = (props: ListProps): JSX.Element => {
 
   const [records, setRecords] = useState<CRUDRecord[]>([]);
   useEffect(() => {
-    fetchRecordData(`/${recordEndpoint}`, props.navigation, setRecords);
+    fetchRecordData(`/${_recordType}`, props.navigation, setRecords);
   }, []);
 
   if (!records) {
@@ -57,7 +57,7 @@ const List = (props: ListProps): JSX.Element => {
                 navigation: props.navigation,
                 recordSingularName: recordSingularName,
                 followingPageTitle: `Editar ${recordSingularName}`,
-                recordEndpoint: recordEndpoint,
+                _recordType: _recordType,
                 recordId: item.id,
                 recordText: recordItemText(item),
                 handleUpdate: handleUpdate,
@@ -71,7 +71,7 @@ const List = (props: ListProps): JSX.Element => {
             handlePress={() => {
               props.navigation.push(screens.Create, {
                 pageTitle: `Criar ${recordSingularName}`,
-                recordEndpoint: recordEndpoint,
+                _recordType: _recordType,
                 handleCreate: handleCreate,
               });
             }}

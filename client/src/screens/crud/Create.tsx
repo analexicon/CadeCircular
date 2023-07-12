@@ -1,5 +1,6 @@
 import COLORS from "../../styles/colors";
 import STYLES from "../../styles/styles";
+import { RecordTypes } from "../../types/types";
 import {
   CRUDInputValues,
   CommonFormBody,
@@ -11,7 +12,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../../components/Header";
 import Form from "../../components/Form";
-import { CRUDRecordEndpoints } from "../../types/types";
 
 interface CreateProps {
   route: any;
@@ -19,11 +19,11 @@ interface CreateProps {
 }
 interface CreateParams {
   pageTitle: string;
-  recordEndpoint: CRUDRecordEndpoints;
+  _recordType: RecordTypes;
   handleCreate: Function;
 }
 const Create = (props: CreateProps): JSX.Element => {
-  const { pageTitle, recordEndpoint, handleCreate }: CreateParams =
+  const { pageTitle, _recordType, handleCreate }: CreateParams =
     props.route.params;
 
   const [inputValues, setInputValues] =
@@ -40,7 +40,7 @@ const Create = (props: CreateProps): JSX.Element => {
             navigation={props.navigation}
             inputValues={inputValues}
             setInputValues={setInputValues}
-            recordEndpoint={recordEndpoint}
+            _recordType={_recordType}
           />
         }
         handleSubmit={() => {

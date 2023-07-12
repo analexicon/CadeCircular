@@ -1,6 +1,6 @@
 import COLORS from "../../styles/colors";
 import STYLES from "../../styles/styles";
-import { Bus, Driver, Route } from "../../types/types";
+import { Bus, Driver, Journey, Route } from "../../types/types";
 import { View, Text, StyleSheet } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,6 +9,8 @@ import CommonHeader from "../../components/Header";
 import IconListItem from "../../components/listItems/IconListItem";
 import BottomProgression from "../../components/BottomProgression";
 import StyledButton from "../../components/buttons/StyledButton";
+import { createRecordOnServer } from "../../controller";
+import screens from "../../types/stackRoutes";
 
 interface StartJourneyProps {
   route: any;
@@ -22,11 +24,26 @@ interface StartJourneyParams {
 const StartJourney = (props: StartJourneyProps): JSX.Element => {
   const { driver, bus, route }: StartJourneyParams = props.route.params;
 
+  // function handleStartJourney() {
+  // const journey: Journey  =
+  // await createRecordOnServer(
+  //   `/journey`,
+  //   {
+  //     id: "",
+  //     paused: false,
+  //     active: true,
+  //     startDate: new Date(),
+  //     nextBusStopIndex: 0,
+  //     driver: driver,
+  //     bus: bus,
+  //     route: route,
+  //   });
+
   return (
     <SafeAreaView style={STYLES.safeArea}>
       <StatusBar backgroundColor={COLORS.white} />
       <CommonHeader navigation={props.navigation} centerText="Iniciar" />
-      <View style={[STYLES.container, LOCAL_STYLES.container]}>
+      <View style={[STYLES.container]}>
         <View style={[STYLES.container, STYLES.spaceBetweenRows12]}>
           <View style={STYLES.column}>
             <Text style={STYLES.semiBoldText}>Veículo</Text>
@@ -69,7 +86,13 @@ const StartJourney = (props: StartJourneyProps): JSX.Element => {
         <StyledButton
           text="Iniciar percurso"
           color="green"
-          handlePress={() => console.log("Journey", { driver, bus, route })}
+          handlePress={() => {
+            props.navigation.navigate(screens.TravelJourney, {
+              driver,
+              bus,
+              route,
+            });
+          }}
         />
       </View>
       <BottomProgression steps={3} currentStep={3} />

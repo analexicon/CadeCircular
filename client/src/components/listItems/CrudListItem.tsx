@@ -1,12 +1,12 @@
 import STYLES from "../../styles/styles";
-import { CRUDRecordEndpoints } from "../../types/types";
+import { RecordTypes } from "../../types/types";
 import screens from "../../types/stackRoutes";
 import { Text } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import ListItem from "./ListItem";
 
 interface RecordItemProps {
-  recordEndpoint: CRUDRecordEndpoints;
+  _recordType: RecordTypes;
   recordId: string;
   recordSingularName: string;
   recordText: string;
@@ -27,7 +27,7 @@ const CrudListItem = (props: CrudListItemProps): JSX.Element => {
           pageTitle: props.followingPageTitle,
           recordId: props.recordId,
           recordSingularName: props.recordSingularName,
-          recordEndpoint: props.recordEndpoint,
+          _recordType: props._recordType,
           handleUpdate: props.handleUpdate,
           handleDelete: props.handleDelete,
         });

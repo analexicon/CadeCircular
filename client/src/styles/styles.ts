@@ -124,7 +124,6 @@ const container: ViewStyle = {
 };
 
 const paragraph: ViewStyle = {
-  flex: 1,
   flexWrap: "wrap",
 };
 
