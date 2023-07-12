@@ -3,6 +3,7 @@ import STYLES from "../styles/styles";
 import { Employee, EmployeeTypes } from "../types/types";
 import screens from "../types/stackRoutes";
 import { listNavigationParams as busListNavigationParams } from "../crudDefinitions/bus";
+import { listNavigationParams as busStopListNavigationParams } from "../crudDefinitions/busStop";
 import { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -10,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import CommonHeader from "../components/Header";
 import StyledButton from "../components/buttons/StyledButton";
+import BusStopItem from "../components/BusStopItem";
 
 interface ProfileProps {
   route: any;
@@ -25,12 +27,26 @@ const Profile = (props: ProfileProps): JSX.Element => {
 
   const actions =
     employee.type === EmployeeTypes.Manager ? (
-      <StyledButton
-        text="Listar ônibus"
-        handlePress={() =>
-          props.navigation.push(screens.List, busListNavigationParams)
-        }
-      />
+      <>
+        <StyledButton
+          text="Listar ônibus"
+          handlePress={() =>
+            props.navigation.push(screens.List, busListNavigationParams)
+          }
+        />
+        <StyledButton
+          text="Listar Pontos"
+          handlePress={() =>
+            props.navigation.push(screens.List, busStopListNavigationParams)
+          }
+        />
+        <StyledButton
+          text="Listar Motoristas"
+          handlePress={() =>
+            props.navigation.push(screens.List, busListNavigationParams)
+          }
+        />
+      </>
     ) : (
       <StyledButton
         text="Iniciar Rota"

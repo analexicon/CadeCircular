@@ -4,6 +4,11 @@ import {
   FormBody as BusFormBody,
   emptyInputValues as busEmptyInputValues,
 } from "./bus";
+import {
+  InputValues as BusStopInputValues,
+  FormBody as BusStopFormBody,
+  emptyInputValues as busStopEmptyInputValues,
+} from "./busStop";
 import { CRUDRecord, RecordTypes } from "../types/types";
 import { fetchRecordData } from "../controller";
 import { useEffect } from "react";
@@ -13,7 +18,7 @@ interface UnknownInputValues {
   _type: "Unknown";
 }
 export const unknownInputValues: UnknownInputValues = { _type: "Unknown" };
-export type CRUDInputValues = BusInputValues | UnknownInputValues;
+export type CRUDInputValues = BusInputValues | UnknownInputValues | BusStopInputValues;
 
 export interface ListNavigationParams {
   pageTitle: string;
@@ -44,6 +49,14 @@ export function CommonFormBody(props: GetFormBodyProps): JSX.Element {
           setInputValuesBus
         );
       else props.setInputValues(busEmptyInputValues);
+    } else if (props._recordType === RecordTypes.BusStop) {
+      if (isEditing)
+        fetchRecordData(
+          `/${props._recordType}/${props.recordId}`,
+          props.navigation,
+          setInputValuesBusStop
+        );
+      else props.setInputValues(busStopEmptyInputValues);
     }
   }, []);
 
@@ -58,6 +71,16 @@ export function CommonFormBody(props: GetFormBodyProps): JSX.Element {
       });
   }
 
+  function setInputValuesBusStop(record: CRUDRecord) {
+    if (record._type === RecordTypes.BusStop)
+      props.setInputValues({
+        _type: RecordTypes.BusStop,
+        name: record.name,
+        description: record.description,
+       busStop_RouteList: record.busStop_RouteList,
+      });
+  }
+
   if (props.inputValues._type === RecordTypes.Bus) {
     return (
       <BusFormBody
@@ -65,5 +88,14 @@ export function CommonFormBody(props: GetFormBodyProps): JSX.Element {
         setInputValues={props.setInputValues}
       />
     );
+
+    }else if (props.inputValues._type === RecordTypes.BusStop) {
+      return (
+        <BusStopFormBody
+          inputValues={props.inputValues}
+          setInputValues={props.setInputValues}
+        />
+    );
+
   } else return <></>;
 }
