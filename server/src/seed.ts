@@ -106,7 +106,7 @@ async function main() {
           id: "00000000-e000-0000-0000-000000000000",
           name: "Edenilson",
           username: "Ede",
-          password: "cigarro",
+          password: "senha",
           identification: "123456",
           type: 1,
         },
