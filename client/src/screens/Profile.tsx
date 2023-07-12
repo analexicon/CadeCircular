@@ -4,6 +4,7 @@ import { Employee, EmployeeTypes } from "../types/types";
 import screens from "../types/stackRoutes";
 import { listNavigationParams as busListNavigationParams } from "../crudDefinitions/bus";
 import { listNavigationParams as busStopListNavigationParams } from "../crudDefinitions/busStop";
+import { listNavigationParams as driverListNavigationParams } from "../crudDefinitions/driver";
 import { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -43,7 +44,7 @@ const Profile = (props: ProfileProps): JSX.Element => {
         <StyledButton
           text="Listar Motoristas"
           handlePress={() =>
-            props.navigation.push(screens.List, busListNavigationParams)
+            props.navigation.push(screens.List, driverListNavigationParams)
           }
         />
       </>
