@@ -2,16 +2,17 @@ import COLORS from "../styles/colors";
 import STYLES from "../styles/styles";
 import { View, Text, StyleSheet } from "react-native";
 import JourneyItem from "./JourneyItem";
+import { BusStop } from "../types/types";
 
 interface ForecastItemProps {
-  busStopName: string;
-  nextBusStopIndex: string;
+  busStop: BusStop;
+  next: string;
 }
 const ForecastItem = (props: ForecastItemProps): JSX.Element => {
   const getBusNameTextColor = () => {
-    if (props.nextBusStopIndex === "1") {
+    if (props.next === "1") {
       return COLORS.greenPrimary;
-    } else if (props.nextBusStopIndex === "2") {
+    } else if (props.next === "2") {
       return COLORS.yellowPrimary;
     } else {
       return COLORS.gray2;
@@ -27,22 +28,16 @@ const ForecastItem = (props: ForecastItemProps): JSX.Element => {
         ]}
       >
         <Text style={LOCAL_STYLES.numberText}>
-          {+props.nextBusStopIndex <= 2 ? props.nextBusStopIndex : "-"}
+          {+props.next <= 2 ? props.next : "-"}
         </Text>
       </View>
       <View style={STYLES.spaceBetweenRows12}>
         <View>
-          <Text style={LOCAL_STYLES.pointName}>{props.busStopName}</Text>
+          <Text style={LOCAL_STYLES.pointName}>{props.busStop.name}</Text>
         </View>
         <View style={LOCAL_STYLES.journeyContainer}>
-          <JourneyItem
-            routeName="RU HU"
-            idxNextBusStop={props.nextBusStopIndex}
-          />
-          <JourneyItem
-            routeName="Circular"
-            idxNextBusStop={props.nextBusStopIndex}
-          />
+          <JourneyItem routeName="RU HU" idxNextBusStop={props.next} />
+          <JourneyItem routeName="Circular" idxNextBusStop={props.next} />
         </View>
       </View>
     </View>
