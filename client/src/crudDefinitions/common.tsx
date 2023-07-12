@@ -9,7 +9,12 @@ import {
   FormBody as BusStopFormBody,
   emptyInputValues as busStopEmptyInputValues,
 } from "./busStop";
-import { CRUDRecord, RecordTypes } from "../types/types";
+import {
+  InputValues as DriverInputValues,
+  FormBody as DriverFormBody,
+  emptyInputValues as driverEmptyInputValues,
+} from "./driver";
+import { CRUDRecord, EmployeeTypes, RecordTypes } from "../types/types";
 import { fetchRecordData } from "../controller";
 import { useEffect } from "react";
 
@@ -18,7 +23,7 @@ interface UnknownInputValues {
   _type: "Unknown";
 }
 export const unknownInputValues: UnknownInputValues = { _type: "Unknown" };
-export type CRUDInputValues = BusInputValues | UnknownInputValues | BusStopInputValues;
+export type CRUDInputValues = BusInputValues | UnknownInputValues | BusStopInputValues | DriverInputValues;
 
 export interface ListNavigationParams {
   pageTitle: string;
@@ -57,6 +62,14 @@ export function CommonFormBody(props: GetFormBodyProps): JSX.Element {
           setInputValuesBusStop
         );
       else props.setInputValues(busStopEmptyInputValues);
+    } else if (props._recordType === RecordTypes.Driver) {
+      if (isEditing)
+        fetchRecordData(
+          `/${props._recordType}/${props.recordId}`,
+          props.navigation,
+          setInputValuesDriver
+        );
+      else props.setInputValues(driverEmptyInputValues);
     }
   }, []);
 
@@ -81,6 +94,17 @@ export function CommonFormBody(props: GetFormBodyProps): JSX.Element {
       });
   }
 
+  function setInputValuesDriver(record: CRUDRecord) {
+    if (record._type === RecordTypes.Driver)
+      props.setInputValues({
+        _type: RecordTypes.Driver,
+        name: record.name,
+        identification: record.identification,
+        username: record.username,
+        password: record.password,
+      });
+  }
+
   if (props.inputValues._type === RecordTypes.Bus) {
     return (
       <BusFormBody
@@ -96,6 +120,13 @@ export function CommonFormBody(props: GetFormBodyProps): JSX.Element {
           setInputValues={props.setInputValues}
         />
     );
-
+    
+    }else if (props.inputValues._type === RecordTypes.Driver) {
+      return (
+        <DriverFormBody
+          inputValues={props.inputValues}
+          setInputValues={props.setInputValues}
+        />
+    );
   } else return <></>;
 }
